@@ -1,0 +1,169 @@
+<section id="advanced" class="single-page scrollblock">
+  <div class="container">
+<!--     <div class="align">
+      <i class="icon-mail-2">
+      </i>
+    </div> -->
+    <h1>
+      詳細検索
+    </h1>
+    <div class="row">
+      <div class="span12">
+        <div class="cform" id="theme-form">
+          <div class="row">
+            <div class="span6">
+              <legend>キーワード</legend>
+              <input type="text" ng-model="searchText" class="input-medium search-query" placeholder="キーワード">
+            </div>
+            <div class="span6">
+              <legend>種類</legend>
+              <div class="btn-group">
+                <label class="btn btn-default" ng-model="form.category" btn-radio="'ルリグ'" uncheckable>ルリグ</label>
+                <label class="btn btn-default" ng-model="form.category" btn-radio="'アーツ'" uncheckable>アーツ</label>
+                <label class="btn btn-default" ng-model="form.category" btn-radio="'シグニ'" uncheckable>シグニ</label>
+                <label class="btn btn-default" ng-model="form.category" btn-radio="'スペル'" uncheckable>スペル</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="span6">
+              <legend>タイプ</legend>
+              <select style="width: 95%" class="form-control ng-pristine ng-valid" ng-model="form.typeTemp" ng-options="t.Name for t in types">
+                <option value="" selected="selected">
+              </select>
+            </div>
+            <div class="span6">
+              <legend>レアリティ</legend>
+              <div class="btn-group">
+                <label class="btn btn-default" ng-model="form.reality" btn-radio="'LR'" uncheckable>LR</label>
+                <label class="btn btn-default" ng-model="form.reality" btn-radio="'LC'" uncheckable>LC</label>
+                <label class="btn btn-default" ng-model="form.reality" btn-radio="'SR'" uncheckable>SR</label>
+                <label class="btn btn-default" ng-model="form.reality" btn-radio="'R'" uncheckable>R</label>
+                <label class="btn btn-default" ng-model="form.reality" btn-radio="'C'" uncheckable>C</label>
+                <label class="btn btn-default" ng-model="form.reality" btn-radio="'ST'" uncheckable>ST</label>
+                <label class="btn btn-default" ng-model="form.reality" btn-radio="'PR'" uncheckable>PR</label>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="span6">
+              <legend>レベル</legend>
+              <select style="width: 35%" class="form-control ng-pristine ng-valid" ng-model="form.levelFrom" ng-options="f for f in levels">
+                <option value="" selected="selected">
+              </select>
+              ≦ レベル ≦
+              <select style="width: 35%" class="form-control ng-pristine ng-valid" ng-model="from.levelTo" ng-options="f for f in levels">
+                <option value="" selected="selected">
+              </select>
+            </div>
+            <div class="span6">
+              <legend>パワー</legend>
+              <select style="width: 35%" class="form-control ng-pristine ng-valid" ng-model="form.powerFrom" ng-options="f for f in powers">
+                <option value="" selected="selected">
+              </select>
+              ≦ パワー ≦
+              <select style="width: 35%" class="form-control ng-pristine ng-valid" ng-model="from.powerTo" ng-options="f for f in powers">
+                <option value="" selected="selected">
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="span6">
+              <legend>色</legend>
+              <div class="btn-group">
+                <label class="btn btn-default" ng-model="form.color" btn-radio="'white'" uncheckable>白</label>
+                <label class="btn btn-default" ng-model="form.color" btn-radio="'red'" uncheckable>赤</label>
+                <label class="btn btn-default" ng-model="form.color" btn-radio="'blue'" uncheckable>青</label>
+                <label class="btn btn-default" ng-model="form.color" btn-radio="'green'" uncheckable>緑</label>
+                <label class="btn btn-default" ng-model="form.color" btn-radio="'black'" uncheckable>黒</label>
+                <label class="btn btn-default" ng-model="form.color" btn-radio="'colorless'" uncheckable>無</label>
+              </div>
+            </div>
+            <div class="span6">
+              <legend>コスト</legend>
+              <select style="width: 15%;" class="form-control ng-pristine ng-valid" ng-model="form.costWhiteFrom" ng-options="f for f in costs">
+                <option value="" selected="selected">
+              </select>
+              ≦ 白 ≦
+              <select style="width: 15%;" class="form-control ng-pristine ng-valid" ng-model="from.costWhiteTo" ng-options="f for f in costs">
+                <option value="" selected="selected">
+              </select>
+              <br>
+              <select style="width: 15%;" class="form-control ng-pristine ng-valid" ng-model="form.costRedFrom" ng-options="f for f in costs">
+                <option value="" selected="selected">
+              </select>
+              ≦ 赤 ≦
+              <select style="width: 15%;" class="form-control ng-pristine ng-valid" ng-model="from.costRedTo" ng-options="f for f in costs">
+                <option value="" selected="selected">
+              </select>
+              <br>
+              <select style="width: 15%;" class="form-control ng-pristine ng-valid" ng-model="form.costBlueFrom" ng-options="f for f in costs">
+                <option value="" selected="selected">
+              </select>
+              ≦ 青 ≦
+              <select style="width: 15%;" class="form-control ng-pristine ng-valid" ng-model="from.costBlueTo" ng-options="f for f in costs">
+                <option value="" selected="selected">
+              </select>
+              <br>
+              <select style="width: 15%;" class="form-control ng-pristine ng-valid" ng-model="form.costGreenFrom" ng-options="f for f in costs">
+                <option value="" selected="selected">
+              </select>
+              ≦ 緑 ≦
+              <select style="width: 15%;" class="form-control ng-pristine ng-valid" ng-model="from.costGreenTo" ng-options="f for f in costs">
+                <option value="" selected="selected">
+              </select>
+              <br>
+              <select style="width: 15%;" class="form-control ng-pristine ng-valid" ng-model="form.costBlackFrom" ng-options="f for f in costs">
+                <option value="" selected="selected">
+              </select>
+              ≦ 黒 ≦
+              <select style="width: 15%;" class="form-control ng-pristine ng-valid" ng-model="from.costBlackTo" ng-options="f for f in costs">
+                <option value="" selected="selected">
+              </select>
+              <br>
+              <select style="width: 15%;" class="form-control ng-pristine ng-valid" ng-model="form.costColorlessFrom" ng-options="f for f in costs">
+                <option value="" selected="selected">
+              </select>
+              ≦ 無 ≦
+              <select style="width: 15%;" class="form-control ng-pristine ng-valid" ng-model="from.costColorlessTo" ng-options="f for f in costs">
+                <option value="" selected="selected">
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="span6">
+              <legend>限定</legend>
+              <select style="width: 95%" class="form-control ng-pristine ng-valid" ng-model="form.constraintTemp" ng-options="c.Type for c in constraints">
+                <option value="" selected="selected">
+              </select>
+            </div>
+            <div class="span6">
+              <legend>ライフバースト</legend>
+              <label>
+                <input type="checkbox" ng-model="form.bursted">　バーストアイコン
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="span6">
+              <legend>エキスパンション</legend>
+              <select style="width: 95%" class="form-control ng-pristine ng-valid" ng-model="form.expansionTemp" ng-options="p.Id for p in products">
+                <option value="" selected="selected">
+              </select>
+            </div>
+            <div class="span6">
+              <legend>イラストレーター</legend>
+              <select style="width: 95%" class="form-control ng-pristine ng-valid" ng-model="form.illusTemp" ng-options="i.Name for i in illustrators">
+                <option value="" selected="selected">
+              </select>
+            </div>
+          </div>
+          <div style="padding-top: 50px;">
+            <input type="submit" value="リセット" style="margin-right: 10px; background-color:gray !important" class="pull-left" ng-click="reset();">
+            <input type="submit" value="検索" class="cform-submit pull-left" ng-click="searchEvent();">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

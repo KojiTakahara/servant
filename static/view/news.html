@@ -1,0 +1,81 @@
+<section id="search" class="single-page scrollblock">
+  <style type="text/css">
+    .cut {
+      position: relative;
+      width: 377px;
+      height: 96px;
+    }
+    .cut > img {
+      position: absolute;
+      clip: rect(80px, 350px, 150px, 50px);
+      margin-left: -239px;
+      margin-top: -80px;
+      top: 0px;
+    }
+    article.post {
+      height: 340px;
+      margin-bottom: 15px;
+    }
+    .entry-content i {
+      font-size: 0.4em;
+    }
+    .more-link {
+      color: #f0bf00;
+    }
+    @media (min-width: 768px) and (max-width: 979px) {
+      article.post {
+        height: 425px;
+      }
+    }
+    @media (max-width: 767px) {
+      article.post {
+        height: 325px;
+        padding-top: 1px;
+      }
+    }
+  </style>
+  <div class="container">
+    <h1>検索結果</h1>
+    <div class="row">
+      <p ng-show="list.length == 0" style="text-align: center; font-size: 2em;">該当する検索結果がありません</p>
+      <article class="span4 post" ng-repeat="card in list | filter:textSearch">
+      <div class="teamalign">
+        <!--
+        <div class="cut">
+          <img class="img-news" ng-src="http://www.takaratomy.co.jp/{{card.Image}}" alt="" width="120%">
+        </div>
+        -->
+        <div class="inside">
+          <p class="post-date">
+            {{card.Category}} / {{card.Color | color}}
+          </p>
+          <h2>{{card.Name}}</h2>
+          <div class="entry-content">
+            <p ng-show="card.Category == 'ルリグ'">
+              レベル {{card.Level}} / リミット {{card.Limit}} / <span ng-repeat="c in card.Cost track by $index">({{c}})</span><span ng-show="card.Cost"> / </span>{{card.Type}}
+            </p>
+            <p ng-show="card.Category == 'アーツ'">
+              <span ng-repeat="c in card.Cost track by $index">({{c}})</span>
+              <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
+            </p>
+            <p ng-show="card.Category == 'シグニ'">
+              レベル {{card.Level}} / パワー {{card.Power}} / {{card.Type}} <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
+            </p>
+            <p ng-show="card.Category == 'スペル'">
+              <span ng-repeat="c in card.Cost track by $index">({{c}})</span>
+              <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
+            </p>
+            <p class="textframe" ng-show="card.Text">
+              <span ng-repeat="text in card.Text.split(',')">
+                {{text}}<br/>
+              </span>
+            </p>
+            <p>{{card.Burst}}</p>
+            <p><i>{{card.Flavor}}</i></p>
+            <span class="more-link" ng-style="{{setColor(card.Color)}}">Illus. {{card.Illus}} ({{card.Expansion}}-{{card.No | padding}} {{card.Reality}})</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
