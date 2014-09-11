@@ -16,6 +16,11 @@ handlers:
   static_files: static/view/\1
   upload: static/view/(.*\.html)
 
+- url: /view/admin/(.*\.html)
+  static_files: static/view/admin/\1
+  login: admin
+  upload: static/view/admin/(.*\.html)
+
 - url: /(.*\.(gif|png|jpg))
   static_files: static/\1
   upload: static/img/(.*\.(gif|png|jpg))
@@ -37,4 +42,8 @@ handlers:
   upload: static/font/(.*\.(eot|svg|ttf|woff))
 
 - url: /api/.*
+  script: _go_app
+
+- url: /api/admin/.*
+  login: admin
   script: _go_app
