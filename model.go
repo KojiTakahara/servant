@@ -2,6 +2,7 @@ package servant
 
 import (
 	"appengine/datastore"
+	"github.com/mrjones/oauth"
 )
 
 type Card struct {
@@ -33,6 +34,12 @@ type Card struct {
 	Text          string
 	Type          string
 	Url           string
+}
+
+type User struct {
+	Key   *datastore.Key
+	Id    string
+	Token *oauth.AccessToken
 }
 
 type Product struct {

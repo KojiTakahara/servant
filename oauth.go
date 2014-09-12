@@ -2,11 +2,14 @@ package servant
 
 import (
 	"appengine"
+	"appengine/urlfetch"
 	"crypto/hmac"
 	"crypto/sha1"
 	"encoding/base64"
 	"fmt"
+	"github.com/martini-contrib/render"
 	"github.com/martini-contrib/sessions"
+	"github.com/mrjones/oauth"
 	"net/http"
 	"net/url"
 	"sort"
@@ -18,6 +21,12 @@ import (
 var TWITTER_CONSUMER_KEY = "cqxGJurLxEDAJhYrzpEqe9v6k"
 var TWITTER_CALLBACK_URL = "http://wixoss-tcg.appspot.com/api/twitter/callback"
 var TWITTER_CONSUMER_SECRET = "d5AwRGPkMdEGtLWZqsrNsN4C5M1lx5ez80ryVtQ5KkSDm15QhR"
+var TWITTER_SERVER = oauth.ServiceProvider{
+	RequestTokenUrl:   "http://api.twitter.com/oauth/request_token",
+	AuthorizeTokenUrl: "https://api.twitter.com/oauth/authorize",
+	AccessTokenUrl:    "https://api.twitter.com/oauth/access_token",
+}
+var consumer = oauth.NewConsumer(TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_SERVER)
 
 // Twitter ボタンが押された時の処理
 func LoginTwitter(w http.ResponseWriter, r *http.Request) {
@@ -27,30 +36,59 @@ func LoginTwitter(w http.ResponseWriter, r *http.Request) {
 	oauth.Authenticate(w, r, "https://api.twitter.com/oauth/authenticate", result["oauth_token"])
 }
 
+func LoginUser(r render.Render, req *http.Request, session sessions.Session) {
+	accessToken := session.Get("accessToken")
+	if accessToken != nil {
+		c := appengine.NewContext(req)
+		consumer.HttpClient = urlfetch.Client(c)
+		response, _ := consumer.Get("https://api.twitter.com/1.1/account/verify_credentials.json", nil, accessToken)
+		result := make([]byte, 1024*1024)
+		response.Body.Read(result)
+		resultString := string(result)
+		resultString = strings.Trim(resultString, "\x00")
+		datas := strings.Split(resultString, "&")
+		result2 := make(map[string]string, 0)
+		for i := 0; i < len(datas); i++ {
+			data := strings.Split(datas[i], "=")
+			result2[data[0]] = data[1]
+		}
+		r.JSON(200, result2)
+	} else {
+		r.Redirect("/api/twitter/login")
+	}
+}
+
 /**
  * ?oauth_token=IKhZRSoIr6ECH9m93qAaDlVfN6GGssNX&oauth_verifier=HlFWsejO7vhpScFgtubBkjp8jvQSyrEO
  **/
-func CallbackTwitter(w http.ResponseWriter, r *http.Request, session sessions.Session) {
-	c := appengine.NewContext(r)
-	token := r.FormValue("oauth_token")
-	verifier := r.FormValue("oauth_verifier")
-
+func CallbackTwitter(r render.Render, w http.ResponseWriter, req *http.Request, session sessions.Session) {
+	c := appengine.NewContext(req)
+	token := req.FormValue("oauth_token")
+	verifier := req.FormValue("oauth_verifier")
 	oauth := NewOAuth1(c, TWITTER_CALLBACK_URL)
-	result := oauth.ExchangeToken(token, verifier, "https://api.twitter.com/oauth/access_token")
-
-	// ログイン成功
-	c.Infof(result["oauth_token"])
-	/**
-	if result["oauth_token"] != "" {
-		result["screen_name"] = strings.Trim(result["screen_name"], "\x00")
+	accessToken := oauth.ExchangeToken(token, verifier, "https://api.twitter.com/oauth/access_token")
+	if accessToken != nil { // ログイン成功
 		// セッション開始
-		session.Set("oauth_token", result["oauth_token"])
-		session.Set("oauth_token_secret", result["oauth_token_secret"])
+		session.Set("accessToken", accessToken)
+		consumer.HttpClient = urlfetch.Client(c)
+		response, _ := consumer.Get("https://api.twitter.com/1.1/account/verify_credentials.json", nil, accessToken)
+		result := make([]byte, 1024*1024)
+		response.Body.Read(result)
+		resultString := string(result)
+		resultString = strings.Trim(resultString, "\x00")
+		datas := strings.Split(resultString, "&")
+		result2 := make(map[string]string, 0)
+		for i := 0; i < len(datas); i++ {
+			data := strings.Split(datas[i], "=")
+			result2[data[0]] = data[1]
+		}
 		// トップページへリダイレクト
-	} else {
-		// ログイン失敗
+		r.Redirect("https://www.google.co.jp")
+		//r.JSON(200, result2)
+	} else { //　ログイン失敗
+		r.JSON(200, "error")
 	}
-	**/
+
 }
 
 /**
@@ -247,21 +285,14 @@ func (this *OAuth1) Authenticate(w http.ResponseWriter, r *http.Request, targetU
  * @param {string} token リクエストトークン
  * @param {string} verifier 認証データ
  * @param {string} targetUrl リクエストの送信先
- * @returns {map[string]string} アクセストークンとユーザデータ
+ * @returns {oauth.AccessToken} アクセストークン
  */
-func (this *OAuth1) ExchangeToken(token string, verifier string, targetUrl string) map[string]string {
-	params := make(map[string]string, 0)
-	params["oauth_token"] = token
-	params["oauth_token"] = params["oauth_token"]
-
-	body := fmt.Sprintf("oauth_verifier=%s", verifier)
-	response := this.Request("POST", targetUrl, params, body, []string{TWITTER_CONSUMER_SECRET, ""})
-
-	datas := strings.Split(response, "&")
-	result := make(map[string]string, len(datas))
-	for i := 0; i < len(datas); i++ {
-		data := strings.Split(datas[i], "=")
-		result[data[0]] = data[1]
+func (this *OAuth1) ExchangeToken(token string, verifier string, targetUrl string) *oauth.AccessToken {
+	requestToken := &oauth.RequestToken{Token: token}
+	consumer.HttpClient = urlfetch.Client(this.context)
+	accessToken, err := consumer.AuthorizeToken(requestToken, verifier)
+	if err != nil {
+		return nil
 	}
-	return result
+	return accessToken
 }

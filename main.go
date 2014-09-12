@@ -54,6 +54,7 @@ func init() {
 
 	m.Get("/api/twitter/login", LoginTwitter)
 	m.Get("/api/twitter/callback", CallbackTwitter)
+	m.Get("/api/loginUser", LoginUser)
 
 	http.ListenAndServe(":8080", m)
 	http.Handle("/", m)
