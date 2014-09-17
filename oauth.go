@@ -37,7 +37,7 @@ func LoginTwitter(w http.ResponseWriter, r *http.Request) {
 }
 
 func LoginUser(r render.Render, req *http.Request, session sessions.Session) {
-	accessToken := session.Get("accessToken")
+	accessToken := GetAccessToken(session)
 	if accessToken != nil {
 		c := appengine.NewContext(req)
 		consumer.HttpClient = urlfetch.Client(c)
@@ -69,7 +69,14 @@ func CallbackTwitter(r render.Render, w http.ResponseWriter, req *http.Request, 
 	accessToken := oauth.ExchangeToken(token, verifier, "https://api.twitter.com/oauth/access_token")
 	if accessToken != nil { // ログイン成功
 		// セッション開始
-		session.Set("accessToken", accessToken)
+		session.Set("accessToken", accessToken.Token)
+		session.Set("accessTokenSecret", accessToken.Secret)
+		// User登録
+		c.Infof("toke")
+		c.Infof(accessToken.Token)
+		c.Infof("secret")
+		c.Infof(accessToken.Secret)
+
 		consumer.HttpClient = urlfetch.Client(c)
 		response, _ := consumer.Get("https://api.twitter.com/1.1/account/verify_credentials.json", nil, accessToken)
 		result := make([]byte, 1024*1024)
@@ -83,7 +90,7 @@ func CallbackTwitter(r render.Render, w http.ResponseWriter, req *http.Request, 
 			result2[data[0]] = data[1]
 		}
 		// トップページへリダイレクト
-		r.Redirect("https://www.google.co.jp")
+		r.Redirect("/api/loginUser")
 		//r.JSON(200, result2)
 	} else { //　ログイン失敗
 		r.JSON(200, "error")
@@ -295,4 +302,11 @@ func (this *OAuth1) ExchangeToken(token string, verifier string, targetUrl strin
 		return nil
 	}
 	return accessToken
+}
+
+func GetAccessToken(session sessions.Session) *oauth.AccessToken {
+	return &oauth.AccessToken{
+		Token:  session.Get("accessToken").(string),
+		Secret: session.Get("accessTokenSecret").(string),
+	}
 }
