@@ -200,7 +200,7 @@ ul.mainMenu li {
 
 ul.mainMenu li a {
   font-size: 13px;
-  color: #444;
+  color: #999;
   text-decoration: none;
 }
 
@@ -209,12 +209,18 @@ ul.mainMenu li i {
 }
 
 ul.mainMenu li a:hover {
-  color: #FFD600;
+  color: #444;
   -webkit-transition: color .12s ease-in-out;
   -moz-transition: color .12s ease-in-out;
   -ms-transition: color .12s ease-in-out;
   -o-transition: color .12s ease-in-out;
   transition: color .12s ease-in-out;
+}
+
+ul.mainMenu li.boaderline {
+  border-left: 1px solid #CACACA;
+  margin: 8px 0px 8px 5px;
+  height: 35px;
 }
 
 /*
