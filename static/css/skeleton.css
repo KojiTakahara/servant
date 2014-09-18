@@ -171,6 +171,7 @@
         .container .offset-by-fourteen,
         .container .offset-by-fifteen { padding-left: 0; }
 
+        div.loginUser { display: none !important; }
     }
 
 
@@ -203,6 +204,8 @@
         .container .sixteen.columns,
         .container .one-third.column,
         .container .two-thirds.column { width: 420px; }
+
+        div.loginUser { display: none !important; }
     }
 
 

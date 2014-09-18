@@ -77,6 +77,15 @@ ul li {
  */
 .loginUser {
   float: right !important;
+  text-align: right;
+  margin-top: 1px;
+}
+.loginUser div {
+  float: right;
+  margin: 17px 8px;
+}
+.loginUser img {
+  float: right;
 }
 
 
@@ -185,6 +194,12 @@ header h4 {
 /*
  * Menu
  */
+div.centerMenu {
+  margin-left: auto;
+  margin-right: auto;
+  width: 17em;
+}
+
 ul.mainMenu {
   margin: 0;
   padding: 0;
