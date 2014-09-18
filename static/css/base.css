@@ -104,7 +104,6 @@ ul li {
 }
 
 
-
 /*
  * Header
  */
@@ -173,8 +172,6 @@ header h4 {
 }
 
 
-
-
 /*
  * Logo
  */
@@ -187,8 +184,6 @@ header h4 {
 .logo a:hover {
   color: #FFD600;
 }
-
-
 
 
 /*
@@ -352,8 +347,6 @@ ul.mainMenu li.boaderline {
 }
 
 
-
-
 /*
  * Form, input, label, textarea
  */
@@ -421,7 +414,6 @@ input[type='submit']:hover {
 }
 
 
-
 /*
  * Focus
  */
@@ -441,7 +433,6 @@ input[type='submit']:hover {
 }
 
 
-
 /*
  * Gallery
  */
@@ -456,8 +447,6 @@ input[type='submit']:hover {
 .gallery a img {
   height: 95px;
 }
-
-
 
 
 /*
@@ -477,10 +466,6 @@ a#top {
   font-size: 14px;
   font-weight: 300;
 }
-
-
-
-
 
 
 /*
@@ -506,6 +491,12 @@ a#top {
   padding: 9px 14px 8px;
 }
 
+.large {
+  font-size: 18px;
+  margin: 5px 0;
+  padding: 19px 35px 18px;
+}
+
 a.green {
   background: #45C491;
   color: #fff;
@@ -527,6 +518,11 @@ a.twitter:hover {
   background: #4888BB;
 }
 
+img.circle {
+  -webkit-border-radius: 500px;
+  -moz-border-radius: 500px;
+  border-radius: 500px;
+}
 
 
 /*
@@ -565,17 +561,13 @@ footer .social a {
 }
 
 footer .social a img {
-  width: 35px;
+  width: 64px;
   opacity: 0.4;
 }
 
 footer .social a:hover img {
   opacity: 1;
 }
-
-
-
-
 
 
 /* -------------------
