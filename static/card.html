@@ -8,8 +8,8 @@
   <meta name="author" content="">
   <meta http-equiv="X-UA-Compatible" content="IE=9" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600&subset=latin,latin-ext' rel='stylesheet' type="text/css">
-  <link href='http://fonts.googleapis.com/css?family=Crete+Round&subset=latin,latin-ext' rel='stylesheet' type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Crete+Round&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/base.css">
@@ -21,14 +21,43 @@
   <link rel="stylesheet" type="text/css" href="css/jquery.fancybox-1.3.4.css" media="screen" />
   <link rel="shortcut icon" href="img/favicon.ico">
 </head>
-<body>
-  <header>
+<body ng-controller="indexController">
+  <header class="content">
     <mainmenu></mainmenu>
-    <div class="container" ui-view="headerContent"></div>
+    <div class='container'>
+      <div class='slogan'>
+        <div class='ten columns'>
+          <h1>ようこそ</h1>
+          <h2>WIXOSSデッキ作成サイトへ</h2>
+        </div>
+        <div class='six columns'>
+          <h4>ログインしましょう</h4>
+          <p>◯◯◯◯◯を利用するにはログインする必要があります。</p>
+          <a href='/api/twitter/login' class='button large twitter'><i class="fa fa-twitter fa-lg"></i>　Twitterでログイン</a>
+        </div>
+      </div>
+    </div>
   </header>
-  <div class="clear"></div>
-  <div class="container" ui-view="mainContent"></div>
-  <div class="clear"></div>
+  <div class='clear'></div>
+  <div class='clear'></div>
+  <div class='container'>
+    <div class='one-third column'>
+      <i class="fa fa-th-list fa-5x"></i>
+      <h3>デッキ集</h3>
+      <p>公開されているデッキが見れます。<br>使われている色、カードなどで検索できます。</p>
+    </div>
+    <div class='one-third column'>
+      <i class="fa fa-search fa-5x"></i>
+      <h3>カード検索</h3>
+      <p>エキスパンション別のカードリストが見れます。<br>キーワードやコスト、イラストレーターでの検索ができます。</p>
+    </div>
+    <div class='one-third column'>
+      <i class="fa fa-users fa-5x"></i>
+      <h3>ユーザー</h3>
+      <p>登録しているユーザーの一覧が見れます。<br>ユーザーが公開したデッキを見るのに最適です。</p>
+    </div>
+  </div>
+  <div class='clear'></div>
   <footer></footer>
   <script type="text/javascript" src="js/lib/bootstrap.js"></script>
   <script type="text/javascript" src="js/lib/jquery.prettyPhoto.js"></script>
@@ -39,10 +68,6 @@
   <script type="text/javascript" src="js/directive/section.js"></script>
   <script type="text/javascript" src="js/filter/stringFilter.js"></script>
   <script type="text/javascript" src="js/filter/numberFilter.js"></script>
-  <!--
-  <script type="text/javascript" src="js/controller/indexController.js"></script>
-  -->
-  <script type="text/javascript" src="js/controller/cardController.js"></script>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

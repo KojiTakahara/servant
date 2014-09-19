@@ -1,5 +1,18 @@
 var dir = angular.module('sectionDirective', []);
 
+dir.directive('mainmenu', function() {
+  return {
+    restrict: 'E',
+    replace: true,
+    templateUrl: '/view/common/menu.html',
+    controller: function() {
+      if (location.pathname === '/') {
+        $('header').addClass('top');
+      }
+    }
+  };
+});
+
 dir.directive('navbar', function() {
   return {
     restrict: 'E',
@@ -74,9 +87,17 @@ dir.directive('contact', function() {
 
 dir.directive('footer', function() {
   return {
-    restrict: 'A',
-    replace: true,
-    templateUrl: '/view/footer.html'
+    restrict: 'E',
+    replace: false,
+    templateUrl: '/view/common/footer.html'
+  };
+});
+
+dir.directive('amazon', function() {
+  return {
+    restrict: 'E',
+    replace: false,
+    templateUrl: '/view/common/amazon.html'
   };
 });
 
