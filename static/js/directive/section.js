@@ -5,10 +5,16 @@ dir.directive('mainmenu', function() {
     restrict: 'E',
     replace: true,
     templateUrl: '/view/common/menu.html',
-    controller: function() {
-      if (location.pathname === '/') {
-        $('header').addClass('top');
-      }
+    controller: function($scope, $location) {
+      $scope.setHeaderClass = function() {
+        if ($location.path() === '/') {
+          $('header').addClass('top');
+          $('header').removeClass('content');
+        } else {
+          $('header').addClass('content');
+          $('header').removeClass('top');
+        }
+      };
     }
   };
 });
