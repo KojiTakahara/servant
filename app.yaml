@@ -33,9 +33,9 @@ handlers:
   static_files: static/img/\1
   upload: static/img/favicon.ico
 
-- url: /css/(.*\.css)
+- url: /css/(.*\.(css|map))
   static_files: static/css/\1
-  upload: static/css/(.*\.css)
+  upload: static/css/(.*\.(css|map))
 
 - url: /js/(.*\.js)
   static_files: static/js/\1

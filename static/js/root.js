@@ -6,7 +6,8 @@ var app = angular.module('app', [
   'numberFilter',
   'ui.router',
   'ui.bootstrap',
-  'cardCtrl'
+  'cardCtrl',
+  'ngSelect'
 ]);
 app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);

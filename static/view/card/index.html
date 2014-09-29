@@ -1,6 +1,121 @@
 <div class='five columns' style="font-size:10px;">
+  <input type="text" class="text-input">
+  <input type="text" class="form-control" placeholder="Text input">
+
+  <h6>種類</h6>
+
+  <h6>レアリティ</h6>
+
+
+  <select class="hoge" ng-model="form.costWhiteFrom" ng-options="f for f in costs">
+    <option value="" selected="selected">
+  </select>
+  ≦ 白 ≦
+  <select class="hoge" ng-model="from.costWhiteTo" ng-options="f for f in costs">
+    <option value="" selected="selected">
+  </select>
+  <br>
+  <select class="hoge" ng-model="form.costRedFrom" ng-options="f for f in costs">
+    <option value="" selected="selected">
+  </select>
+  ≦ 赤 ≦
+  <select class="hoge" ng-model="from.costRedTo" ng-options="f for f in costs">
+    <option value="" selected="selected">
+  </select>
+  <br>
+  <select class="hoge" ng-model="form.costBlueFrom" ng-options="f for f in costs">
+    <option value="" selected="selected">
+  </select>
+  ≦ 青 ≦
+  <select class="hoge" ng-model="from.costBlueTo" ng-options="f for f in costs">
+    <option value="" selected="selected">
+  </select>
+  <br>
+  <select class="hoge" ng-model="form.costGreenFrom" ng-options="f for f in costs">
+    <option value="" selected="selected">
+  </select>
+  ≦ 緑 ≦
+  <select class="hoge" ng-model="from.costGreenTo" ng-options="f for f in costs">
+    <option value="" selected="selected">
+  </select>
+  <br>
+  <select class="hoge" ng-model="form.costBlackFrom" ng-options="f for f in costs">
+    <option value="" selected="selected">
+  </select>
+  ≦ 黒 ≦
+  <select class="hoge" ng-model="from.costBlackTo" ng-options="f for f in costs">
+    <option value="" selected="selected">
+  </select>
+  <br>
+  <select class="hoge" ng-model="form.costColorlessFrom" ng-options="f for f in costs">
+    <option value="" selected="selected">
+  </select>
+  ≦ 無 ≦
+  <select class="hoge" ng-model="from.costColorlessTo" ng-options="f for f in costs">
+    <option value="" selected="selected">
+  </select>
+
+
+
+  <select ng-model="form.typeTemp" ng-options="t.Name for t in types">
+    <option value="" selected="selected">-- タイプ --</option>
+  </select>
+
+  <select ng-model="form.constraintTemp" ng-options="c.Type for c in constraints">
+    <option value="" selected="selected">-- 限定 --</option>
+  </select>
+
+  <label>
+    <input type="checkbox" ng-model="form.bursted">　バーストアイコン
+  </label>
+
+  <select ng-model="form.expansionTemp" ng-options="p.Id for p in products">
+    <option value="" selected="selected">-- エキスパンション --</option>
+  </select>
+
+  <select ng-model="form.illusTemp" ng-options="i.Name for i in illustrators">
+    <option value="" selected="selected">-- イラストレーター --</option>
+  </select>
+
+  <button type="button" class="btn btn-nomal btn-block" ng-click="reset();">リセット</button>
+  <button type="button" class="btn btn-info btn-block">検索</button>
+  <div class="clear"></div>
   <amazon></amazon>
 </div>
 <div class='eleven columns'>
-  aaaa
+
+  <!-- カード -->
+  <div class="panel" ng-repeat="card in cardList">
+    <div class="panel-heading" ng-style="{{setColor(card.Color)}}">
+      <h4 class="panel-title"></h3>
+    </div>
+    <div class="panel-body">
+      <a href="/card/{{card.Expansion}}/{{card.No | padding}}">{{card.Name}}</a>
+      <div style="padding: .8em 0 1.1em 0;">
+        <div style="float: left; padding-top: 0.1em;">
+          <span class="label label-default">{{card.Category}}</span>
+        </div>
+        <div style="float: right; text-align: right;">
+          <p ng-show="card.Category == 'ルリグ'">
+            レベル {{card.Level}} / リミット {{card.Limit}} / <span ng-repeat="c in card.Cost track by $index">({{c}})</span><span ng-show="card.Cost"> / </span>{{card.Type}} / {{card.Expansion}}-{{card.No | padding}} {{card.Reality}}
+          </p>
+          <p ng-show="card.Category == 'アーツ'">
+            <span ng-repeat="c in card.Cost track by $index">({{c}})</span>
+            <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
+            / {{card.Expansion}}-{{card.No | padding}} {{card.Reality}}
+          </p>
+          <p ng-show="card.Category == 'シグニ'">
+            レベル {{card.Level}} / パワー {{card.Power}} / {{card.Type}} <span ng-show="card.Constraint">/ {{card.Constraint}}</span> / {{card.Expansion}}-{{card.No | padding}} {{card.Reality}}
+          </p>
+          <p ng-show="card.Category == 'スペル'">
+            <span ng-repeat="c in card.Cost track by $index">({{c}})</span>
+            <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
+            / {{card.Expansion}}-{{card.No | padding}} {{card.Reality}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- //カード -->
+
 </div>
