@@ -5,55 +5,83 @@
   <h6>種類</h6>
 
   <h6>レアリティ</h6>
+  <input type="radio"ng-model="form.reality" value="'LR'">
+  <input type="radio"ng-model="form.reality" value="'LC'">
+  <input type="radio"ng-model="form.reality" value="'SR'">
+  <input type="radio"ng-model="form.reality" value="'R'">
+  <input type="radio"ng-model="form.reality" value="'C'">
+  <input type="radio"ng-model="form.reality" value="'ST'">
+  <input type="radio"ng-model="form.reality" value="'PR'">
 
 
-  <select class="hoge" ng-model="form.costWhiteFrom" ng-options="f for f in costs">
-    <option value="" selected="selected">
-  </select>
-  ≦ 白 ≦
-  <select class="hoge" ng-model="from.costWhiteTo" ng-options="f for f in costs">
-    <option value="" selected="selected">
-  </select>
-  <br>
-  <select class="hoge" ng-model="form.costRedFrom" ng-options="f for f in costs">
-    <option value="" selected="selected">
-  </select>
-  ≦ 赤 ≦
-  <select class="hoge" ng-model="from.costRedTo" ng-options="f for f in costs">
-    <option value="" selected="selected">
-  </select>
-  <br>
-  <select class="hoge" ng-model="form.costBlueFrom" ng-options="f for f in costs">
-    <option value="" selected="selected">
-  </select>
-  ≦ 青 ≦
-  <select class="hoge" ng-model="from.costBlueTo" ng-options="f for f in costs">
-    <option value="" selected="selected">
-  </select>
-  <br>
-  <select class="hoge" ng-model="form.costGreenFrom" ng-options="f for f in costs">
-    <option value="" selected="selected">
-  </select>
-  ≦ 緑 ≦
-  <select class="hoge" ng-model="from.costGreenTo" ng-options="f for f in costs">
-    <option value="" selected="selected">
-  </select>
-  <br>
-  <select class="hoge" ng-model="form.costBlackFrom" ng-options="f for f in costs">
-    <option value="" selected="selected">
-  </select>
-  ≦ 黒 ≦
-  <select class="hoge" ng-model="from.costBlackTo" ng-options="f for f in costs">
-    <option value="" selected="selected">
-  </select>
-  <br>
-  <select class="hoge" ng-model="form.costColorlessFrom" ng-options="f for f in costs">
-    <option value="" selected="selected">
-  </select>
-  ≦ 無 ≦
-  <select class="hoge" ng-model="from.costColorlessTo" ng-options="f for f in costs">
-    <option value="" selected="selected">
-  </select>
+
+
+  <div style="display:flex">
+    <select class="hoge" ng-model="form.costWhiteFrom" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+    <div style="padding: 1em 1em;">
+      ≦ 白 ≦
+    </div>
+    <select class="hoge" ng-model="from.costWhiteTo" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+  </div>
+  <div style="display:flex">
+    <select class="hoge" ng-model="form.costRedFrom" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+    <div style="padding: 1em 1em;">
+      ≦ 赤 ≦
+    </div>
+    <select class="hoge" ng-model="from.costRedTo" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+  </div>
+  <div style="display:flex">
+    <select class="hoge" ng-model="form.costBlueFrom" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+    <div style="padding: 1em 1em;">
+      ≦ 青 ≦
+    </div>
+    <select class="hoge" ng-model="from.costBlueTo" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+  </div>
+  <div style="display:flex">
+    <select class="hoge" ng-model="form.costGreenFrom" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+    <div style="padding: 1em 1em;">
+      ≦ 緑 ≦
+    </div>
+    <select class="hoge" ng-model="from.costGreenTo" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+  </div>
+  <div style="display:flex">
+    <select class="hoge" ng-model="form.costBlackFrom" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+    <div style="padding: 1em 1em;">
+      ≦ 黒 ≦
+    </div>
+    <select class="hoge" ng-model="from.costBlackTo" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+  </div>
+  <div style="display:flex">
+    <select class="hoge" ng-model="form.costColorlessFrom" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+    <div style="padding: 1em 1em;">
+      ≦ 無 ≦
+    </div>
+    <select class="hoge" ng-model="from.costColorlessTo" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+  </div>
 
 
 

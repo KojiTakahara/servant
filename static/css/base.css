@@ -185,7 +185,9 @@ header h4 {
  * Selecter
  */
 .fuga {
-  width: 90px;
+  width: 38%;
+  margin: 0;
+  height: 26px;
 }
 
 /*
