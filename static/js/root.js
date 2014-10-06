@@ -19,9 +19,27 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       headerContent: { templateUrl: '/view/welcome.html' },
       mainContent: { templateUrl: '/view/top/menuDescription.html' }
     }
-  }),
+  });
   provider.state('card', {
     url: '/card',
+    views: {
+      mainContent: {
+        templateUrl: '/view/card/index.html',
+        controller: 'cardController'
+      }
+    }
+  });
+  provider.state('card.expansion', {
+    url: '/:expansion',
+    views: {
+      mainContent: {
+        templateUrl: '/view/card/index.html',
+        controller: 'cardController'
+      }
+    }
+  });
+  provider.state('card.expansion.detail', {
+    url: '/:no',
     views: {
       mainContent: {
         templateUrl: '/view/card/index.html',

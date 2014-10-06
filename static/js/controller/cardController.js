@@ -1,12 +1,19 @@
 'use strict';
 
-angular.module('cardCtrl', ['apiService'])
+angular.module('cardCtrl', ['apiService', 'selecterForOptionWithNgRepeat'])
 .controller('cardController', ['$scope', '$http', '$location', 'cardService', function($scope, $http, $location, cardService) {
   $scope.categories = ['ルリグ', 'アーツ', 'シグニ', 'スペル'];
   $scope.realities = ['LR', 'LC', 'SR', 'R', 'C', 'ST', 'PR'];
   $scope.levels = [0, 1, 2, 3, 4];
   $scope.powers = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000];
   $scope.costs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  
+
+  $scope.setSelectedItem = function(value, index) {
+    console.log(value);
+    console.log(index);
+  };
+
   var init = function() {
     cardService.getIllustrator().then(function(data) {
       $scope.illustrators = data;
@@ -32,7 +39,7 @@ angular.module('cardCtrl', ['apiService'])
       // error
     });
 
-    var form = {expansion:'WX03'};
+    var form = {expansion:'WX01'};
     cardService.search(form).then(function(data) {
       $scope.cardList = data;
     });

@@ -1,5 +1,5 @@
 <div class='five columns' style="font-size:10px;">
-  <input type="text" class="text-input">
+  <input type="text" class="text-input" ng-model="form.input">
   <input type="text" class="form-control" placeholder="Text input">
 
   <h6>種類</h6>
@@ -14,6 +14,50 @@
   <input type="radio"ng-model="form.reality" value="'PR'">
 
 
+
+{{selectedItem}}
+{{form.typeTemp}}
+
+<select id="linkStartImage" name="linkStartImage" required>
+  <option value="{{type.Name}}"
+    data-ng-repeat="type in types"  
+    selecter-for-option-with-ng-repeat
+    selecter-target="#linkStartImage"
+    selecter-callback="setSelectedItem"
+    ng-selected="type == selectedItem">{{type.Name}}</option>
+</select>
+
+
+
+
+
+  <select ng-model="form.typeTemp" ng-options="t.Name for t in types">
+    <option value="" selected="selected">-- タイプ --</option>
+  </select>
+
+  <div style="display:flex">
+    <select class="hoge" ng-model="form.levelFrom" ng-options="f for f in levels">
+      <option value="" selected="selected">-</option>
+    </select>
+    <div style="padding: 1em 1em;">
+      ≦ レベル ≦
+    </div>
+    <select class="hoge" ng-model="from.levelTo" ng-options="f for f in levels">
+      <option value="" selected="selected">-</option>
+    </select>
+  </div>
+
+  <div style="display:flex">
+    <select class="hoge" ng-model="form.powerFrom" ng-options="f for f in powers">
+      <option value="" selected="selected">-</option>
+    </select>
+    <div style="padding: 1em 1em;">
+      ≦ パワー ≦
+    </div>
+    <select class="hoge" ng-model="from.powerTo" ng-options="f for f in powers">
+      <option value="" selected="selected">-</option>
+    </select>
+  </div>
 
 
   <div style="display:flex">
@@ -83,11 +127,6 @@
     </select>
   </div>
 
-
-
-  <select ng-model="form.typeTemp" ng-options="t.Name for t in types">
-    <option value="" selected="selected">-- タイプ --</option>
-  </select>
 
   <select ng-model="form.constraintTemp" ng-options="c.Type for c in constraints">
     <option value="" selected="selected">-- 限定 --</option>
