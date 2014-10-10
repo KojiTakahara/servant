@@ -7,7 +7,9 @@ var app = angular.module('app', [
   'ui.router',
   'ui.bootstrap',
   'cardCtrl',
-  'ngSelect'
+  'ngSelect',
+  'angular-loading-bar',
+  'ngAnimate'
 ]);
 app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);

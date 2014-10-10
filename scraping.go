@@ -19,6 +19,7 @@ func CreateCard(id int, req *http.Request) *Card {
 	card.CostGreen = -1
 	card.CostRed = -1
 	card.CostWhite = -1
+	card.Id = id
 
 	url := "http://www.takaratomy.co.jp/products/wixoss/card/card_detail.php?id=" + strconv.Itoa(id)
 	card.Url = url
@@ -151,6 +152,12 @@ func CreateCard(id int, req *http.Request) *Card {
 			})
 		})
 	})
+
+	cards := GetCardByNameAndId(card.Name, id, req)
+	if len(cards) != 0 {
+		card.ParentKeyName = cards[0].KeyName
+	}
+
 	keyStr := card.Expansion + "-" + fmt.Sprintf("%03d", card.No)
 	key := datastore.NewKey(c, "Card", keyStr, 0, nil)
 	key, err := datastore.Put(c, key, card)

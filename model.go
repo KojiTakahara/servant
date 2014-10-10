@@ -1,12 +1,16 @@
 package servant
 
 import (
-	"appengine/datastore"
 	"github.com/mrjones/oauth"
+	"time"
 )
 
+/**
+ * カード
+ */
 type Card struct {
-	Key           *datastore.Key
+	Id            int
+	KeyName       string
 	Burst         string
 	Bursted       bool
 	Category      string
@@ -34,38 +38,53 @@ type Card struct {
 	Text          string
 	Type          string
 	Url           string
+	ParentKeyName string
 }
 
+/**
+ * 登録ユーザ
+ */
 type User struct {
-	Key   *datastore.Key
+	Key   string
 	Id    string
-	Token *oauth.AccessToken
+	Token oauth.AccessToken
 }
 
+/**
+ * エキスパンション
+ */
 type Product struct {
-	Key  *datastore.Key
 	Id   string
 	Name string
 }
 
+/**
+ * 種族またはルリグ
+ */
 type Type struct {
-	Key  *datastore.Key
 	Name string
 }
 
+/**
+ * イラストレーター
+ */
 type Illustrator struct {
-	Key  *datastore.Key
 	Name string
 }
 
+/**
+ * 限定条件
+ */
 type Constraint struct {
-	Key  *datastore.Key
 	Type string
 }
 
+/**
+ * デッキ
+ */
 type Deck struct {
-	Key          *datastore.key
-	Owner        *datastore.key
+	Id           int
+	Owner        string
 	Title        string
 	Introduction string
 	Description  string
@@ -74,56 +93,56 @@ type Deck struct {
 	Blue         bool
 	Green        bool
 	Black        bool
-	Lrig01       *datastore.key
-	Lrig02       *datastore.key
-	Lrig03       *datastore.key
-	Lrig04       *datastore.key
-	Lrig05       *datastore.key
-	Lrig06       *datastore.key
-	Lrig07       *datastore.key
-	Lrig08       *datastore.key
-	Lrig09       *datastore.key
-	Lrig10       *datastore.key
-	Main01       *datastore.key
-	Main02       *datastore.key
-	Main03       *datastore.key
-	Main04       *datastore.key
-	Main05       *datastore.key
-	Main06       *datastore.key
-	Main07       *datastore.key
-	Main08       *datastore.key
-	Main09       *datastore.key
-	Main10       *datastore.key
-	Main11       *datastore.key
-	Main12       *datastore.key
-	Main13       *datastore.key
-	Main14       *datastore.key
-	Main15       *datastore.key
-	Main16       *datastore.key
-	Main17       *datastore.key
-	Main18       *datastore.key
-	Main19       *datastore.key
-	Main20       *datastore.key
-	Main21       *datastore.key
-	Main22       *datastore.key
-	Main23       *datastore.key
-	Main24       *datastore.key
-	Main25       *datastore.key
-	Main26       *datastore.key
-	Main27       *datastore.key
-	Main28       *datastore.key
-	Main29       *datastore.key
-	Main30       *datastore.key
-	Main31       *datastore.key
-	Main32       *datastore.key
-	Main33       *datastore.key
-	Main34       *datastore.key
-	Main35       *datastore.key
-	Main36       *datastore.key
-	Main37       *datastore.key
-	Main38       *datastore.key
-	Main39       *datastore.key
-	Main40       *datastore.key
+	Lrig01       string
+	Lrig02       string
+	Lrig03       string
+	Lrig04       string
+	Lrig05       string
+	Lrig06       string
+	Lrig07       string
+	Lrig08       string
+	Lrig09       string
+	Lrig10       string
+	Main01       string
+	Main02       string
+	Main03       string
+	Main04       string
+	Main05       string
+	Main06       string
+	Main07       string
+	Main08       string
+	Main09       string
+	Main10       string
+	Main11       string
+	Main12       string
+	Main13       string
+	Main14       string
+	Main15       string
+	Main16       string
+	Main17       string
+	Main18       string
+	Main19       string
+	Main20       string
+	Main21       string
+	Main22       string
+	Main23       string
+	Main24       string
+	Main25       string
+	Main26       string
+	Main27       string
+	Main28       string
+	Main29       string
+	Main30       string
+	Main31       string
+	Main32       string
+	Main33       string
+	Main34       string
+	Main35       string
+	Main36       string
+	Main37       string
+	Main38       string
+	Main39       string
+	Main40       string
 	Scope        string
 	Use0500      string
 	Use1000      string

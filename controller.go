@@ -3,16 +3,18 @@ package servant
 import (
 	"appengine"
 	"appengine/datastore"
+	"fmt"
+	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
-	"log"
 	"net/http"
 	"net/url"
+	"strconv"
+	"time"
 )
 
 func GetCardList(r render.Render, req *http.Request) []Card {
 	u, _ := url.Parse(req.URL.String())
 	params := u.Query()
-	log.Println(params)
 	c := appengine.NewContext(req)
 	q := datastore.NewQuery("Card")
 	q = EqualQuery(q, params, "bursted")
@@ -25,8 +27,12 @@ func GetCardList(r render.Render, req *http.Request) []Card {
 	q = EqualQuery(q, params, "reality")
 	q = EqualQuery(q, params, "type")
 	entities := make([]Card, 0, 10)
-	if _, err := q.GetAll(c, &entities); err != nil {
+	keys, err := q.GetAll(c, &entities)
+	if err != nil {
 		c.Criticalf(err.Error())
+	}
+	for i := range entities {
+		entities[i].KeyName = keys[i].StringID()
 	}
 	entities = Removenequality(entities, params, "costBlack")
 	entities = Removenequality(entities, params, "costBlue")
@@ -155,4 +161,71 @@ func GetTypeList(r render.Render, req *http.Request) []Type {
 		c.Criticalf(err.Error())
 	}
 	return res
+}
+
+func CreateDeck(r render.Render, req *http.Request) {
+	c := appengine.NewContext(req)
+
+	q := datastore.NewQuery("Card")
+	entities := make([]Card, 0, 0)
+	if _, err := q.GetAll(c, &entities); err != nil {
+		c.Criticalf(err.Error())
+	}
+	deck := &Deck{}
+	deck.Title = "ほげほげ"
+	deck.Introduction = "intoro"
+	deck.Description = "desc"
+	deck.CreatedAt = time.Now()
+	deck.UpdatedAt = time.Now()
+	deck.Main01 = entities[0].KeyName
+	key := datastore.NewKey(c, "Deck", "", 0, nil)
+	c.Infof("%s", key)
+	key, err := datastore.Put(c, key, deck)
+	if err != nil {
+		c.Criticalf("%s", err)
+	} else {
+		c.Infof("success. IntID: %s", key.IntID())
+		c.Infof("success. StringID: %s", key.StringID())
+	}
+	r.JSON(200, deck)
+}
+
+func GetCardByExpansion(r render.Render, params martini.Params, req *http.Request) {
+	c := appengine.NewContext(req)
+	q := datastore.NewQuery("Card")
+	q = q.Filter("Expansion=", params["expansion"])
+	cards := make([]Card, 0, 10)
+	keys, err := q.GetAll(c, &cards)
+	if err != nil {
+		c.Criticalf(err.Error())
+	}
+	for i := range cards {
+		cards[i].KeyName = keys[i].StringID()
+	}
+	r.JSON(200, cards)
+}
+
+func GetCard(r render.Render, params martini.Params, req *http.Request) {
+	c := appengine.NewContext(req)
+	keyStr := params["expansion"] + "-" + fmt.Sprintf("%03d", ToInt(params["no"]))
+	c.Infof("%s", keyStr)
+	key := datastore.NewKey(c, "Card", keyStr, 0, nil)
+	var card Card
+	if err := datastore.Get(c, key, &card); err != nil {
+		c.Criticalf(err.Error())
+		r.JSON(400, "")
+	} else {
+		r.JSON(200, card)
+	}
+}
+
+func GetDeck(r render.Render, params martini.Params, req *http.Request) {
+	c := appengine.NewContext(req)
+	id, _ := strconv.Atoi(params["id"])
+	key := datastore.NewKey(c, "Deck", "", int64(id), nil)
+	var e2 Deck
+	if err := datastore.Get(c, key, &e2); err != nil {
+		c.Criticalf(err.Error())
+	}
+	r.JSON(200, e2)
 }
