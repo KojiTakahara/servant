@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('cardCtrl', ['apiService', 'selecterForOptionWithNgRepeat'])
+angular.module('cardCtrl', ['apiService', 'selecterForOptionWithNgRepeat', 'angularUtils.directives.dirPagination'])
 .controller('cardController', ['$scope', '$http', '$location', 'cardService', function($scope, $http, $location, cardService) {
   $scope.categories = ['ルリグ', 'アーツ', 'シグニ', 'スペル'];
   $scope.realities = ['LR', 'LC', 'SR', 'R', 'C', 'ST', 'PR'];
   $scope.levels = [0, 1, 2, 3, 4];
   $scope.powers = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000];
   $scope.costs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  
+
 
   $scope.setSelectedItem = function(value, index) {
     console.log(value);
@@ -50,7 +50,7 @@ angular.module('cardCtrl', ['apiService', 'selecterForOptionWithNgRepeat'])
         radioClass: "iradio_square-yellow" //使用するテーマのスキンを指定する
       });
       $("select.hoge").selecter({customClass: 'fuga'});
-      $("select").selecter();
+      $("select.piyo").selecter();
     }, 500);
   };
   init();
@@ -79,6 +79,11 @@ angular.module('cardCtrl', ['apiService', 'selecterForOptionWithNgRepeat'])
 
   $scope.reset = function() {
     $scope.form = {};
+    console.log($("select.hoge").length);
+    setTimeout(function() {
+      $("select.hoge").selecter("destroy").selecter({customClass: 'fuga'});
+      $("select.piyo").selecter("destroy").selecter();
+    }, 10);
   };
 
 

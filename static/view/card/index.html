@@ -1,5 +1,12 @@
 <div class='five columns' style="font-size:10px;">
-  <input type="text" class="text-input" ng-model="form.input">
+
+
+  <amazon></amazon>
+</div>
+<div class='eleven columns'>
+
+
+<input type="text" class="text-input" ng-model="form.input">
   <input type="text" class="form-control" placeholder="Text input">
 
   <h6>種類</h6>
@@ -15,49 +22,41 @@
 
 
 
-{{selectedItem}}
-{{form.typeTemp}}
-
-<select id="linkStartImage" name="linkStartImage" required>
-  <option value="{{type.Name}}"
-    data-ng-repeat="type in types"  
-    selecter-for-option-with-ng-repeat
-    selecter-target="#linkStartImage"
-    selecter-callback="setSelectedItem"
-    ng-selected="type == selectedItem">{{type.Name}}</option>
-</select>
 
 
 
-
-
-  <select ng-model="form.typeTemp" ng-options="t.Name for t in types">
+  <select class="piyo" ng-model="form.typeTemp" ng-options="t.Name for t in types">
     <option value="" selected="selected">-- タイプ --</option>
   </select>
 
-  <div style="display:flex">
-    <select class="hoge" ng-model="form.levelFrom" ng-options="f for f in levels">
-      <option value="" selected="selected">-</option>
-    </select>
-    <div style="padding: 1em 1em;">
-      ≦ レベル ≦
-    </div>
-    <select class="hoge" ng-model="from.levelTo" ng-options="f for f in levels">
-      <option value="" selected="selected">-</option>
-    </select>
-  </div>
 
-  <div style="display:flex">
-    <select class="hoge" ng-model="form.powerFrom" ng-options="f for f in powers">
-      <option value="" selected="selected">-</option>
-    </select>
-    <div style="padding: 1em 1em;">
-      ≦ パワー ≦
+    <div style="display:flex">
+      <select class="hoge" ng-model="form.levelFrom" ng-options="f for f in levels">
+        <option value="" selected="selected">-</option>
+      </select>
+      <div style="padding: 1em 1em;">
+        ≦ レベル ≦
+      </div>
+      <select class="hoge" ng-model="from.levelTo" ng-options="f for f in levels">
+        <option value="" selected="selected">-</option>
+      </select>
     </div>
-    <select class="hoge" ng-model="from.powerTo" ng-options="f for f in powers">
-      <option value="" selected="selected">-</option>
-    </select>
-  </div>
+
+    <div style="display:flex">
+      <select class="hoge" ng-model="form.powerFrom" ng-options="f for f in powers">
+        <option value="" selected="selected">-</option>
+      </select>
+      <div style="padding: 1em 1em;">
+        ≦ パワー ≦
+      </div>
+      <select class="hoge" ng-model="from.powerTo" ng-options="f for f in powers">
+        <option value="" selected="selected">-</option>
+      </select>
+    </div>
+
+
+
+
 
 
   <div style="display:flex">
@@ -128,7 +127,7 @@
   </div>
 
 
-  <select ng-model="form.constraintTemp" ng-options="c.Type for c in constraints">
+  <select class="piyo" ng-model="form.constraintTemp" ng-options="c.Type for c in constraints">
     <option value="" selected="selected">-- 限定 --</option>
   </select>
 
@@ -136,23 +135,26 @@
     <input type="checkbox" ng-model="form.bursted">　バーストアイコン
   </label>
 
-  <select ng-model="form.expansionTemp" ng-options="p.Id for p in products">
+  <select class="piyo" ng-model="form.expansionTemp" ng-options="p.Id for p in products">
     <option value="" selected="selected">-- エキスパンション --</option>
   </select>
 
-  <select ng-model="form.illusTemp" ng-options="i.Name for i in illustrators">
+  <select class="piyo" ng-model="form.illusTemp" ng-options="i.Name for i in illustrators">
     <option value="" selected="selected">-- イラストレーター --</option>
   </select>
 
-  <button type="button" class="btn btn-nomal btn-block" ng-click="reset();">リセット</button>
-  <button type="button" class="btn btn-info btn-block">検索</button>
+
+
+
+  <div style="background-color: #5AACEE; padding: 10px;">
+    <button type="button" class="btn btn-nomal btn-block" ng-click="reset();">リセット</button>
+    <button type="button" class="btn btn-info btn-block">検索</button>
+  </div>
   <div class="clear"></div>
-  <amazon></amazon>
-</div>
-<div class='eleven columns'>
+
 
   <!-- カード -->
-  <div class="panel" ng-repeat="card in cardList">
+  <div class="panel" dir-paginate="card in cardList | itemsPerPage: 10: 'cust'" pagination-id="cust">
     <div class="panel-heading" ng-style="{{setColor(card.Color)}}">
       <h4 class="panel-title"></h3>
     </div>
@@ -184,5 +186,6 @@
     </div>
   </div>
   <!-- //カード -->
+  <dir-pagination-controls pagination-id="cust"></dir-pagination-controls>
 
 </div>
