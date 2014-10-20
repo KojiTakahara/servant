@@ -1,7 +1,7 @@
 <div class='five columns' style="font-size:10px;">
 
-  <!--
   <amazon></amazon>
+  <!--
   -->
 </div>
 <div class='eleven columns'>
@@ -15,11 +15,20 @@
   <div style="padding: 10px; border: 1px solid #999; border-radius: 5px; font-size: 12px;">
 
     <div style="display: flex; width: 100%;">
-      <div class="six columns">
-        <input type="text" class="text-input" ng-model="form.input">
+      <div class="three columns" style="margin: auto 0; text-align: center;">
+        キーワード
       </div>
-      <div class="six columns">
-        <div class="btn-group">
+      <div class="form-search">
+        <input type="text" class="form-control search-query">
+      </div>
+    </div>
+
+    <div style="display: flex; width: 100%;">
+      <div class="three columns" style="margin: auto 0; text-align: center;">
+        レアリティ
+      </div>
+      <div class="nine columns">
+        <div class="btn-group" style="padding: 0.8em 0;">
           <label class="btn btn-warning piyo" ng-model="form.category" btn-radio="'ルリグ'" uncheckable>ルリグ</label>
           <label class="btn btn-warning piyo" ng-model="form.category" btn-radio="'アーツ'" uncheckable>アーツ</label>
           <label class="btn btn-warning piyo" ng-model="form.category" btn-radio="'シグニ'" uncheckable>シグニ</label>
@@ -27,15 +36,23 @@
         </div>
       </div>
     </div>
-
     <div style="display: flex; width: 100%;">
-      <div class="six columns">
+      <div class="three columns" style="margin: auto 0; text-align: center;">
+        レアリティ
+      </div>
+      <div class="nine columns">
         <select class="piyo" ng-model="form.typeTemp" ng-options="t.Name for t in types">
           <option value="" selected="selected">-- タイプ --</option>
         </select>
       </div>
-      <div class="six columns">
-        <div class="btn-group">
+    </div>
+
+    <div style="display: flex; width: 100%;">
+      <div class="three columns" style="margin: auto 0; text-align: center;">
+        レアリティ
+      </div>
+      <div class="nine columns">
+        <div class="btn-group" style="padding: 0.8em 0;">
           <label class="btn btn-warning piyo" ng-model="form.reality" btn-radio="'LR'" uncheckable>LR</label>
           <label class="btn btn-warning piyo" ng-model="form.reality" btn-radio="'LC'" uncheckable>LC</label>
           <label class="btn btn-warning piyo" ng-model="form.reality" btn-radio="'SR'" uncheckable>SR</label>
@@ -46,35 +63,47 @@
         </div>
       </div>
     </div>
-
     <div style="display: flex; width: 100%;">
-      <div class="btn-group">
-        <label class="btn btn-warning piyo" ng-model="form.color" btn-radio="'white'" uncheckable>白</label>
-        <label class="btn btn-warning piyo" ng-model="form.color" btn-radio="'red'" uncheckable>赤</label>
-        <label class="btn btn-warning piyo" ng-model="form.color" btn-radio="'blue'" uncheckable>青</label>
-        <label class="btn btn-warning piyo" ng-model="form.color" btn-radio="'green'" uncheckable>緑</label>
-        <label class="btn btn-warning piyo" ng-model="form.color" btn-radio="'black'" uncheckable>黒</label>
-        <label class="btn btn-warning piyo" ng-model="form.color" btn-radio="'colorless'" uncheckable>無</label>
+      <div class="three columns" style="margin: auto 0; text-align: center;">
+        色
+      </div>
+      <div class="nine columns">
+        <div class="btn-group" style="padding: 0.8em 0;">
+          <label class="btn btn-warning piyo" ng-model="form.color" btn-radio="'white'" uncheckable>白</label>
+          <label class="btn btn-warning piyo" ng-model="form.color" btn-radio="'red'" uncheckable>赤</label>
+          <label class="btn btn-warning piyo" ng-model="form.color" btn-radio="'blue'" uncheckable>青</label>
+          <label class="btn btn-warning piyo" ng-model="form.color" btn-radio="'green'" uncheckable>緑</label>
+          <label class="btn btn-warning piyo" ng-model="form.color" btn-radio="'black'" uncheckable>黒</label>
+          <label class="btn btn-warning piyo" ng-model="form.color" btn-radio="'colorless'" uncheckable>無</label>
+        </div>
       </div>
     </div>
 
     <div style="display: flex; width: 100%;">
-      <div class="four columns" style="display: flex;">
+      <div class="three columns" style="margin: auto 0; text-align: center;">
+        レベル
+      </div>
+      <div class="nine columns" style="display: flex;">
         <select class="hoge" ng-model="form.levelFrom" ng-options="f for f in levels">
           <option value="" selected="selected">-</option>
         </select>
-        <div style="padding: 1em 1em;">
+        <div style="padding: 1em 0.3em;">
           ≦ レベル ≦
         </div>
         <select class="hoge" ng-model="form.levelTo" ng-options="f for f in levels">
           <option value="" selected="selected">-</option>
         </select>
       </div>
-      <div class="four columns" style="display: flex;">
+    </div>
+    <div style="display: flex; width: 100%;">
+      <div class="three columns" style="margin: auto 0; text-align: center;">
+        パワー
+      </div>
+      <div class="nine columns" style="display: flex;">
         <select class="hoge" ng-model="form.powerFrom" ng-options="f for f in powers">
           <option value="" selected="selected">-</option>
         </select>
-        <div style="padding: 1em 1em;">
+        <div style="padding: 1em 0.3em;">
           ≦ パワー ≦
         </div>
         <select class="hoge" ng-model="form.powerTo" ng-options="f for f in powers">
@@ -88,68 +117,74 @@
 
 
     <div style="display: flex; width: 100%;">
-      <div class="four columns" style="display: flex;">
+      <div class="three columns" style="margin: auto 0; text-align: center;">
+        コスト
+      </div>
+      <div class="nine columns" style="display: flex;">
         <select class="hoge" ng-model="form.costWhiteFrom" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
-        <div style="padding: 1em 1em;">
+        <div style="padding: 1em 0.3em;">
           ≦ 白 ≦
         </div>
         <select class="hoge" ng-model="form.costWhiteTo" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
-      </div>
-      <div class="four columns" style="display: flex;">
+        <div style="padding: 7px;"></div>
         <select class="hoge" ng-model="form.costRedFrom" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
-        <div style="padding: 1em 1em;">
+        <div style="padding: 1em 0.3em;">
           ≦ 赤 ≦
         </div>
         <select class="hoge" ng-model="form.costRedTo" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
       </div>
-      <div class="four columns" style="display: flex;">
+    </div>
+    <div style="display: flex; width: 100%;">
+      <div class="three columns" style="margin: auto 0; text-align: center;">
+      </div>
+      <div class="nine columns" style="display: flex;">
         <select class="hoge" ng-model="form.costBlueFrom" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
-        <div style="padding: 1em 1em;">
+        <div style="padding: 1em 0.3em;">
           ≦ 青 ≦
         </div>
         <select class="hoge" ng-model="form.costBlueTo" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
-      </div>
-    </div>
-    <div style="display: flex; width: 100%;">
-      <div class="four columns" style="display: flex;">
+        <div style="padding: 7px;"></div>
         <select class="hoge" ng-model="form.costGreenFrom" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
-        <div style="padding: 1em 1em;">
+        <div style="padding: 1em 0.3em;">
           ≦ 緑 ≦
         </div>
         <select class="hoge" ng-model="form.costGreenTo" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
       </div>
-      <div class="four columns" style="display: flex;">
+    </div>
+    <div style="display: flex; width: 100%;">
+      <div class="three columns" style="margin: auto 0; text-align: center;">
+      </div>
+      <div class="nine columns" style="display: flex;">
         <select class="hoge" ng-model="form.costBlackFrom" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
-        <div style="padding: 1em 1em;">
+        <div style="padding: 1em 0.3em;">
           ≦ 黒 ≦
         </div>
         <select class="hoge" ng-model="form.costBlackTo" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
-      </div>
-      <div class="four columns" style="display: flex;">
+        <div style="padding: 7px;"></div>
         <select class="hoge" ng-model="form.costColorlessFrom" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
-        <div style="padding: 1em 1em;">
+        <div style="padding: 1em 0.3em;">
           ≦ 無 ≦
         </div>
         <select class="hoge" ng-model="form.costColorlessTo" ng-options="f for f in costs">
@@ -160,12 +195,21 @@
 
 
     <div style="display: flex; width: 100%;">
-      <div class="six columns">
+      <div class="three columns" style="margin: auto 0; text-align: center;">
+        限定
+      </div>
+      <div class="nine columns">
         <select class="piyo" ng-model="form.constraintTemp" ng-options="c.Type for c in constraints">
           <option value="" selected="selected">-- 限定 --</option>
         </select>
       </div>
-      <div class="six columns">
+    </div>
+
+    <div style="display: flex; width: 100%;">
+      <div class="three columns" style="margin: auto 0; text-align: center;">
+        ライフバースト
+      </div>
+      <div class="nine columns">
         <label>
           <input type="checkbox" ng-model="form.bursted">　バーストアイコン
         </label>
@@ -173,12 +217,20 @@
     </div>
 
     <div style="display: flex; width: 100%;">
-      <div class="six columns">
+      <div class="three columns" style="margin: auto 0; text-align: center;">
+        エキスパンション
+      </div>
+      <div class="nine columns">
         <select class="piyo" ng-model="form.expansionTemp" ng-options="p.Id for p in products">
           <option value="" selected="selected">-- エキスパンション --</option>
         </select>
       </div>
-      <div class="six columns">
+    </div>
+    <div style="display: flex; width: 100%;">
+      <div class="three columns" style="margin: auto 0; text-align: center;">
+        イラストレーター
+      </div>
+      <div class="nine columns">
         <select class="piyo" ng-model="form.illusTemp" ng-options="i.Name for i in illustrators">
           <option value="" selected="selected">-- イラストレーター --</option>
         </select>
@@ -186,10 +238,15 @@
     </div>
 
 
+    <div style="display: flex; width: 100%;">
+      <div class="three columns">
+        <button type="button" class="btn btn-nomal btn-block" ng-click="reset();">リセット</button>
+      </div>
+      <div class="nine columns">
+        <button type="button" class="btn btn-info btn-block">検索</button>
+      </div>
+    </div>
 
-
-    <button type="button" class="btn btn-nomal btn-block" ng-click="reset();">リセット</button>
-    <button type="button" class="btn btn-info btn-block">検索</button>
   </div>
 
 

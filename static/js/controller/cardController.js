@@ -49,8 +49,8 @@ angular.module('cardCtrl', ['apiService', 'selecterForOptionWithNgRepeat', 'angu
         checkboxClass: "icheckbox_square-yellow", //使用するテーマのスキンを指定する
         radioClass: "iradio_square-yellow" //使用するテーマのスキンを指定する
       });
-      $("select.hoge").selecter({customClass: 'fuga'});
-      $("select.piyo").selecter();
+      //$("select.hoge").selecter({customClass: 'fuga'});
+      //$("select.piyo").selecter();
     }, 500);
   };
   init();
@@ -81,8 +81,8 @@ angular.module('cardCtrl', ['apiService', 'selecterForOptionWithNgRepeat', 'angu
     $scope.form = {};
     console.log($("select.hoge").length);
     setTimeout(function() {
-      $("select.hoge").selecter("destroy").selecter({customClass: 'fuga'});
-      $("select.piyo").selecter("destroy").selecter();
+      //$("select.hoge").selecter("destroy").selecter({customClass: 'fuga'});
+      //$("select.piyo").selecter("destroy").selecter();
     }, 10);
   };
 
