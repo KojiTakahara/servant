@@ -26,3 +26,13 @@ fil.filter('color', function() {
     }
   };
 });
+
+fil.filter('productId', function() {
+  return function(id) {
+    var list = id.split(/([a-zA-Z]+)([0-9]+)/);
+    if (list[1] === 'WD') {
+      list[1] = 'WXD';
+    }
+    return list[1] + '-' + list[2];
+  };
+});
