@@ -16,6 +16,10 @@ handlers:
   static_files: static/index.html
   upload: static/index.html
 
+- url: /card/(.*)
+  static_files: static/index.html
+  upload: static/index.html
+
 - url: /view/(.*\.html)
   static_files: static/view/\1
   upload: static/view/(.*\.html)

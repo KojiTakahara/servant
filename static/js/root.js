@@ -14,15 +14,14 @@ var app = angular.module('app', [
 app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise("");
-  var provider = $stateProvider;
-  provider.state('top', {
+  $stateProvider.state('top', {
     url: '/',
     views: {
       headerContent: { templateUrl: '/view/welcome.html' },
       mainContent: { templateUrl: '/view/top/menuDescription.html' }
     }
   });
-  provider.state('card', {
+  $stateProvider.state('card', {
     url: '/card',
     views: {
       mainContent: {
@@ -31,8 +30,8 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       }
     }
   });
-  provider.state('card.expansion', {
-    url: '/:expansion',
+  $stateProvider.state('card.expansion', {
+    url: '/:hoge',
     views: {
       mainContent: {
         templateUrl: '/view/card/index.html',
@@ -40,7 +39,8 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       }
     }
   });
-  provider.state('card.expansion.detail', {
+  /**
+  $stateProvider.state('card.expansion.detail', {
     url: '/:no',
     views: {
       mainContent: {
@@ -49,4 +49,5 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       }
     }
   });
+  */
 }]);
