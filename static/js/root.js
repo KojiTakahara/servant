@@ -39,15 +39,13 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       }
     }
   });
-  /**
-  $stateProvider.state('card.expansion.detail', {
-    url: '/:no',
+  $stateProvider.state('cardDetail', {
+    url: '/card/:expansion/:no',
     views: {
       mainContent: {
-        templateUrl: '/view/card/index.html',
-        controller: 'cardController'
+        templateUrl: '/view/card/detail.html',
+        controller: 'cardDetailController'
       }
     }
   });
-  */
 }]);

@@ -27,3 +27,9 @@ dir.directive('cardlist', function() {
     }
   };
 });
+dir.directive('carddetail', function() {
+  return {
+    restrict: 'E',
+    templateUrl: '/view/common/cardDetail.html'
+  };
+});

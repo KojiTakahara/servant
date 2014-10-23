@@ -9,20 +9,18 @@
     </div>
     <div style="float: right; text-align: right;">
       <p ng-show="card.Category == 'ルリグ'">
-        レベル {{card.Level}} / リミット {{card.Limit}} / <span ng-repeat="c in card.Cost track by $index">({{c}})</span><span ng-show="card.Cost"> / </span>{{card.Type}} / {{card.Expansion}}-{{card.No | padding}} {{card.Reality}}
+        レベル {{card.Level}} / リミット {{card.Limit}} / <span ng-repeat="c in card.Cost track by $index">({{c}})</span><span ng-show="card.Cost"> / </span>{{card.Type}}
       </p>
       <p ng-show="card.Category == 'アーツ'">
         <span ng-repeat="c in card.Cost track by $index">({{c}})</span>
         <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
-        / {{card.Expansion}}-{{card.No | padding}} {{card.Reality}}
       </p>
       <p ng-show="card.Category == 'シグニ'">
-        レベル {{card.Level}} / パワー {{card.Power}} / {{card.Type}} <span ng-show="card.Constraint">/ {{card.Constraint}}</span> / {{card.Expansion}}-{{card.No | padding}} {{card.Reality}}
+        レベル {{card.Level}} / パワー {{card.Power}} / {{card.Type}} <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
       </p>
       <p ng-show="card.Category == 'スペル'">
         <span ng-repeat="c in card.Cost track by $index">({{c}})</span>
         <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
-        / {{card.Expansion}}-{{card.No | padding}} {{card.Reality}}
       </p>
     </div>
   </div>

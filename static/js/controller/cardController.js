@@ -6,6 +6,8 @@ var ctrl = angular.module('cardCtrl', [
   'selecterForOptionWithNgRepeat',
   'angularUtils.directives.dirPagination'
 ]);
+
+/** カードTOP **/
 ctrl.controller('cardController', ['$scope', '$location', 'cardService', function($scope, $location, cardService) {
   $scope.categories = ['ルリグ', 'アーツ', 'シグニ', 'スペル'];
   $scope.realities = ['LR', 'LC', 'SR', 'R', 'C', 'ST', 'PR'];
@@ -56,7 +58,6 @@ ctrl.controller('cardController', ['$scope', '$location', 'cardService', functio
 
   $scope.reset = function() {
     $scope.form = {};
-    console.log($("select.hoge").length);
     setTimeout(function() {
       //$("select.hoge").selecter("destroy").selecter({customClass: 'fuga'});
       //$("select.piyo").selecter("destroy").selecter();
@@ -68,5 +69,12 @@ ctrl.controller('cardController', ['$scope', '$location', 'cardService', functio
 ctrl.controller('cardExController', ['$scope', '$stateParams', 'cardService', function($scope, $stateParams, cardService) {
   cardService.getCardByExpansion($stateParams.expansion).then(function(data) {
     $scope.cardList = data;
+  });
+}]);
+
+/** カード詳細 **/
+ctrl.controller('cardDetailController', ['$scope', '$stateParams', 'cardService', function($scope, $stateParams, cardService) {
+  cardService.getCardByExpansionAndNo($stateParams.expansion, $stateParams.no).then(function(data) {
+    $scope.card = data;
   });
 }]);
