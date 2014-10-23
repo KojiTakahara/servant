@@ -83,5 +83,18 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
     return deferred.promise;
   };
 
+  service.getCardByExpansion = function(expansion) {
+    var deferred = $q.defer();
+    $http({
+      method: 'GET',
+      url: '/api/card/' + expansion
+    }).success(function(data, status, headers, config) {
+      deferred.resolve(data);
+    }).error(function(data, status, headers, config) {
+      deferred.reject(data);
+    });
+    return deferred.promise;
+  };
+
   return service;
 }]);

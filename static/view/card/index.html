@@ -1,7 +1,7 @@
 <div class='five columns' style="font-size:10px;">
 
-  <amazon></amazon>
   <!--
+  <amazon></amazon>
   -->
 </div>
 <div class='eleven columns'>
@@ -11,6 +11,15 @@
       font-size: 10px;
     }
   </style>
+
+  <div ng-repeat="p in products">
+    <a href="/card/{{p.Id}}">
+      {{p.Id | productId}} {{p.Name}}
+    </a>
+    <hr>
+  </div>
+
+  <!--
 
   <div style="padding: 10px; border: 1px solid #999; border-radius: 5px; font-size: 12px;">
 
@@ -38,7 +47,7 @@
     </div>
     <div style="display: flex; width: 100%;">
       <div class="three columns" style="margin: auto 0; text-align: center;">
-        レアリティ
+        タイプ
       </div>
       <div class="nine columns">
         <select class="piyo" ng-model="form.typeTemp" ng-options="t.Name for t in types">
@@ -249,40 +258,14 @@
 
   </div>
 
+  -->
 
-  <!-- カード -->
+
   <div class="panel" dir-paginate="card in cardList | itemsPerPage: 2: 'cust'" pagination-id="cust">
-    <div class="panel-heading" ng-style="{{setColor(card.Color)}}">
-      <h4 class="panel-title"></h3>
-    </div>
-    <div class="panel-body">
-      <a href="/card/{{card.Expansion}}/{{card.No | padding}}">{{card.Name}}</a>
-      <div style="padding: .8em 0 1.1em 0;">
-        <div style="float: left; padding-top: 0.1em;">
-          <span class="label label-default">{{card.Category}}</span>
-        </div>
-        <div style="float: right; text-align: right;">
-          <p ng-show="card.Category == 'ルリグ'">
-            レベル {{card.Level}} / リミット {{card.Limit}} / <span ng-repeat="c in card.Cost track by $index">({{c}})</span><span ng-show="card.Cost"> / </span>{{card.Type}} / {{card.Expansion}}-{{card.No | padding}} {{card.Reality}}
-          </p>
-          <p ng-show="card.Category == 'アーツ'">
-            <span ng-repeat="c in card.Cost track by $index">({{c}})</span>
-            <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
-            / {{card.Expansion}}-{{card.No | padding}} {{card.Reality}}
-          </p>
-          <p ng-show="card.Category == 'シグニ'">
-            レベル {{card.Level}} / パワー {{card.Power}} / {{card.Type}} <span ng-show="card.Constraint">/ {{card.Constraint}}</span> / {{card.Expansion}}-{{card.No | padding}} {{card.Reality}}
-          </p>
-          <p ng-show="card.Category == 'スペル'">
-            <span ng-repeat="c in card.Cost track by $index">({{c}})</span>
-            <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
-            / {{card.Expansion}}-{{card.No | padding}} {{card.Reality}}
-          </p>
-        </div>
-      </div>
-    </div>
+    <cardlist card="card"></cardlist>
   </div>
-  <!-- //カード -->
+  <!--
   <dir-pagination-controls pagination-id="cust"></dir-pagination-controls>
+  -->
 
 </div>

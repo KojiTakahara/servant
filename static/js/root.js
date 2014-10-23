@@ -30,12 +30,12 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       }
     }
   });
-  $stateProvider.state('card.expansion', {
-    url: '/:hoge',
+  $stateProvider.state('expansion', {
+    url: '/card/:expansion',
     views: {
       mainContent: {
-        templateUrl: '/view/card/index.html',
-        controller: 'cardController'
+        templateUrl: '/view/card/expansion.html',
+        controller: 'cardExController'
       }
     }
   });
