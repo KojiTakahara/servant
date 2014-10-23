@@ -24,7 +24,27 @@
           <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
         </p>
       </div>
-      <br><br>{{card.Text}}
+    </div>
+    <p class="textframe" ng-show="card.Text" style="padding: .8em 0 1.1em 0;">
+      <span ng-repeat="text in card.Text.split(',')">
+        {{text}}<br/>
+      </span>
+    </p>
+    <p class="textframe" ng-show="card.Text" style="padding: .8em 0 1.1em 0;">
+      {{card.Burst}}
+    </p>
+    <p class="textframe" ng-show="card.Text" style="padding: .8em 0 1.1em 0;">
+      <i>{{card.Flavor}}</i>
+    </p>
+    <div style="padding: .8em 0 1.1em 0;">
+      <div style="float: right; text-align: right;">
+        <span>Illus. {{card.Illus}}</span>
+      </div>
+    </div>
+    <div style="padding: .8em 0 1.1em 0;">
+      <div style="float: right; text-align: right;">
+        {{card.Expansion}}-{{card.No | padding}} {{card.Reality}}
+      </div>
     </div>
   </div>
 </div>
