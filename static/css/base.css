@@ -181,13 +181,24 @@ header h4 {
   margin-bottom: 10px;
 }
 
-/**
- * Selecter
- */
-.fuga {
-  width: 18%;
-  margin: 0;
-  height: 26px;
+select {
+  font-size: 14px;
+  border: 1px solid #888;
+  border-radius: 0px;
+  color: black;
+  padding: 12px;
+  width: 300px;
+  -webkit-appearance: none;
+  background-color: white;
+  background-transparency: 0.5;
+  background-position: right 15px top 22px;
+  background-size: 18px 18px;
+}
+select:active {
+  border: 1px solid #fff;
+}
+.zozo {
+    margin: 20px;
 }
 
 /*

@@ -1,41 +1,21 @@
 <div class='five columns' style="font-size:10px;">
-
-  <!--
-  <amazon></amazon>
-  -->
-</div>
-<div class='eleven columns'>
-
-  <style type="text/css" media="screen">
+  <style type="text/css">
     .piyo {
       font-size: 10px;
     }
   </style>
+  <input type="text" class="form-control search-query">
 
-  <div ng-repeat="p in products">
-    <a href="/card/{{p.Id}}">
-      {{p.Id | productId}} {{p.Name}}
-    </a>
-    <hr>
-  </div>
 
-  <!--
 
-  <div style="padding: 10px; border: 1px solid #999; border-radius: 5px; font-size: 12px;">
 
     <div style="display: flex; width: 100%;">
-      <div class="three columns" style="margin: auto 0; text-align: center;">
-        キーワード
-      </div>
       <div class="form-search">
         <input type="text" class="form-control search-query">
       </div>
     </div>
 
     <div style="display: flex; width: 100%;">
-      <div class="three columns" style="margin: auto 0; text-align: center;">
-        レアリティ
-      </div>
       <div class="nine columns">
         <div class="btn-group" style="padding: 0.8em 0;">
           <label class="btn btn-warning piyo" ng-model="form.category" btn-radio="'ルリグ'" uncheckable>ルリグ</label>
@@ -46,9 +26,6 @@
       </div>
     </div>
     <div style="display: flex; width: 100%;">
-      <div class="three columns" style="margin: auto 0; text-align: center;">
-        タイプ
-      </div>
       <div class="nine columns">
         <select class="piyo" ng-model="form.typeTemp" ng-options="t.Name for t in types">
           <option value="" selected="selected">-- タイプ --</option>
@@ -57,9 +34,6 @@
     </div>
 
     <div style="display: flex; width: 100%;">
-      <div class="three columns" style="margin: auto 0; text-align: center;">
-        レアリティ
-      </div>
       <div class="nine columns">
         <div class="btn-group" style="padding: 0.8em 0;">
           <label class="btn btn-warning piyo" ng-model="form.reality" btn-radio="'LR'" uncheckable>LR</label>
@@ -73,9 +47,6 @@
       </div>
     </div>
     <div style="display: flex; width: 100%;">
-      <div class="three columns" style="margin: auto 0; text-align: center;">
-        色
-      </div>
       <div class="nine columns">
         <div class="btn-group" style="padding: 0.8em 0;">
           <label class="btn btn-warning piyo" ng-model="form.color" btn-radio="'white'" uncheckable>白</label>
@@ -89,9 +60,6 @@
     </div>
 
     <div style="display: flex; width: 100%;">
-      <div class="three columns" style="margin: auto 0; text-align: center;">
-        レベル
-      </div>
       <div class="nine columns" style="display: flex;">
         <select class="hoge" ng-model="form.levelFrom" ng-options="f for f in levels">
           <option value="" selected="selected">-</option>
@@ -105,9 +73,6 @@
       </div>
     </div>
     <div style="display: flex; width: 100%;">
-      <div class="three columns" style="margin: auto 0; text-align: center;">
-        パワー
-      </div>
       <div class="nine columns" style="display: flex;">
         <select class="hoge" ng-model="form.powerFrom" ng-options="f for f in powers">
           <option value="" selected="selected">-</option>
@@ -126,9 +91,6 @@
 
 
     <div style="display: flex; width: 100%;">
-      <div class="three columns" style="margin: auto 0; text-align: center;">
-        コスト
-      </div>
       <div class="nine columns" style="display: flex;">
         <select class="hoge" ng-model="form.costWhiteFrom" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
@@ -203,69 +165,43 @@
     </div>
 
 
-    <div style="display: flex; width: 100%;">
-      <div class="three columns" style="margin: auto 0; text-align: center;">
-        限定
-      </div>
-      <div class="nine columns">
-        <select class="piyo" ng-model="form.constraintTemp" ng-options="c.Type for c in constraints">
-          <option value="" selected="selected">-- 限定 --</option>
-        </select>
-      </div>
+  <div style="display: flex; width: 100%;">
+    <div class="nine columns">
+      <select class="piyo" ng-model="form.constraintTemp" ng-options="c.Type for c in constraints">
+        <option value="" selected="selected">-- 限定 --</option>
+      </select>
     </div>
-
-    <div style="display: flex; width: 100%;">
-      <div class="three columns" style="margin: auto 0; text-align: center;">
-        ライフバースト
-      </div>
-      <div class="nine columns">
-        <label>
-          <input type="checkbox" ng-model="form.bursted">　バーストアイコン
-        </label>
-      </div>
+    <div class="nine columns">
+      <label>
+        <input type="checkbox" ng-model="form.bursted">　バーストアイコン
+      </label>
     </div>
-
-    <div style="display: flex; width: 100%;">
-      <div class="three columns" style="margin: auto 0; text-align: center;">
-        エキスパンション
-      </div>
-      <div class="nine columns">
-        <select class="piyo" ng-model="form.expansionTemp" ng-options="p.Id for p in products">
-          <option value="" selected="selected">-- エキスパンション --</option>
-        </select>
-      </div>
-    </div>
-    <div style="display: flex; width: 100%;">
-      <div class="three columns" style="margin: auto 0; text-align: center;">
-        イラストレーター
-      </div>
-      <div class="nine columns">
-        <select class="piyo" ng-model="form.illusTemp" ng-options="i.Name for i in illustrators">
-          <option value="" selected="selected">-- イラストレーター --</option>
-        </select>
-      </div>
-    </div>
-
-
-    <div style="display: flex; width: 100%;">
-      <div class="three columns">
-        <button type="button" class="btn btn-nomal btn-block" ng-click="reset();">リセット</button>
-      </div>
-      <div class="nine columns">
-        <button type="button" class="btn btn-info btn-block">検索</button>
-      </div>
-    </div>
-
   </div>
 
-  -->
-
-
-  <div class="panel" dir-paginate="card in cardList | itemsPerPage: 2: 'cust'" pagination-id="cust">
-    <cardlist card="card"></cardlist>
+  <div style="display: flex; width: 100%;">
+    <div class="zozo five columns">
+      <select class="piyo" ng-model="form.expansionTemp" ng-options="p.Id for p in products">
+        <option value="" selected="selected">-- エキスパンション --</option>
+      </select>
+    </div>
+    <div class="zozo five columns">
+      <select class="piyo" ng-model="form.illusTemp" ng-options="i.Name for i in illustrators">
+        <option value="" selected="selected">-- イラストレーター --</option>
+      </select>
+    </div>
   </div>
-  <!--
-  <dir-pagination-controls pagination-id="cust"></dir-pagination-controls>
-  -->
 
+  <button type="button" class="btn btn-nomal btn-block" ng-click="reset();">リセット</button>
+  <button type="button" class="btn btn-info btn-block">検索</button>
+
+  <amazon></amazon>
+
+</div>
+<div class='eleven columns'>
+  <div ng-repeat="p in products">
+    <a href="/card/{{p.Id}}">
+      {{p.Id | productId}} {{p.Name}}
+    </a>
+    <hr>
+  </div>
 </div>
