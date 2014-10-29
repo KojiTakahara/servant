@@ -2,11 +2,13 @@ package servant
 
 import (
 	"appengine"
+	"appengine/datastore"
 	"appengine/urlfetch"
 	"crypto/hmac"
 	"crypto/sha1"
 	"encoding/base64"
 	"fmt"
+	"github.com/clbanning/mxj"
 	"github.com/martini-contrib/render"
 	"github.com/martini-contrib/sessions"
 	"github.com/mrjones/oauth"
@@ -73,8 +75,10 @@ func CallbackTwitter(r render.Render, w http.ResponseWriter, req *http.Request, 
 		session.Set("accessTokenSecret", accessToken.Secret)
 		// User登録
 		c.Infof("toke")
+		// 101003089-Ob0HDOTbB4v6sCV5uZSp34vN9sRgNbXXXzW8Uu6a (10/29)
 		c.Infof(accessToken.Token)
 		c.Infof("secret")
+		// 8Me7R48XKMRO0ZTO3IiDiysYyGSJEeV05gOMia7g2vf0b (10/29)
 		c.Infof(accessToken.Secret)
 
 		consumer.HttpClient = urlfetch.Client(c)
@@ -82,15 +86,27 @@ func CallbackTwitter(r render.Render, w http.ResponseWriter, req *http.Request, 
 		result := make([]byte, 1024*1024)
 		response.Body.Read(result)
 		resultString := string(result)
-		resultString = strings.Trim(resultString, "\x00")
-		datas := strings.Split(resultString, "&")
-		result2 := make(map[string]string, 0)
-		for i := 0; i < len(datas); i++ {
-			data := strings.Split(datas[i], "=")
-			result2[data[0]] = data[1]
+		datas := strings.Split(strings.Trim(resultString, "\x00"), "&")
+
+		accountInfo, _ := mxj.NewMapJson([]byte(datas[0]))
+
+		// User登録
+		screenName := accountInfo["screen_name"].(string)
+		user := &User{}
+		user.Id = screenName
+		user.Key = screenName
+		user.Token = accessToken.Token
+		key := datastore.NewKey(c, "User", screenName, 0, nil)
+		key, err := datastore.Put(c, key, user)
+		if err != nil {
+			c.Criticalf("%s", err)
+		} else {
+			c.Infof("")
 		}
+
 		// トップページへリダイレクト
 		r.Redirect("/api/loginUser")
+
 		//r.JSON(200, result2)
 	} else { //　ログイン失敗
 		r.JSON(200, "error")

@@ -1,7 +1,6 @@
 package servant
 
 import (
-	"github.com/mrjones/oauth"
 	"time"
 )
 
@@ -47,7 +46,7 @@ type Card struct {
 type User struct {
 	Key   string
 	Id    string
-	Token oauth.AccessToken
+	Token string
 }
 
 /**
