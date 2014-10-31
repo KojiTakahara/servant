@@ -3,7 +3,6 @@
 var ctrl = angular.module('cardCtrl', [
   'apiService',
   'wxCardDirective',
-  'selecterForOptionWithNgRepeat',
   'angularUtils.directives.dirPagination'
 ]);
 

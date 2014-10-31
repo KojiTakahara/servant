@@ -23,18 +23,7 @@
     </div>
     <div style="display: flex; width: 100%;">
       <div class="nine columns">
-        {{types}}
-
-        {{type.selected}}
-        <ui-select ng-model="type.selected" theme="selectize" ng-disabled="disabled" style="width: 200px;">
-          <ui-select-match placeholder="タイプ">{{$select.selected.Name}}</ui-select-match>
-          <ui-select-choices repeat="type in types">
-            <span ng-bind-html="type.Name"></span>
-          </ui-select-choices>
-        </ui-select>
-
-
-        <select ng-model="form.typeTemp" ng-options="t.Name for t in types">
+        <select selectize ng-model="form.typeTemp" ng-options="t.Name for t in types">
           <option value="" selected="selected">-- タイプ --</option>
         </select>
       </div>
@@ -68,26 +57,26 @@
 
     <div style="display: flex; width: 100%;">
       <div class="nine columns" style="display: flex;">
-        <select class="hoge" ng-model="form.levelFrom" ng-options="f for f in levels">
+        <select selectize class="hoge" ng-model="form.levelFrom" ng-options="f for f in levels">
           <option value="" selected="selected">-</option>
         </select>
         <div style="padding: 1em 0.3em;">
           ≦ レベル ≦
         </div>
-        <select class="hoge" ng-model="form.levelTo" ng-options="f for f in levels">
+        <select selectize class="hoge" ng-model="form.levelTo" ng-options="f for f in levels">
           <option value="" selected="selected">-</option>
         </select>
       </div>
     </div>
     <div style="display: flex; width: 100%;">
       <div class="nine columns" style="display: flex;">
-        <select class="hoge" ng-model="form.powerFrom" ng-options="f for f in powers">
+        <select selectize class="hoge" ng-model="form.powerFrom" ng-options="f for f in powers">
           <option value="" selected="selected">-</option>
         </select>
         <div style="padding: 1em 0.3em;">
           ≦ パワー ≦
         </div>
-        <select class="hoge" ng-model="form.powerTo" ng-options="f for f in powers">
+        <select selectize class="hoge" ng-model="form.powerTo" ng-options="f for f in powers">
           <option value="" selected="selected">-</option>
         </select>
       </div>
@@ -99,23 +88,23 @@
 
     <div style="display: flex; width: 100%;">
       <div class="nine columns" style="display: flex;">
-        <select class="hoge" ng-model="form.costWhiteFrom" ng-options="f for f in costs">
+        <select selectize class="hoge" ng-model="form.costWhiteFrom" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
         <div style="padding: 1em 0.3em;">
           ≦ 白 ≦
         </div>
-        <select class="hoge" ng-model="form.costWhiteTo" ng-options="f for f in costs">
+        <select selectize class="hoge" ng-model="form.costWhiteTo" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
         <div style="padding: 7px;"></div>
-        <select class="hoge" ng-model="form.costRedFrom" ng-options="f for f in costs">
+        <select selectize class="hoge" ng-model="form.costRedFrom" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
         <div style="padding: 1em 0.3em;">
           ≦ 赤 ≦
         </div>
-        <select class="hoge" ng-model="form.costRedTo" ng-options="f for f in costs">
+        <select selectize class="hoge" ng-model="form.costRedTo" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
       </div>
@@ -124,23 +113,23 @@
       <div class="three columns" style="margin: auto 0; text-align: center;">
       </div>
       <div class="nine columns" style="display: flex;">
-        <select class="hoge" ng-model="form.costBlueFrom" ng-options="f for f in costs">
+        <select selectize class="hoge" ng-model="form.costBlueFrom" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
         <div style="padding: 1em 0.3em;">
           ≦ 青 ≦
         </div>
-        <select class="hoge" ng-model="form.costBlueTo" ng-options="f for f in costs">
+        <select selectize class="hoge" ng-model="form.costBlueTo" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
         <div style="padding: 7px;"></div>
-        <select class="hoge" ng-model="form.costGreenFrom" ng-options="f for f in costs">
+        <select selectize class="hoge" ng-model="form.costGreenFrom" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
         <div style="padding: 1em 0.3em;">
           ≦ 緑 ≦
         </div>
-        <select class="hoge" ng-model="form.costGreenTo" ng-options="f for f in costs">
+        <select selectize class="hoge" ng-model="form.costGreenTo" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
       </div>
@@ -149,23 +138,23 @@
       <div class="three columns" style="margin: auto 0; text-align: center;">
       </div>
       <div class="nine columns" style="display: flex;">
-        <select class="hoge" ng-model="form.costBlackFrom" ng-options="f for f in costs">
+        <select selectize class="hoge" ng-model="form.costBlackFrom" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
         <div style="padding: 1em 0.3em;">
           ≦ 黒 ≦
         </div>
-        <select class="hoge" ng-model="form.costBlackTo" ng-options="f for f in costs">
+        <select selectize class="hoge" ng-model="form.costBlackTo" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
         <div style="padding: 7px;"></div>
-        <select class="hoge" ng-model="form.costColorlessFrom" ng-options="f for f in costs">
+        <select selectize class="hoge" ng-model="form.costColorlessFrom" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
         <div style="padding: 1em 0.3em;">
           ≦ 無 ≦
         </div>
-        <select class="hoge" ng-model="form.costColorlessTo" ng-options="f for f in costs">
+        <select selectize class="hoge" ng-model="form.costColorlessTo" ng-options="f for f in costs">
           <option value="" selected="selected">-</option>
         </select>
       </div>
@@ -174,7 +163,7 @@
 
   <div style="display: flex; width: 100%;">
     <div class="nine columns">
-      <select ng-model="form.constraintTemp" ng-options="c.Type for c in constraints">
+      <select selectize ng-model="form.constraintTemp" ng-options="c.Type for c in constraints">
         <option value="" selected="selected">-- 限定 --</option>
       </select>
     </div>
@@ -187,12 +176,12 @@
 
   <div style="display: flex; width: 100%;">
     <div class=" five columns">
-      <select ng-model="form.expansionTemp" ng-options="p.Id for p in products">
+      <select selectize ng-model="form.expansionTemp" ng-options="p.Id for p in products">
         <option value="" selected="selected">-- エキスパンション --</option>
       </select>
     </div>
     <div class=" five columns">
-      <select ng-model="form.illusTemp" ng-options="i.Name for i in illustrators">
+      <select selectize ng-model="form.illusTemp" ng-options="i.Name for i in illustrators">
         <option value="" selected="selected">-- イラストレーター --</option>
       </select>
     </div>

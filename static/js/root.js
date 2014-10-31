@@ -9,15 +9,13 @@ var app = angular.module('app', [
   'indexCtrl',
   'cardCtrl',
   'userService',
-  'ngSelect',
+  'selectize',
   'angular-loading-bar',
   'ngAnimate',
-  'ui.select'
 ]);
-app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', 'uiSelectConfig', function($locationProvider, $stateProvider, $urlRouterProvider, uiSelectConfig) {
+app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
   $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise("");
-  uiSelectConfig.theme = 'selectize';
   $stateProvider.state('top', {
     url: '/',
     views: {
