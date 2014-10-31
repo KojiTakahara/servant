@@ -1,21 +1,31 @@
 'use strict';
 
 var app = angular.module('indexCtrl', []);
-app.controller('indexController', ['$scope', '$http', '$location', '$anchorScroll', function($scope, $http, $location, $anchorScroll) {
-
+app.controller('indexController', ['$scope', '$window', function($scope, $window) {
+  /**
   $scope.form = {};
   $scope.textSearch;
   $scope.levels = [0, 1, 2, 3, 4];
   $scope.powers = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000];
   $scope.costs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
+  */
   /**
    * トップページの場合はtrueを返す
    */
+  /*
   $scope.isTopPage = function() {
     return $location.path() === '/';
   };
+  */
 
+  /**
+   * ログイン
+   */
+  $scope.login = function() {
+    $window.location.href = '/api/twitter/login';
+  };
+
+  /*
   $scope.handleKeydown = function(e) {
     if (e.which === 13) {
       $scope.textSearch = $scope.searchText;
@@ -98,5 +108,6 @@ app.controller('indexController', ['$scope', '$http', '$location', '$anchorScrol
   $scope.reset = function() {
     $scope.form = {};
   };
+  */
 
 }]);

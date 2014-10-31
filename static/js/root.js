@@ -6,7 +6,9 @@ var app = angular.module('app', [
   'numberFilter',
   'ui.router',
   'ui.bootstrap',
+  'indexCtrl',
   'cardCtrl',
+  'userService',
   'ngSelect',
   'angular-loading-bar',
   'ngAnimate'
@@ -17,7 +19,10 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
   $stateProvider.state('top', {
     url: '/',
     views: {
-      headerContent: { templateUrl: '/view/welcome.html' },
+      headerContent: {
+        templateUrl: '/view/welcome.html',
+        controller: 'indexController'
+      },
       mainContent: { templateUrl: '/view/top/menuDescription.html' }
     }
   });

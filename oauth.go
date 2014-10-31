@@ -47,14 +47,9 @@ func LoginUser(r render.Render, req *http.Request, session sessions.Session) {
 		result := make([]byte, 1024*1024)
 		response.Body.Read(result)
 		resultString := string(result)
-		resultString = strings.Trim(resultString, "\x00")
-		datas := strings.Split(resultString, "&")
-		result2 := make(map[string]string, 0)
-		for i := 0; i < len(datas); i++ {
-			data := strings.Split(datas[i], "=")
-			result2[data[0]] = data[1]
-		}
-		r.JSON(200, result2)
+		datas := strings.Split(strings.Trim(resultString, "\x00"), "&")
+		accountInfo, _ := mxj.NewMapJson([]byte(datas[0]))
+		r.JSON(200, accountInfo)
 	} else {
 		r.Redirect("/api/twitter/login")
 	}
@@ -73,12 +68,10 @@ func CallbackTwitter(r render.Render, w http.ResponseWriter, req *http.Request, 
 		// セッション開始
 		session.Set("accessToken", accessToken.Token)
 		session.Set("accessTokenSecret", accessToken.Secret)
-		// User登録
+
 		c.Infof("toke")
-		// 101003089-Ob0HDOTbB4v6sCV5uZSp34vN9sRgNbXXXzW8Uu6a (10/29)
 		c.Infof(accessToken.Token)
 		c.Infof("secret")
-		// 8Me7R48XKMRO0ZTO3IiDiysYyGSJEeV05gOMia7g2vf0b (10/29)
 		c.Infof(accessToken.Secret)
 
 		consumer.HttpClient = urlfetch.Client(c)
@@ -103,15 +96,11 @@ func CallbackTwitter(r render.Render, w http.ResponseWriter, req *http.Request, 
 		} else {
 			c.Infof("")
 		}
-
-		// トップページへリダイレクト
+		// TODO トップページへリダイレクト
 		r.Redirect("/api/loginUser")
-
-		//r.JSON(200, result2)
 	} else { //　ログイン失敗
-		r.JSON(200, "error")
+		r.Redirect("/")
 	}
-
 }
 
 /**
@@ -325,4 +314,10 @@ func GetAccessToken(session sessions.Session) *oauth.AccessToken {
 		Token:  session.Get("accessToken").(string),
 		Secret: session.Get("accessTokenSecret").(string),
 	}
+}
+
+func SetTestSettion(r render.Render, req *http.Request, session sessions.Session) {
+	session.Set("accessToken", req.FormValue("token"))
+	session.Set("accessTokenSecret", req.FormValue("secret"))
+	r.JSON(200, "success")
 }

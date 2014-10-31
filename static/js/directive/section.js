@@ -5,7 +5,7 @@ dir.directive('mainmenu', function() {
     restrict: 'E',
     replace: true,
     templateUrl: '/view/common/menu.html',
-    controller: function($scope, $location) {
+    controller: function($scope, $location, userService) {
       $scope.setHeaderClass = function() {
         if ($location.path() === '/') {
           $('header').addClass('top');
@@ -15,6 +15,17 @@ dir.directive('mainmenu', function() {
           $('header').removeClass('top');
         }
       };
+      $scope.user = {};
+      /**
+       * セッションからログインユーザの情報をとる
+       */
+      userService.getLoginUser().then(function(data) {
+        $scope.user = data; // 成功
+        console.log(data);
+      }, function(e) {
+        $scope.user = undefined;
+        console.log(e); // ログインユーザが見当たらない
+      });
     }
   };
 });

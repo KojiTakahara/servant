@@ -27,9 +27,14 @@
       </div>
     </div>
     <div class='four columns loginUser'>
-      <a href='#'>
+      <div ng-show="user && !user.name" style="font-size:14px">読み込み中...</div>
+      <a href='#' ng-hide="user">
         <img src='img/social/twitter.png'>
         <div>ログイン</div>
+      </a>
+      <a href='/mypage' ng-show="user">
+        <img ng-src="{{user.profile_image_url}}" class="circle" ng-show="user">
+        <div>{{user.name}}</div>
       </a>
     </div>
   </div>

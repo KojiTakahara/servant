@@ -60,6 +60,8 @@ func init() {
 	m.Get("/api/card/:expansion", GetCardByExpansion)
 	m.Get("/api/card/:expansion/:no", GetCard)
 
+	m.Post("/api/setTestSession", SetTestSettion)
+
 	http.ListenAndServe(":8080", m)
 	http.Handle("/", m)
 }
