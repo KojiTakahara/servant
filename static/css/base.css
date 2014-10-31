@@ -180,7 +180,7 @@ header h4 {
   font-weight: normal;
   margin-bottom: 10px;
 }
-
+/**
 select {
   font-size: 14px;
   border: 1px solid #888;
@@ -200,6 +200,7 @@ select:active {
 .zozo {
     margin: 20px;
 }
+*/
 
 /*
  * Logo

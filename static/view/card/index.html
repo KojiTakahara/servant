@@ -23,7 +23,18 @@
     </div>
     <div style="display: flex; width: 100%;">
       <div class="nine columns">
-        <select class="piyo" ng-model="form.typeTemp" ng-options="t.Name for t in types">
+        {{types}}
+
+        {{type.selected}}
+        <ui-select ng-model="type.selected" theme="selectize" ng-disabled="disabled" style="width: 200px;">
+          <ui-select-match placeholder="タイプ">{{$select.selected.Name}}</ui-select-match>
+          <ui-select-choices repeat="type in types">
+            <span ng-bind-html="type.Name"></span>
+          </ui-select-choices>
+        </ui-select>
+
+
+        <select ng-model="form.typeTemp" ng-options="t.Name for t in types">
           <option value="" selected="selected">-- タイプ --</option>
         </select>
       </div>
@@ -163,7 +174,7 @@
 
   <div style="display: flex; width: 100%;">
     <div class="nine columns">
-      <select class="piyo" ng-model="form.constraintTemp" ng-options="c.Type for c in constraints">
+      <select ng-model="form.constraintTemp" ng-options="c.Type for c in constraints">
         <option value="" selected="selected">-- 限定 --</option>
       </select>
     </div>
@@ -175,13 +186,13 @@
   </div>
 
   <div style="display: flex; width: 100%;">
-    <div class="zozo five columns">
-      <select class="piyo" ng-model="form.expansionTemp" ng-options="p.Id for p in products">
+    <div class=" five columns">
+      <select ng-model="form.expansionTemp" ng-options="p.Id for p in products">
         <option value="" selected="selected">-- エキスパンション --</option>
       </select>
     </div>
-    <div class="zozo five columns">
-      <select class="piyo" ng-model="form.illusTemp" ng-options="i.Name for i in illustrators">
+    <div class=" five columns">
+      <select ng-model="form.illusTemp" ng-options="i.Name for i in illustrators">
         <option value="" selected="selected">-- イラストレーター --</option>
       </select>
     </div>

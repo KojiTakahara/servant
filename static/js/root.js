@@ -11,11 +11,13 @@ var app = angular.module('app', [
   'userService',
   'ngSelect',
   'angular-loading-bar',
-  'ngAnimate'
+  'ngAnimate',
+  'ui.select'
 ]);
-app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
+app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', 'uiSelectConfig', function($locationProvider, $stateProvider, $urlRouterProvider, uiSelectConfig) {
   $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise("");
+  uiSelectConfig.theme = 'selectize';
   $stateProvider.state('top', {
     url: '/',
     views: {
