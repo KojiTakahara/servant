@@ -122,7 +122,13 @@ dir.directive('cardsearchform', function() {
   return {
     restrict: 'E',
     replace: false,
-    templateUrl: '/view/common/cardsearchform.html'
+    templateUrl: '/view/common/cardsearchform.html',
+    controller: function($scope) {
+      $scope.isDetail = false;
+      $scope.toggleDetail = function() {
+        $scope.isDetail = !$scope.isDetail;
+      };
+    }
   };
 });
 
