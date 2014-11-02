@@ -49,18 +49,12 @@ ctrl.controller('cardController', ['$scope', '$location', 'cardService', functio
         checkboxClass: "icheckbox_square-yellow", //使用するテーマのスキンを指定する
         radioClass: "iradio_square-yellow" //使用するテーマのスキンを指定する
       });
-      //$("select.hoge").selecter({customClass: 'fuga'});
-      //$("select.piyo").selecter();
     }, 500);
   };
   init();
 
   $scope.reset = function() {
     $scope.form = {};
-    setTimeout(function() {
-      //$("select.hoge").selecter("destroy").selecter({customClass: 'fuga'});
-      //$("select.piyo").selecter("destroy").selecter();
-    }, 10);
   };
 }]);
 

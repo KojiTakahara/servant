@@ -1,12 +1,12 @@
 <div class='five columns' style="font-size:10px;">
-  <input type="text" class="form-control search-query">
-  <button type="button" class="btn btn-nomal btn-block" ng-click="reset();">リセット</button>
-  <button type="button" class="btn btn-info btn-block">検索</button>
+  <cardsearchform></cardsearchform>
   <amazon></amazon>
 </div>
 <div class='eleven columns'>
-  <div class="panel" dir-paginate="card in cardList | itemsPerPage: 5: 'cust'" pagination-id="cust">
+  <div class="panel" ng-repeat="card in cardList">
     <cardlist card="card"></cardlist>
   </div>
+  <!--
   <dir-pagination-controls pagination-id="cust"></dir-pagination-controls>
+  -->
 </div>

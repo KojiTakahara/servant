@@ -4,6 +4,7 @@ dir.directive('cardlist', function() {
     restrict: 'E',
     templateUrl: '/view/common/cardlist.html',
     controller: function($scope) {
+      /**
       $scope.setColor = function(color) {
         var result = '';
         switch (color){
@@ -24,6 +25,7 @@ dir.directive('cardlist', function() {
         }
         return "{backgroundColor: '" + result + "', borderColor: '" + result + "', height: '8px' }";
       };
+      */
     }
   };
 });

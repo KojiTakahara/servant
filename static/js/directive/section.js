@@ -118,6 +118,14 @@ dir.directive('amazon', function() {
   };
 });
 
+dir.directive('cardsearchform', function() {
+  return {
+    restrict: 'E',
+    replace: false,
+    templateUrl: '/view/common/cardsearchform.html'
+  };
+});
+
 dir.directive('copyright', function() {
   return {
     restrict: 'E',

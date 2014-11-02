@@ -1,0 +1,148 @@
+<div class="search-box" style="margin-top: 15px;">
+
+  <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
+    <input type="text" class="form-control search-query" ng-model="searchText" placeholder="キーワード">
+  </div>
+
+  <div class="btn-group" style="padding-bottom: 0.3em;">
+    <label class="btn btn-warning lrig" ng-model="form.category" btn-radio="'ルリグ'" uncheckable>ルリグ</label>
+    <label class="btn btn-warning lrig" ng-model="form.category" btn-radio="'アーツ'" uncheckable>アーツ</label>
+    <label class="btn btn-warning lrig" ng-model="form.category" btn-radio="'シグニ'" uncheckable>シグニ</label>
+    <label class="btn btn-warning lrig" ng-model="form.category" btn-radio="'スペル'" uncheckable>スペル</label>
+  </div>
+
+  <select selectize ng-model="form.typeTemp" ng-options="t.Name for t in types">
+    <option value="" selected="selected">-- タイプ --</option>
+  </select>
+
+  <div class="btn-group" style="padding-bottom: 0.3em;">
+    <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'LR'" uncheckable>LR</label>
+    <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'LC'" uncheckable>LC</label>
+    <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'SR'" uncheckable>SR</label>
+    <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'R'" uncheckable>R</label>
+    <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'C'" uncheckable>C</label>
+    <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'ST'" uncheckable>ST</label>
+    <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'PR'" uncheckable>PR</label>
+  </div>
+
+  <div class="btn-group" style="padding-bottom: 0.3em;">
+    <label class="btn btn-warning color" ng-model="form.color" btn-radio="'white'" uncheckable>白</label>
+    <label class="btn btn-warning color" ng-model="form.color" btn-radio="'red'" uncheckable>赤</label>
+    <label class="btn btn-warning color" ng-model="form.color" btn-radio="'blue'" uncheckable>青</label>
+    <label class="btn btn-warning color" ng-model="form.color" btn-radio="'green'" uncheckable>緑</label>
+    <label class="btn btn-warning color" ng-model="form.color" btn-radio="'black'" uncheckable>黒</label>
+    <label class="btn btn-warning color" ng-model="form.color" btn-radio="'colorless'" uncheckable>無</label>
+  </div>
+
+  <div style="display: -webkit-box">
+    <select selectize class="mini" ng-model="form.levelFrom" ng-options="f for f in levels">
+      <option value="" selected="selected">-</option>
+    </select>
+    <div style="padding: 1em 0.5em;">
+      ≦ レベル ≦
+    </div>
+    <select selectize class="mini" ng-model="form.levelTo" ng-options="f for f in levels">
+      <option value="" selected="selected">-</option>
+    </select>
+  </div>
+
+  <div style="display: -webkit-box">
+    <select selectize class="mini" ng-model="form.powerFrom" ng-options="f for f in powers">
+      <option value="" selected="selected">-</option>
+    </select>
+    <div style="padding: 1em 0.5em;">
+      ≦ パワー ≦
+    </div>
+    <select selectize class="mini" ng-model="form.powerTo" ng-options="f for f in powers">
+      <option value="" selected="selected">-</option>
+    </select>
+  </div>
+
+  <div style="display: -webkit-box">
+    <select selectize class="mini" ng-model="form.costWhiteFrom" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+    <div style="padding: 1em 0.5em;">
+      ≦ 白 ≦
+    </div>
+    <select selectize class="mini" ng-model="form.costWhiteTo" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+  </div>
+  <div style="display: -webkit-box">
+    <select selectize class="mini" ng-model="form.costRedFrom" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+    <div style="padding: 1em 0.5em;">
+      ≦ 赤 ≦
+    </div>
+    <select selectize class="mini" ng-model="form.costRedTo" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+  </div>
+
+  <div style="display: -webkit-box">
+    <select selectize class="mini" ng-model="form.costBlueFrom" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+    <div style="padding: 1em 0.5em;">
+      ≦ 青 ≦
+    </div>
+    <select selectize class="mini" ng-model="form.costBlueTo" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+  </div>
+  <div style="display: -webkit-box">
+    <select selectize class="mini" ng-model="form.costGreenFrom" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+    <div style="padding: 1em 0.5em;">
+      ≦ 緑 ≦
+    </div>
+    <select selectize class="mini" ng-model="form.costGreenTo" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+  </div>
+  <div style="display: -webkit-box">
+    <select selectize class="mini" ng-model="form.costBlackFrom" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+    <div style="padding: 1em 0.5em;">
+      ≦ 黒 ≦
+    </div>
+    <select selectize class="mini" ng-model="form.costBlackTo" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+  </div>
+  <div style="display: -webkit-box">
+    <select selectize class="mini" ng-model="form.costColorlessFrom" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+    <div style="padding: 1em 0.5em;">
+      ≦ 無 ≦
+    </div>
+    <select selectize class="mini" ng-model="form.costColorlessTo" ng-options="f for f in costs">
+      <option value="" selected="selected">-</option>
+    </select>
+  </div>
+
+  <select selectize ng-model="form.constraintTemp" ng-options="c.Type for c in constraints">
+    <option value="" selected="selected">-- 限定 --</option>
+  </select>
+  <label>
+    <input type="checkbox" ng-model="form.bursted">　バーストアイコン
+  </label>
+  <select selectize ng-model="form.expansionTemp" ng-options="p.Id for p in products">
+    <option value="" selected="selected">-- エキスパンション --</option>
+  </select>
+  <select selectize ng-model="form.illusTemp" ng-options="i.Name for i in illustrators">
+    <option value="" selected="selected">-- イラストレーター --</option>
+  </select>
+  <button type="button" class="btn btn-nomal btn-block" ng-click="reset();">リセット</button>
+  <button type="button" class="btn btn-info btn-block">検索</button>
+
+  <div style="text-align: right; padding: 0.7em 1.5em 0.5em 1.5em;">
+    <a href="javascript:void(0)" ng-click="showDetail()">詳細検索</a>
+  </div>
+
+</div>
