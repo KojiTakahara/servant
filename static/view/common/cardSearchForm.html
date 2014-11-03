@@ -1,7 +1,7 @@
 <div class="search-box" style="margin-top: 15px;">
 
   <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
-    <input type="text" class="form-control search-query" ng-model="searchText" placeholder="キーワード">
+    <input type="text" class="form-control search-query" ng-model="form.text" placeholder="キーワード">
   </div>
 
   <div class="btn-group" style="padding-bottom: 0.3em;" ng-show="isDetail">
@@ -147,7 +147,7 @@
     </select>
   </div>
   <button type="button" class="btn btn-nomal btn-block" ng-click="reset();" ng-show="isDetail">リセット</button>
-  <button type="button" class="btn btn-info btn-block">検索</button>
+  <button type="button" class="btn btn-info btn-block" ng-click="search();">検索</button>
 
   <div style="text-align: right; padding: 0.7em 1.5em 0.5em 1.5em;">
     <a href="javascript:void(0)" ng-click="toggleDetail()">

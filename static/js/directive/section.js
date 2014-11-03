@@ -128,6 +128,9 @@ dir.directive('cardsearchform', function() {
       $scope.toggleDetail = function() {
         $scope.isDetail = !$scope.isDetail;
       };
+      $scope.search = function() {
+        console.log($scope.form);
+      };
     }
   };
 });
