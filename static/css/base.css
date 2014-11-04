@@ -88,6 +88,93 @@ ul li {
   float: right;
 }
 
+/**
+ * デッキ色用
+ */
+.square {
+  width: 15px;
+  height: 15px;
+  float: left;
+  margin: 0.4em 0.1em 0 0.1em;
+}
+
+/**
+ * テーブル
+ */
+table {
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  display: block;
+  font-size: 14px;
+}
+tr {
+  display: block;
+  background: #f6f6f6;
+}
+tr:nth-child(odd) {
+  background: #e9e9e9;
+}
+th {
+  /**
+    background: #e9e9e9;
+    background: #ea6153;
+    background: #27ae60;
+    background: #2980b9;
+  */
+  padding: 6px 12px;
+  color: #ffffff;
+  background: #ea6153;
+}
+td {
+  padding: 6px 1px 4px 1px;
+}
+
+/**
+ * common
+ */
+.float-l {
+  float: left;
+}
+.float-r {
+  float: right;
+}
+.align-l {
+  text-align: left;
+}
+.align-r {
+  text-align: right;
+}
+.align-c {
+  text-align: center;
+}
+.wx300 {
+  width: 300px;
+}
+.wx200 {
+  width: 200px;
+}
+.wx100 {
+  width: 100px;
+}
+.wx50 {
+  width: 50px;
+}
+.wp100 {
+  width: 100%;
+}
+.wp50 {
+  width: 50%;
+}
+.wp30 {
+  width: 30%;
+}
+.wp20 {
+  width: 20%;
+}
+.wp10 {
+  width: 50%;
+}
+
 
 /*
  * divs random

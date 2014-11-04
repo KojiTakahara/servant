@@ -8,6 +8,7 @@ var app = angular.module('app', [
   'ui.bootstrap',
   'indexCtrl',
   'cardCtrl',
+  'mypageCtrl',
   'userService',
   'selectize',
   'angular-loading-bar',
@@ -50,6 +51,15 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       mainContent: {
         templateUrl: '/view/card/detail.html',
         controller: 'cardDetailController'
+      }
+    }
+  });
+  $stateProvider.state('mypage', {
+    url: '/mypage',
+    views: {
+      mainContent: {
+        templateUrl: '/view/mypage/index.html',
+        controller: 'mypageController'
       }
     }
   });
