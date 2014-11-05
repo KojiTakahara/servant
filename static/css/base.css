@@ -92,10 +92,9 @@ ul li {
  * デッキ色用
  */
 .square {
-  width: 15px;
-  height: 15px;
+  margin: -4px 0.1em;
+  padding: 0.5em 0.4em;
   float: left;
-  margin: 0.4em 0.1em 0 0.1em;
 }
 
 /**
@@ -103,12 +102,10 @@ ul li {
  */
 table {
   width: 100%;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-  display: block;
   font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 tr {
-  display: block;
   background: #f6f6f6;
 }
 tr:nth-child(odd) {
@@ -121,12 +118,22 @@ th {
     background: #27ae60;
     background: #2980b9;
   */
-  padding: 6px 12px;
+  padding: 6px 10px;
   color: #ffffff;
   background: #ea6153;
 }
+th:nth-child(n+2):nth-child(-n+4) {
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 0px 1px;
+}
 td {
-  padding: 6px 1px 4px 1px;
+  padding: 6px 10px 6px 10px;
+}
+td:nth-child(n+2):nth-child(-n+4) {
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 0px 1px;
 }
 
 /**
@@ -155,6 +162,9 @@ td {
 }
 .wx100 {
   width: 100px;
+}
+.wx90 {
+  width: 90px;
 }
 .wx50 {
   width: 50px;

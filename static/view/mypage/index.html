@@ -2,39 +2,37 @@
   <div style="margin-top: 15px;">
     <button type="button" class="btn btn-danger btn-block" ng-click="createDeck();">デッキ 新規作成</button>
   </div>
+  <!--
   <amazon></amazon>
+  -->
 </div>
 <div class='eleven columns'>
   <div style="padding-top:20px;"></div>
   <table ng-hide="decks.length == 0">
-    <thead>
       <tr>
-        <th class="wx200"></th>
-        <th class="wx300">デッキ名</th>
-        <th class="wx100">公開状態</th>
-        <th class="wx200">最終更新日時</th>
-        <th class="wx50"></th>
+        <th class="wx90" nowrap></th>
+        <th class="wx200" nowrap>デッキ名</th>
+        <th class="wx90" nowrap>公開状態</th>
+        <th class="wx90" nowrap>更新日付</th>
+        <th class="wx50" nowrap></th>
       </tr>
-    </thead>
-    <tbody>
       <tr ng-repeat="deck in decks">
-        <td class="align-c wx200">
-          <div class="card white square" ng-show="deck.White"></div>
-          <div class="card red square" ng-show="deck.Red"></div>
-          <div class="card blue square" ng-show="deck.Blue"></div>
-          <div class="card green square" ng-show="deck.Green"></div>
-          <div class="card black square" ng-show="deck.Black"></div>
+        <td class="align-c">
+          <span class="card white square" ng-show="deck.White"></span>
+          <span class="card red square" ng-show="deck.Red"></span>
+          <span class="card blue square" ng-show="deck.Blue"></span>
+          <span class="card green square" ng-show="deck.Green"></span>
+          <span class="card black square" ng-show="deck.Black"></span>
         </td>
-        <td class="wx300">
+        <td class="">
           <a ng-href="/mypage/deck/{{deck.Id}}">{{deck.Title}}</a>
         </td>
-        <td class="align-c wx100">{{deck.Scope | scope}}</td>
-        <td class="align-c wx200">{{deck.UpdatedAt | date:'yyyy/MM/dd HH:mm' }}</td>
-        <td class="align-c wx50">
-          <button type="button">削除</button>
+        <td class="align-c">{{deck.Scope | scope}}</td>
+        <td class="align-c">{{deck.UpdatedAt | date:'yy/MM/dd' }}</td>
+        <td class="align-c" nowrap>
+          <button type="button" ng-click="deleteDeck($index);">削除</button>
         </td>
       </tr>
-    </tbody>
   </table>
   <div class="align-c" ng-show="decks.length == 0">
     保存しているデッキはありません。

@@ -8,8 +8,8 @@ app.controller('mypageController', ['$scope', '$window', function($scope, $windo
     alert('編集処理を実装してね');
   };
 
-  $scope.deleteDeck = function() {
-    alert('削除処理を実装してね');
+  $scope.deleteDeck = function(index) {
+    alert('削除処理を実装してね ' + index);
   };
 
   var init = function() {
