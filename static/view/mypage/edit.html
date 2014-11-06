@@ -1,0 +1,53 @@
+<div class='five columns' style="font-size:10px;">
+  <div style="margin-top: 15px;">
+    a
+  </div>
+  <!--
+  <amazon></amazon>
+  -->
+</div>
+<div class='eleven columns'>
+  <div style="padding-top:20px;"></div>
+  <!-- 白デッキ -->
+  <table>
+    <tr>
+      <th class="lrig wx20" nowrap></th>
+      <th class="lrig wx20" nowrap></th>
+      <th class="lrig wx200" nowrap>カード名</th>
+      <th class="lrig wx50" nowrap>種類</th>
+      <th class="lrig wx20" nowrap>レベル</th>
+    </tr>
+    <tr ng-repeat="card in deck.cards">
+      <td class="align-c {{card.Color}}">
+        <i class="fa fa-trash fa-lg" ng-click="deleteDeck($index);"></i>
+      </td>
+      <td class="{{card.Color}}">
+        <select selectize ng-model="num" ng-options="f for f in cardNums"></select>
+      </td>
+      <td class="{{card.Color}}">{{card.Name}}</td>
+      <td class="align-c {{card.Color}}"><span class="label label-default">{{card.Category}}</span></td>
+      <td class="align-c {{card.Color}}">{{card.Level}}</td>
+    </tr>
+  </table>
+  <!-- 黒デッキ -->
+  <table>
+    <tr>
+      <th class="main wx20" nowrap></th>
+      <th class="main wx20" nowrap></th>
+      <th class="main wx200" nowrap>カード名</th>
+      <th class="main wx50" nowrap>種類</th>
+      <th class="main wx20" nowrap>レベル</th>
+    </tr>
+    <tr ng-repeat="card in deck.cards">
+      <td class="align-c">
+        <i class="fa fa-trash fa-lg" ng-click="deleteDeck($index);"></i>
+      </td>
+      <td>
+        <select selectize ng-model="num" ng-options="f for f in cardNums"></select>
+      </td>
+      <td>{{card.Name}}</td>
+      <td class="align-c"><span class="label label-default">{{card.Category}}</span></td>
+      <td class="align-c">{{card.Level}}</td>
+    </tr>
+  </table>
+</div>

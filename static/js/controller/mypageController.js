@@ -1,7 +1,23 @@
 'use strict';
 
 var app = angular.module('mypageCtrl', []);
-app.controller('mypageController', ['$scope', '$window', function($scope, $window) {
+
+app.controller('editDeckController', ['$scope', '$location', function($scope, $location) {
+  $scope.cardNums = [1, 2, 3, 4];
+  $scope.deck = {
+    cards: []
+  };
+  for (var i = 0; i < 4; i++) {
+    $scope.deck.cards.push({
+      Name: 'カード名',
+      Category: 'ルリグ',
+      Color: 'red',
+      Level: 4
+    });
+  }
+}]);
+
+app.controller('mypageController', ['$scope', '$location', function($scope, $location) {
   $scope.decks = [];
 
   $scope.editDeck = function() {
@@ -10,6 +26,10 @@ app.controller('mypageController', ['$scope', '$window', function($scope, $windo
 
   $scope.deleteDeck = function(index) {
     alert('削除処理を実装してね ' + index);
+  };
+
+  $scope.createDeck = function() {
+    $location.path('/mypage/deck/0');
   };
 
   var init = function() {

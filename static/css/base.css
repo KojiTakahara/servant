@@ -122,6 +122,12 @@ th {
   color: #ffffff;
   background: #ea6153;
 }
+th.lrig {
+  background: #EAEAEA;
+}
+th.main {
+  background: #303030;;
+}
 th:nth-child(n+2):nth-child(-n+4) {
   border-style: solid;
   border-color: #ffffff;
@@ -168,6 +174,9 @@ td:nth-child(n+2):nth-child(-n+4) {
 }
 .wx50 {
   width: 50px;
+}
+.wx20 {
+  width: 20px;
 }
 .wp100 {
   width: 100%;

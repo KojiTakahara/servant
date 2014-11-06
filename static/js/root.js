@@ -63,4 +63,13 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       }
     }
   });
+  $stateProvider.state('mydeck', {
+    url: '/mypage/deck/:id',
+    views: {
+      mainContent: {
+        templateUrl: '/view/mypage/edit.html',
+        controller: 'editDeckController'
+      }
+    }
+  });
 }]);
