@@ -11,3 +11,9 @@ dir.directive('carddetail', function() {
     templateUrl: '/view/common/cardDetail.html'
   };
 });
+dir.directive('cardsmalllist', function() {
+  return {
+    restrict: 'E',
+    templateUrl: '/view/common/cardSmallList.html'
+  };
+});

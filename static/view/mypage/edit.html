@@ -1,6 +1,31 @@
 <div class='five columns' style="font-size:10px;">
   <div style="margin-top: 15px;">
-    a
+    <tabset justified="true">
+      <tab heading="ルリグ">
+        <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
+          <input type="text" class="form-control search-query" ng-model="form.text" placeholder="キーワード">
+        </div>
+        <cardsmalllist ng-repeat="card in cards"></cardsmalllist>
+      </tab>
+      <tab heading="アーツ">
+        <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
+          <input type="text" class="form-control search-query" ng-model="form.text" placeholder="キーワード">
+        </div>
+        <cardsmalllist ng-repeat="card in cards"></cardsmalllist>
+      </tab>
+      <tab heading="シグニ">
+        <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
+          <input type="text" class="form-control search-query" ng-model="form.text" placeholder="キーワード">
+        </div>
+        <cardsmalllist ng-repeat="card in cards"></cardsmalllist>
+      </tab>
+      <tab heading="スペル">
+        <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
+          <input type="text" class="form-control search-query" ng-model="form.text" placeholder="キーワード">
+        </div>
+        <cardsmalllist ng-repeat="card in cards"></cardsmalllist>
+      </tab>
+    </tabset>
   </div>
   <!--
   <amazon></amazon>
@@ -50,4 +75,5 @@
       <td class="align-c">{{card.Level}}</td>
     </tr>
   </table>
+  <!-- -->
 </div>
