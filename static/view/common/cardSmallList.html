@@ -2,7 +2,7 @@
   <div class="panel-heading card {{card.Color}}" ng-class="{'close-card': !card.opend}" style="height: 29px">
     <h4 class="panel-title"></h4>
     <div style="padding: 0.4em;">
-      <button type="button" class="btn btn-default btn-xs" onclick="alert()" ng-keydown="returnCursor($last, $event)">
+      <button type="button" class="btn btn-default btn-xs" ng-click="addCard($index)" ng-keydown="returnCursor($last, $event)">
         <i class="fa fa-plus"></i>
       </button>
       <span style="color:white; padding-left:0.5em;" class="pointer" ng-click="card.opend = !card.opend">

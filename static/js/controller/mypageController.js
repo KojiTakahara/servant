@@ -5,16 +5,29 @@ var app = angular.module('mypageCtrl', []);
 app.controller('editDeckController', ['$scope', '$location', function($scope, $location) {
   $scope.cardNums = [1, 2, 3, 4];
   $scope.deck = {
-    cards: []
+    lrig: [],
+    main: []
   };
-  for (var i = 0; i < 4; i++) {
-    $scope.deck.cards.push({
-      Name: 'カード名',
-      Category: 'ルリグ',
-      Color: 'red',
-      Level: 4
-    });
-  }
+
+  $scope.addCard = function(index) {
+    var card = $scope.cards[index];
+    if (isLrigDeck(card)) {
+      $scope.deck.lrig.push(card);
+    } else if (isMainDeck(card)) {
+      $scope.deck.main.push(card);
+    }
+  };
+
+  $scope.removeCard = function(index) {
+
+  };
+
+  var isLrigDeck = function(card) {
+    return card.Category === 'ルリグ' || card.Category === 'アーツ';
+  };
+  var isMainDeck = function(card) {
+    return card.Category === 'シグニ' || card.Category === 'スペル';
+  };
 
   /** 最後のカードでtabが押されたらinputに戻すやつ **/
   $scope.returnCursor = function(bool, event) {

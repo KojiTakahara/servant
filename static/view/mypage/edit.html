@@ -36,13 +36,13 @@
   <!-- 白デッキ -->
   <table>
     <tr>
-      <th class="lrig wx20" nowrap></th>
+      <th class="lrig wx10" nowrap></th>
       <th class="lrig wx20" nowrap></th>
       <th class="lrig wx200" nowrap>カード名</th>
-      <th class="lrig wx50" nowrap>種類</th>
+      <th class="lrig wx20" nowrap>種類</th>
       <th class="lrig wx20" nowrap>レベル</th>
     </tr>
-    <tr ng-repeat="card in deck.cards">
+    <tr ng-repeat="card in deck.lrig">
       <td class="align-c {{card.Color}}">
         <i class="fa fa-trash fa-lg" ng-click="deleteDeck($index);"></i>
       </td>
@@ -57,13 +57,13 @@
   <!-- 黒デッキ -->
   <table>
     <tr>
-      <th class="main wx20" nowrap></th>
+      <th class="main wx10" nowrap></th>
       <th class="main wx20" nowrap></th>
       <th class="main wx200" nowrap>カード名</th>
-      <th class="main wx50" nowrap>種類</th>
+      <th class="main wx20" nowrap>種類</th>
       <th class="main wx20" nowrap>レベル</th>
     </tr>
-    <tr ng-repeat="card in deck.cards">
+    <tr ng-repeat="card in deck.main">
       <td class="align-c">
         <i class="fa fa-trash fa-lg" ng-click="deleteDeck($index);"></i>
       </td>

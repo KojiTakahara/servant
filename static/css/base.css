@@ -179,6 +179,9 @@ td:nth-child(n+2):nth-child(-n+4) {
 .wx20 {
   width: 20px;
 }
+.wx10 {
+  width: 10px;
+}
 .wp100 {
   width: 100%;
 }
