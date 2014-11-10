@@ -1,6 +1,7 @@
 package servant
 
 import (
+	"container/list"
 	"time"
 )
 
@@ -147,6 +148,24 @@ type Deck struct {
 	Use1000      string
 	Use1500      string
 	Use2000      string
+	CreatedAt    time.Time
+	UpdatedAt    time.Time
+}
+
+type ViewDeck struct {
+	Id           int
+	Owner        string
+	Title        string
+	Introduction string
+	Description  string
+	White        bool
+	Red          bool
+	Blue         bool
+	Green        bool
+	Black        bool
+	Lrig         *list.List
+	Main         *list.List
+	Scope        string
 	CreatedAt    time.Time
 	UpdatedAt    time.Time
 }

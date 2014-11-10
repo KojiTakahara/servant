@@ -1,12 +1,18 @@
 package servant
 
 import (
+	"appengine"
 	"appengine/datastore"
 	"net/url"
 	"reflect"
 	"strconv"
 	"strings"
 )
+
+func GetCardByKey(keyStr string, c appengine.Context) error {
+	key := datastore.NewKey(c, "Card", keyStr, 0, nil)
+	return datastore.Get(c, key, &Card{})
+}
 
 func EqualQuery(query *datastore.Query, values url.Values, s string) *datastore.Query {
 	if len(values[s]) != 0 {

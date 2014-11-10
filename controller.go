@@ -3,6 +3,7 @@ package servant
 import (
 	"appengine"
 	"appengine/datastore"
+	"container/list"
 	"fmt"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
@@ -208,24 +209,102 @@ func GetCardByExpansion(r render.Render, params martini.Params, req *http.Reques
 func GetCard(r render.Render, params martini.Params, req *http.Request) {
 	c := appengine.NewContext(req)
 	keyStr := params["expansion"] + "-" + fmt.Sprintf("%03d", ToInt(params["no"]))
-	c.Infof("%s", keyStr)
-	key := datastore.NewKey(c, "Card", keyStr, 0, nil)
-	var card Card
-	if err := datastore.Get(c, key, &card); err != nil {
-		c.Criticalf(err.Error())
-		r.JSON(400, "")
-	} else {
-		r.JSON(200, card)
-	}
+	card := GetCardByKey(keyStr, c)
+	r.JSON(200, card)
 }
 
 func GetDeck(r render.Render, params martini.Params, req *http.Request) {
 	c := appengine.NewContext(req)
 	id, _ := strconv.Atoi(params["id"])
 	key := datastore.NewKey(c, "Deck", "", int64(id), nil)
-	var e2 Deck
-	if err := datastore.Get(c, key, &e2); err != nil {
+	var deck Deck
+	if err := datastore.Get(c, key, &deck); err != nil {
 		c.Criticalf(err.Error())
 	}
-	r.JSON(200, e2)
+	viewDeck := &ViewDeck{}
+	viewDeck.Id = deck.Id
+	viewDeck.Owner = deck.Owner
+	viewDeck.Title = deck.Title
+	viewDeck.Introduction = deck.Introduction
+	viewDeck.Description = deck.Description
+	viewDeck.White = deck.White
+	viewDeck.Red = deck.Red
+	viewDeck.Blue = deck.Blue
+	viewDeck.Green = deck.Green
+	viewDeck.Black = deck.Black
+	lrigs := make(map[string]int)
+	addUnique(lrigs, deck.Lrig01)
+	addUnique(lrigs, deck.Lrig02)
+	addUnique(lrigs, deck.Lrig03)
+	addUnique(lrigs, deck.Lrig04)
+	addUnique(lrigs, deck.Lrig05)
+	addUnique(lrigs, deck.Lrig06)
+	addUnique(lrigs, deck.Lrig07)
+	addUnique(lrigs, deck.Lrig08)
+	addUnique(lrigs, deck.Lrig09)
+	addUnique(lrigs, deck.Lrig10)
+	mains := make(map[string]int)
+	addUnique(mains, deck.Main01)
+	addUnique(mains, deck.Main02)
+	addUnique(mains, deck.Main03)
+	addUnique(mains, deck.Main04)
+	addUnique(mains, deck.Main05)
+	addUnique(mains, deck.Main06)
+	addUnique(mains, deck.Main07)
+	addUnique(mains, deck.Main08)
+	addUnique(mains, deck.Main09)
+	addUnique(mains, deck.Main10)
+	addUnique(mains, deck.Main11)
+	addUnique(mains, deck.Main12)
+	addUnique(mains, deck.Main13)
+	addUnique(mains, deck.Main14)
+	addUnique(mains, deck.Main15)
+	addUnique(mains, deck.Main16)
+	addUnique(mains, deck.Main17)
+	addUnique(mains, deck.Main18)
+	addUnique(mains, deck.Main19)
+	addUnique(mains, deck.Main20)
+	addUnique(mains, deck.Main21)
+	addUnique(mains, deck.Main22)
+	addUnique(mains, deck.Main23)
+	addUnique(mains, deck.Main24)
+	addUnique(mains, deck.Main25)
+	addUnique(mains, deck.Main26)
+	addUnique(mains, deck.Main27)
+	addUnique(mains, deck.Main28)
+	addUnique(mains, deck.Main29)
+	addUnique(mains, deck.Main30)
+	addUnique(mains, deck.Main31)
+	addUnique(mains, deck.Main32)
+	addUnique(mains, deck.Main33)
+	addUnique(mains, deck.Main34)
+	addUnique(mains, deck.Main35)
+	addUnique(mains, deck.Main36)
+	addUnique(mains, deck.Main37)
+	addUnique(mains, deck.Main38)
+	addUnique(mains, deck.Main39)
+	addUnique(mains, deck.Main40)
+	viewDeck.Lrig = list.New()
+	for k := range lrigs {
+		viewDeck.Lrig.PushBack(GetCardByKey(k, c))
+	}
+	viewDeck.Main = list.New()
+	for k := range mains {
+		viewDeck.Main.PushBack(GetCardByKey(k, c))
+	}
+	viewDeck.Scope = deck.Scope
+	viewDeck.CreatedAt = deck.CreatedAt
+	viewDeck.UpdatedAt = deck.UpdatedAt
+	r.JSON(200, viewDeck)
+}
+
+func addUnique(m map[string]int, key string) {
+	if key == "" {
+		return
+	}
+	if m[key] == 0 {
+		m[key] = 1
+	} else {
+		m[key]++
+	}
 }
