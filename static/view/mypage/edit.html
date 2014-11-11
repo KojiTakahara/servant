@@ -44,14 +44,16 @@
     </tr>
     <tr ng-repeat="card in deck.lrig">
       <td class="align-c {{card.Color}}">
-        <i class="fa fa-trash fa-lg" ng-click="deleteDeck($index);"></i>
+        <i class="fa fa-trash fa-lg" ng-click="removeCard(card.Category, $index);"></i>
       </td>
       <td class="{{card.Color}}">
-        <select selectize ng-model="num" ng-options="f for f in cardNums"></select>
+        <select selectize ng-options="f for f in cardNums" ng-model="card.num"></select>
       </td>
       <td class="{{card.Color}}">{{card.Name}}</td>
       <td class="align-c {{card.Color}}"><span class="label label-default">{{card.Category}}</span></td>
-      <td class="align-c {{card.Color}}">{{card.Level}}</td>
+      <td class="align-c {{card.Color}}">
+        <span ng-show="-1 < card.Level">{{card.Level}}</span>
+      </td>
     </tr>
   </table>
   <!-- 黒デッキ -->
@@ -65,7 +67,7 @@
     </tr>
     <tr ng-repeat="card in deck.main">
       <td class="align-c">
-        <i class="fa fa-trash fa-lg" ng-click="deleteDeck($index);"></i>
+        <i class="fa fa-trash fa-lg" ng-click="removeCard(card.Category, $index);"></i>
       </td>
       <td>
         <select selectize ng-model="num" ng-options="f for f in cardNums"></select>

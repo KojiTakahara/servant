@@ -10,17 +10,34 @@ app.controller('editDeckController', ['$scope', '$location', function($scope, $l
   };
 
   $scope.addCard = function(index) {
-    var card = $scope.cards[index];
-    if (isLrigDeck(card)) {
-      $scope.deck.lrig.push(card);
-    } else if (isMainDeck(card)) {
-      $scope.deck.main.push(card);
+    var card = $scope.cards[index],
+        deck = $scope.deck;
+    card.num = 1;
+    if (isLrigDeck(card) && !isContain(deck.lrig, card)) {
+      deck.lrig.push(card);
+    } else if (isMainDeck(card) && !isContain(deck.main, card)) {
+      deck.main.push(card);
     }
   };
 
-  $scope.removeCard = function(index) {
-
+  $scope.removeCard = function(category, index) {
+    if (isLrigDeck({Category: category})) {
+      $scope.deck.lrig.splice(index, 1);
+    } else if (isMainDeck({Category: category})) {
+      $scope.deck.main.splice(index, 1);
+    }
   };
+
+  var isContain = function(list, card) {
+    var result = false;
+    for (var i in list) {
+      if (list[i].Id === card.Id) {
+        result = true;
+        break;
+      }
+    }
+    return result;
+  }
 
   var isLrigDeck = function(card) {
     return card.Category === 'ルリグ' || card.Category === 'アーツ';
