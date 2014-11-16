@@ -22,3 +22,22 @@
   background-color: #E6E9ED;
   border-color: #E6E9ED;
 }
+
+.text.white {
+  color: #F6BB42;
+}
+.text.red {
+  color: #DA4453;
+}
+.text.blue {
+  color: #3BAFDA;
+}
+.text.green {
+  color: #8CC152;
+}
+.text.black {
+  color: #967ADC;
+}
+.text.colorless {
+  color: #E6E9ED;
+}

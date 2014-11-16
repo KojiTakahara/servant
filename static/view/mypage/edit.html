@@ -34,7 +34,7 @@
 <div class='eleven columns'>
   <div style="padding-top:20px;"></div>
   <!-- 白デッキ -->
-  <table>
+  <table class="row">
     <tr>
       <th class="lrig wx10" nowrap></th>
       <th class="lrig wx20" nowrap></th>
@@ -43,21 +43,21 @@
       <th class="lrig wx20" nowrap>レベル</th>
     </tr>
     <tr ng-repeat="card in deck.lrig">
-      <td class="align-c {{card.Color}}">
+      <td class="align-c text {{card.Color}}">
         <i class="fa fa-trash fa-lg" ng-click="removeCard(card.Category, $index);"></i>
       </td>
-      <td class="{{card.Color}}">
-        <select selectize ng-options="f for f in cardNums" ng-model="card.num"></select>
+      <td class="text {{card.Color}} num-column">
+        <select selectize ng-model="card.num" ng-options="f for f in cardNums"></select>
       </td>
-      <td class="{{card.Color}}">{{card.Name}}</td>
-      <td class="align-c {{card.Color}}"><span class="label label-default">{{card.Category}}</span></td>
-      <td class="align-c {{card.Color}}">
+      <td class="text {{card.Color}}">{{card.Name}}</td>
+      <td class="align-c text {{card.Color}}">{{card.Category}}</td>
+      <td class="align-c text {{card.Color}}">
         <span ng-show="-1 < card.Level">{{card.Level}}</span>
       </td>
     </tr>
   </table>
   <!-- 黒デッキ -->
-  <table>
+  <table class="row">
     <tr>
       <th class="main wx10" nowrap></th>
       <th class="main wx20" nowrap></th>
@@ -66,16 +66,52 @@
       <th class="main wx20" nowrap>レベル</th>
     </tr>
     <tr ng-repeat="card in deck.main">
-      <td class="align-c">
+      <td class="align-c text {{card.Color}}">
         <i class="fa fa-trash fa-lg" ng-click="removeCard(card.Category, $index);"></i>
       </td>
-      <td>
-        <select selectize ng-model="num" ng-options="f for f in cardNums"></select>
+      <td class="text {{card.Color}} num-column">
+        <select selectize ng-model="card.num" ng-options="f for f in cardNums"></select>
       </td>
-      <td>{{card.Name}}</td>
-      <td class="align-c"><span class="label label-default">{{card.Category}}</span></td>
-      <td class="align-c">{{card.Level}}</td>
+      <td class="text {{card.Color}}">{{card.Name}}</td>
+      <td class="align-c text {{card.Color}}">{{card.Category}}</td>
+      <td class="align-c text {{card.Color}}">{{card.Level}}</td>
     </tr>
   </table>
-  <!-- -->
+
+  <div style="text-align: center;">
+    <button type="button" class="btn btn-primary row" ng-click="" style="width:30em;">保存</button>
+  </div>
+
+  <div class="two columns">
+    デッキ名
+  </div>
+  <div class="eight columns row">
+    <input type="text" class="form-control float-r">
+  </div>
+
+  <div class="two columns">
+    公開設定
+  </div>
+  <div class="eight columns row scope-column">
+    <select selectize ng-model="form.scope" ng-options="f.name for f in scopes"></select>
+  </div>
+
+  <div class="two columns">
+    概要
+  </div>
+  <div class="eight columns row">
+    <input type="text" class="form-control float-r">
+  </div>
+
+  <div class="two columns">
+    説明
+  </div>
+  <div class="eight columns row">
+    <textarea class="form-control float-r" rows="5"></textarea>
+  </div>
+
+  <div style="text-align: center;">
+    <button type="button" class="btn btn-primary row" ng-click="" style="width:30em;">保存</button>
+  </div>
+
 </div>

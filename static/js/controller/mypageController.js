@@ -54,6 +54,17 @@ app.controller('editDeckController', ['$scope', '$location', function($scope, $l
     }
   };
 
+  $scope.scopes = [{
+    id: 'PRIVATE',
+    name: '非公開'
+  }, {
+    id: 'SELECT',
+    name: '限定公開'
+  }, {
+    id: 'PUBLIC',
+    name: '公開'
+  }];
+
 
   $scope.cards = [
     {"Id":329,"KeyName":"","Burst":"","Bursted":false,"Category":"アーツ","Color":"blue","Constraint":"エルドラ限定","CostBlack":-1,"CostBlue":1,"CostColorless":1,"CostGreen":-1,"CostRed":-1,"CostWhite":-1,"Expansion":"WD06","Flavor":"ばっちん！","Guard":"","Illus":"パトリシア","Image":"/products/wixoss/images/card/WD06/WD06-006.jpg","Level":-1,"Limit":-1,"Name":"クロス・クラッシュ・フラッシュ","NameKana":"クロスクラッシュフラッシュ","No":6,"Power":-1,"Reality":"ST","SearchText":"","Text":"使用タイミング【メインフェイズ】,\n対戦相手はライフクロスの一番上を公開する。そのカードが【ライフバースト】を持たない場合、それをトラッシュに置く。","Type":"","Url":"http://www.takaratomy.co.jp/products/wixoss/card/card_detail.php?id=329","ParentKeyName":""},
