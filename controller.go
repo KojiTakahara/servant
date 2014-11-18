@@ -27,6 +27,7 @@ func GetCardList(r render.Render, req *http.Request) []Card {
 	q = EqualQuery(q, params, "illus")
 	q = EqualQuery(q, params, "reality")
 	q = EqualQuery(q, params, "type")
+	q = q.Filter("ParentKeyName=", "")
 	entities := make([]Card, 0, 10)
 	keys, err := q.GetAll(c, &entities)
 	if err != nil {

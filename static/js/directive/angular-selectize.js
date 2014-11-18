@@ -58,7 +58,7 @@
         var displayFn = $parse(match[2] || match[1]);
         var valueFn = $parse(match[2] ? match[1] : valueName);
 
-        watchParentOptions();
+        //watchParentOptions();
 
         function watchModel() {
           scope.$watchCollection(function() {

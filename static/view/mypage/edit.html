@@ -3,27 +3,27 @@
     <tabset justified="true">
       <tab heading="ルリグ">
         <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
-          <input type="text" class="form-control search-query" ng-model="form.text" placeholder="キーワード">
+          <input type="text" class="form-control search-query" ng-model="searchText" placeholder="キーワード">
         </div>
-        <cardsmalllist ng-repeat="card in cards"></cardsmalllist>
+        <cardsmalllist ng-repeat="card in lrigList | filter:searchText" ng-show="!isEmpty(searchText)"></cardsmalllist>
       </tab>
       <tab heading="アーツ">
         <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
-          <input type="text" class="form-control search-query" ng-model="form.text" placeholder="キーワード">
+          <input type="text" class="form-control search-query" ng-model="searchText" placeholder="キーワード">
         </div>
-        <cardsmalllist ng-repeat="card in cards"></cardsmalllist>
+        <cardsmalllist ng-repeat="card in artsList | filter:searchText" ng-show="!isEmpty(searchText)"></cardsmalllist>
       </tab>
       <tab heading="シグニ">
         <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
-          <input type="text" class="form-control search-query" ng-model="form.text" placeholder="キーワード">
+          <input type="text" class="form-control search-query" ng-model="searchText" placeholder="キーワード">
         </div>
-        <cardsmalllist ng-repeat="card in cards"></cardsmalllist>
+        <cardsmalllist ng-repeat="card in signiList | filter:searchText" ng-show="!isEmpty(searchText)"></cardsmalllist>
       </tab>
       <tab heading="スペル">
         <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
-          <input type="text" class="form-control search-query" ng-model="form.text" placeholder="キーワード">
+          <input type="text" class="form-control search-query" ng-model="searchText" placeholder="キーワード">
         </div>
-        <cardsmalllist ng-repeat="card in cards"></cardsmalllist>
+        <cardsmalllist ng-repeat="card in spellList | filter:searchText" ng-show="!isEmpty(searchText)"></cardsmalllist>
       </tab>
     </tabset>
   </div>
@@ -33,6 +33,7 @@
 </div>
 <div class='eleven columns'>
   <div style="padding-top:20px;"></div>
+  <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
   <!-- 白デッキ -->
   <table class="row">
     <tr>
@@ -74,44 +75,46 @@
       </td>
       <td class="text {{card.Color}}">{{card.Name}}</td>
       <td class="align-c text {{card.Color}}">{{card.Category}}</td>
-      <td class="align-c text {{card.Color}}">{{card.Level}}</td>
+      <td class="align-c text {{card.Color}}">
+        <span ng-show="-1 < card.Level">{{card.Level}}</span>
+      </td>
     </tr>
   </table>
 
   <div style="text-align: center;">
-    <button type="button" class="btn btn-primary row" ng-click="" style="width:30em;">保存</button>
+    <button type="button" class="btn btn-primary row" ng-click="save()" style="width:30em;">保存</button>
   </div>
 
   <div class="two columns">
     デッキ名
   </div>
   <div class="eight columns row">
-    <input type="text" class="form-control float-r">
+    <input type="text" ng-model="deck.Title" class="form-control float-r">
   </div>
 
   <div class="two columns">
     公開設定
   </div>
   <div class="eight columns row scope-column">
-    <select selectize ng-model="form.scope" ng-options="f.name for f in scopes"></select>
+    <select selectize ng-model="deck.Scope" ng-options="key as value for (key, value) in scopes"></select>
   </div>
 
   <div class="two columns">
     概要
   </div>
   <div class="eight columns row">
-    <input type="text" class="form-control float-r">
+    <input type="text" ng-model="deck.Introduction" class="form-control float-r">
   </div>
 
   <div class="two columns">
     説明
   </div>
   <div class="eight columns row">
-    <textarea class="form-control float-r" rows="5"></textarea>
+    <textarea ng-model="deck.Description" class="form-control float-r" rows="5"></textarea>
   </div>
 
   <div style="text-align: center;">
-    <button type="button" class="btn btn-primary row" ng-click="" style="width:30em;">保存</button>
+    <button type="button" class="btn btn-primary row" ng-click="save()" style="width:30em;">保存</button>
   </div>
 
 </div>
