@@ -6,7 +6,8 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
     var deferred = $q.defer();
     $http({
       method: 'GET',
-      url: '/api/illustrator'
+      url: '/api/illustrator',
+      cache: true
     }).success(function(data, status, headers, config) {
       deferred.resolve(data);
     }).error(function(data, status, headers, config) {
@@ -19,7 +20,8 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
     var deferred = $q.defer();
     $http({
       method: 'GET',
-      url: '/api/constraint'
+      url: '/api/constraint',
+      cache: true
     }).success(function(data, status, headers, config) {
       deferred.resolve(data);
     }).error(function(data, status, headers, config) {
@@ -32,7 +34,8 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
     var deferred = $q.defer();
     $http({
       method: 'GET',
-      url: '/api/product'
+      url: '/api/product',
+      cache: true
     }).success(function(data, status, headers, config) {
       deferred.resolve(data);
     }).error(function(data, status, headers, config) {
@@ -45,7 +48,8 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
     var deferred = $q.defer();
     $http({
       method: 'GET',
-      url: '/api/type'
+      url: '/api/type',
+      cache: true
     }).success(function(data, status, headers, config) {
       deferred.resolve(data);
     }).error(function(data, status, headers, config) {
@@ -59,7 +63,8 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
     $http({
       method: 'GET',
       url: '/api/search',
-      params: params
+      params: params,
+      cache: true
     }).success(function(data, status, headers, config) {
       for (var i in data) {
         var cost = [];
@@ -87,7 +92,8 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
     var deferred = $q.defer();
     $http({
       method: 'GET',
-      url: '/api/card/' + expansion
+      url: '/api/card/' + expansion,
+      cache: true
     }).success(function(data, status, headers, config) {
       deferred.resolve(data);
     }).error(function(data, status, headers, config) {
@@ -100,7 +106,8 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
     var deferred = $q.defer();
     $http({
       method: 'GET',
-      url: '/api/card/' + expansion + '/' + no
+      url: '/api/card/' + expansion + '/' + no,
+      cache: true
     }).success(function(data, status, headers, config) {
       deferred.resolve(data);
     }).error(function(data, status, headers, config) {

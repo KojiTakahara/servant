@@ -53,7 +53,7 @@ app.controller('editDeckController', ['$scope', '$location', 'cardService', func
   /** 最後のカードでtabが押されたらinputに戻すやつ **/
   $scope.returnCursor = function(bool, event) {
     if (bool && event.which === 9) {
-      angular.element('.search-query').selected;
+      angular.element('#cursor').focus();
     }
   };
 
@@ -67,20 +67,32 @@ app.controller('editDeckController', ['$scope', '$location', 'cardService', func
         mainDeck = $scope.deck.main,
         lrigNum = 0,
         mainNum = 0;
+    $scope.alerts = [];
     for (var i in lrigDeck) {
       lrigNum += lrigDeck[i].num;
     }
     for (var i in mainDeck) {
       mainNum += mainDeck[i].num;
     }
-    if ($scope.isEmpty($scope.deck.Name)) {
+    if ($scope.isEmpty($scope.deck.Title)) {
       $scope.alerts.push({ type: 'warning', msg: 'デッキ名を入力してください。' });
     }
-    if (lrigNum !== 10) {
-      $scope.alerts.push({ type: 'warning', msg: 'ルリグデッキは合計10枚にしてください。' });
+    if (10 < lrigNum) {
+      $scope.alerts.push({ type: 'warning', msg: 'ルリグデッキは合計10枚までにしてください。' });
     }
     if (mainNum !== 40) {
       $scope.alerts.push({ type: 'warning', msg: 'メインデッキは合計40枚にしてください。' });
+    }
+  };
+
+  $scope.sort = function(list, predicate) {
+    if (list === 'lrig') {
+      $scope.deck.lrigPredicate = predicate;
+      $scope.deck.lrigReverse = !$scope.deck.lrigReverse;
+    }
+    if (list === 'main') {
+      $scope.deck.mainPredicate = predicate;
+      $scope.deck.mainReverse = !$scope.deck.mainReverse;
     }
   };
 

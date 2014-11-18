@@ -121,6 +121,9 @@ th {
   padding: 6px 10px;
   color: #ffffff;
   background: #ea6153;
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 0px 1px;
 }
 th.lrig {
   background: #EAEAEA;
@@ -129,18 +132,17 @@ th.lrig {
 th.main {
   background: #303030;;
 }
-th:nth-child(n+2):nth-child(-n+4) {
-  border-style: solid;
-  border-color: #ffffff;
-  border-width: 0px 1px;
+th:last-child, th:first-child {
+  border-width: 0px;
 }
 td {
   padding: 6px 10px 6px 10px;
-}
-td:nth-child(n+2):nth-child(-n+4) {
   border-style: solid;
   border-color: #ffffff;
   border-width: 0px 1px;
+}
+td:last-child, td:first-child {
+  border-width: 0px;
 }
 .scope-column > .selectize-control {
   width: 94%;
@@ -149,6 +151,10 @@ td:nth-child(n+2):nth-child(-n+4) {
 .num-column > .selectize-control {
   display: flex;
   padding-bottom: 0px;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 /**
@@ -174,6 +180,9 @@ td:nth-child(n+2):nth-child(-n+4) {
 }
 .wx200 {
   width: 200px;
+}
+.wx180 {
+  width: 180px;
 }
 .wx100 {
   width: 100px;
