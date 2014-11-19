@@ -119,11 +119,17 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
   /** デッキ保存 **/
   service.saveDeck = function(params) {
     var deferred = $q.defer();
-    $http.post('/api/deck', params).success(function(data, status, headers, config) {
-      deferred.resolve(data);
-    }).error(function(data, status, headers, config) {
-      deferred.reject(data);
-    });
+    console.log(params);
+    if (params.Id) {
+      // 更新
+    } else {
+      $http.post('/api/deck', params).success(function(data, status, headers, config) {
+        deferred.resolve(data);
+      }).error(function(data, status, headers, config) {
+        deferred.reject(data);
+      });
+    }
+
     return deferred.promise;
   };
 

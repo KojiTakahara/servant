@@ -83,6 +83,14 @@ app.controller('editDeckController', ['$scope', '$location', 'cardService', func
     if (mainNum !== 40) {
       $scope.alerts.push({ type: 'warning', msg: 'メインデッキは合計40枚にしてください。' });
     }
+    if (0 < $scope.alerts.length) {
+      return;
+    }
+    cardService.saveDeck($scope.deck).then(function(res) {
+      $scope.alerts.push({ type: 'success', msg: '保存しました。' });
+    }, function(err) {
+      $scope.alerts.push({ type: 'danger', msg: '保存できませんでした。' });
+    });
   };
 
   $scope.sort = function(list, predicate) {
