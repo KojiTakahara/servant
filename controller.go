@@ -3,6 +3,7 @@ package servant
 import (
 	"appengine"
 	"appengine/datastore"
+	"appengine/memcache"
 	"container/list"
 	"fmt"
 	"github.com/go-martini/martini"
@@ -13,29 +14,41 @@ import (
 	"time"
 )
 
-func GetCardList(r render.Render, req *http.Request) []Card {
+func GetCardList(r render.Render, req *http.Request) {
 	u, _ := url.Parse(req.URL.String())
 	params := u.Query()
+
 	c := appengine.NewContext(req)
-	q := datastore.NewQuery("Card")
-	q = EqualQuery(q, params, "bursted")
-	q = EqualQuery(q, params, "category")
-	q = EqualQuery(q, params, "color")
-	q = EqualQuery(q, params, "constraint")
-	q = EqualQuery(q, params, "expansion")
-	q = EqualQuery(q, params, "guard")
-	q = EqualQuery(q, params, "illus")
-	q = EqualQuery(q, params, "reality")
-	q = EqualQuery(q, params, "type")
-	q = q.Filter("ParentKeyName=", "")
 	entities := make([]Card, 0, 10)
-	keys, err := q.GetAll(c, &entities)
-	if err != nil {
-		c.Criticalf(err.Error())
+	memcache.Gob.Get(c, fmt.Sprintf("%s", params), &entities)
+	if len(entities) == 0 {
+		q := datastore.NewQuery("Card")
+		q = EqualQuery(q, params, "bursted")
+		q = EqualQuery(q, params, "category")
+		q = EqualQuery(q, params, "color")
+		q = EqualQuery(q, params, "constraint")
+		q = EqualQuery(q, params, "expansion")
+		q = EqualQuery(q, params, "guard")
+		q = EqualQuery(q, params, "illus")
+		q = EqualQuery(q, params, "reality")
+		q = EqualQuery(q, params, "type")
+		q = q.Filter("ParentKeyName=", "")
+		keys, err := q.GetAll(c, &entities)
+		if err != nil {
+			c.Criticalf(err.Error())
+			r.JSON(400, err)
+			return
+		}
+		for i := range entities {
+			entities[i].KeyName = keys[i].StringID()
+		}
+		mem_item := &memcache.Item{
+			Key:    fmt.Sprintf("%s", params),
+			Object: entities,
+		}
+		memcache.Gob.Add(c, mem_item)
 	}
-	for i := range entities {
-		entities[i].KeyName = keys[i].StringID()
-	}
+
 	entities = Removenequality(entities, params, "costBlack")
 	entities = Removenequality(entities, params, "costBlue")
 	entities = Removenequality(entities, params, "costColorless")
@@ -45,7 +58,7 @@ func GetCardList(r render.Render, req *http.Request) []Card {
 	entities = Removenequality(entities, params, "level")
 	entities = Removenequality(entities, params, "limit")
 	entities = Removenequality(entities, params, "power")
-	return entities
+	r.JSON(200, entities)
 }
 
 func CreateModels(r render.Render, req *http.Request) map[string][]string {
@@ -125,24 +138,42 @@ func CreateModels(r render.Render, req *http.Request) map[string][]string {
 	return response
 }
 
-func GetProductList(r render.Render, req *http.Request) []Product {
+func GetProductList(r render.Render, req *http.Request) {
 	c := appengine.NewContext(req)
-	q := datastore.NewQuery("Product")
 	res := make([]Product, 0, 0)
-	if _, err := q.GetAll(c, &res); err != nil {
-		c.Criticalf(err.Error())
+	memcache.Gob.Get(c, "Product", &res)
+	if len(res) == 0 {
+		q := datastore.NewQuery("Product")
+		if _, err := q.GetAll(c, &res); err != nil {
+			c.Criticalf(err.Error())
+			r.JSON(400, err)
+		}
+		mem_item := &memcache.Item{
+			Key:    "Product",
+			Object: res,
+		}
+		memcache.Gob.Add(c, mem_item)
 	}
-	return res
+	r.JSON(200, res)
 }
 
-func GetIllustratorList(r render.Render, req *http.Request) []Illustrator {
+func GetIllustratorList(r render.Render, req *http.Request) {
 	c := appengine.NewContext(req)
-	q := datastore.NewQuery("Illustrator")
 	res := make([]Illustrator, 0, 0)
-	if _, err := q.GetAll(c, &res); err != nil {
-		c.Criticalf(err.Error())
+	memcache.Gob.Get(c, "Illustrator", &res)
+	if len(res) == 0 {
+		q := datastore.NewQuery("Illustrator")
+		if _, err := q.GetAll(c, &res); err != nil {
+			c.Criticalf(err.Error())
+			r.JSON(400, err)
+		}
+		mem_item := &memcache.Item{
+			Key:    "Illustrator",
+			Object: res,
+		}
+		memcache.Gob.Add(c, mem_item)
 	}
-	return res
+	r.JSON(200, res)
 }
 
 func GetConstraintList(r render.Render, req *http.Request) []Constraint {

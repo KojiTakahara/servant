@@ -15,25 +15,16 @@ func init() {
 	m.Use(render.Renderer())
 	m.Use(sessions.Sessions(SESSION_KEY, sessions.NewCookieStore([]byte(SESSION_KEY))))
 
-	m.Get("/api/search", func(r render.Render, req *http.Request) {
-		res := GetCardList(r, req)
-		r.JSON(200, res)
-	})
+	m.Get("/api/search", GetCardList)
 
 	m.Get("/api/model", func(r render.Render, req *http.Request) {
 		res := CreateModels(r, req)
 		r.JSON(200, res)
 	})
 
-	m.Get("/api/product", func(r render.Render, req *http.Request) {
-		res := GetProductList(r, req)
-		r.JSON(200, res)
-	})
+	m.Get("/api/product", GetProductList)
 
-	m.Get("/api/illustrator", func(r render.Render, req *http.Request) {
-		res := GetIllustratorList(r, req)
-		r.JSON(200, res)
-	})
+	m.Get("/api/illustrator", GetIllustratorList)
 
 	m.Get("/api/constraint", func(r render.Render, req *http.Request) {
 		res := GetConstraintList(r, req)
