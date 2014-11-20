@@ -215,17 +215,14 @@ func GetTypeList(r render.Render, req *http.Request) {
 
 }
 
-func CreateDeck(r render.Render, req *http.Request, params martini.Params) {
+func CreateDeck(r render.Render, req *http.Request, formDeck FormDeck) {
 	c := appengine.NewContext(req)
-	c.Infof("%s", req.FormValue("lrig"))
-	c.Infof("%s", req.FormValue("Title"))
-	c.Infof("%s", params["lrig"])
-	c.Infof("%s", params["Title"])
+	c.Infof("%s", formDeck)
 	deck := &Deck{}
-	deck.Title = params["Title"]
-	deck.Introduction = params["Introduction"]
-	deck.Description = params["Description"]
-	deck.Scope = params["Scope"]
+	deck.Title = formDeck.Title
+	deck.Introduction = formDeck.Introduction
+	deck.Description = formDeck.Description
+	deck.Scope = formDeck.Scope
 	deck.CreatedAt = time.Now()
 	deck.UpdatedAt = time.Now()
 	//deck.Main01 = entities[0].KeyName

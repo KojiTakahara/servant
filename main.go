@@ -2,6 +2,7 @@ package servant
 
 import (
 	"github.com/go-martini/martini"
+	"github.com/martini-contrib/binding"
 	"github.com/martini-contrib/render"
 	"github.com/martini-contrib/sessions"
 	"net/http"
@@ -30,7 +31,7 @@ func init() {
 	m.Get("/api/twitter/login", LoginTwitter)
 	m.Get("/api/twitter/callback", CallbackTwitter)
 	m.Get("/api/loginUser", LoginUser)
-	m.Post("/api/deck", CreateDeck)
+	m.Post("/api/deck", binding.Json(FormDeck{}), CreateDeck)
 	m.Get("/api/deck/:id", GetDeck)
 	m.Get("/api/card/:expansion", GetCardByExpansion)
 	m.Get("/api/card/:expansion/:no", GetCard)
