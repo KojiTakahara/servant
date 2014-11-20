@@ -61,7 +61,7 @@ func GetCardList(r render.Render, req *http.Request) {
 	r.JSON(200, entities)
 }
 
-func CreateModels(r render.Render, req *http.Request) map[string][]string {
+func CreateModels(r render.Render, req *http.Request) {
 	c := appengine.NewContext(req)
 	q := datastore.NewQuery("Card")
 	entities := make([]Card, 0, 0)
@@ -135,7 +135,7 @@ func CreateModels(r render.Render, req *http.Request) map[string][]string {
 	response["illustrator"] = illus
 	response["constraint"] = constraints
 	response["type"] = types
-	return response
+	r.JSON(200, response)
 }
 
 func GetProductList(r render.Render, req *http.Request) {
@@ -176,51 +176,68 @@ func GetIllustratorList(r render.Render, req *http.Request) {
 	r.JSON(200, res)
 }
 
-func GetConstraintList(r render.Render, req *http.Request) []Constraint {
+func GetConstraintList(r render.Render, req *http.Request) {
 	c := appengine.NewContext(req)
-	q := datastore.NewQuery("Constraint")
 	res := make([]Constraint, 0, 0)
-	if _, err := q.GetAll(c, &res); err != nil {
-		c.Criticalf(err.Error())
+	memcache.Gob.Get(c, "Constraint", &res)
+	if len(res) == 0 {
+		q := datastore.NewQuery("Constraint")
+		if _, err := q.GetAll(c, &res); err != nil {
+			c.Criticalf(err.Error())
+			r.JSON(400, err)
+		}
+		mem_item := &memcache.Item{
+			Key:    "Constraint",
+			Object: res,
+		}
+		memcache.Gob.Add(c, mem_item)
 	}
-	return res
+	r.JSON(200, res)
 }
 
-func GetTypeList(r render.Render, req *http.Request) []Type {
+func GetTypeList(r render.Render, req *http.Request) {
 	c := appengine.NewContext(req)
-	q := datastore.NewQuery("Type")
 	res := make([]Type, 0, 0)
-	if _, err := q.GetAll(c, &res); err != nil {
-		c.Criticalf(err.Error())
+	memcache.Gob.Get(c, "Type", &res)
+	if len(res) == 0 {
+		q := datastore.NewQuery("Type")
+		if _, err := q.GetAll(c, &res); err != nil {
+			c.Criticalf(err.Error())
+			r.JSON(400, err)
+		}
+		mem_item := &memcache.Item{
+			Key:    "Type",
+			Object: res,
+		}
+		memcache.Gob.Add(c, mem_item)
 	}
-	return res
+	r.JSON(200, res)
+
 }
 
-func CreateDeck(r render.Render, req *http.Request) {
+func CreateDeck(r render.Render, req *http.Request, params martini.Params) {
 	c := appengine.NewContext(req)
-
-	q := datastore.NewQuery("Card")
-	entities := make([]Card, 0, 0)
-	if _, err := q.GetAll(c, &entities); err != nil {
-		c.Criticalf(err.Error())
-	}
+	c.Infof("%s", req.FormValue("lrig"))
+	c.Infof("%s", req.FormValue("Title"))
+	c.Infof("%s", params["lrig"])
+	c.Infof("%s", params["Title"])
 	deck := &Deck{}
-	deck.Title = "ほげほげ"
-	deck.Introduction = "intoro"
-	deck.Description = "desc"
+	deck.Title = params["Title"]
+	deck.Introduction = params["Introduction"]
+	deck.Description = params["Description"]
+	deck.Scope = params["Scope"]
 	deck.CreatedAt = time.Now()
 	deck.UpdatedAt = time.Now()
-	deck.Main01 = entities[0].KeyName
+	//deck.Main01 = entities[0].KeyName
 	key := datastore.NewKey(c, "Deck", "", 0, nil)
-	c.Infof("%s", key)
 	key, err := datastore.Put(c, key, deck)
 	if err != nil {
 		c.Criticalf("%s", err)
+		r.JSON(400, err)
 	} else {
 		c.Infof("success. IntID: %s", key.IntID())
-		c.Infof("success. StringID: %s", key.StringID())
+		r.JSON(200, deck)
 	}
-	r.JSON(200, deck)
 }
 
 func GetCardByExpansion(r render.Render, params martini.Params, req *http.Request) {
