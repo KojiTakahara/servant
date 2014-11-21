@@ -10,8 +10,10 @@ type FormDeck struct {
 	Blue         bool       `json:"Blue"`
 	Green        bool       `json:"Green"`
 	Black        bool       `json:"Black"`
-	Lrig         []FormCard `json:"lrig"`
-	Main         []FormCard `json:"main"`
+	UniqueLrigs  []FormCard `json:"lrig"`
+	UniqueMains  []FormCard `json:"main"`
+	Lrig         []FormCard `json:"Lrig"`
+	Main         []FormCard `json:"Main"`
 	Scope        string     `json:"Scope"`
 }
 

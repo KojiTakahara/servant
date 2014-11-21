@@ -217,15 +217,116 @@ func GetTypeList(r render.Render, req *http.Request) {
 
 func CreateDeck(r render.Render, req *http.Request, formDeck FormDeck) {
 	c := appengine.NewContext(req)
-	c.Infof("%s", formDeck)
+	c.Infof("%s", formDeck.UniqueLrigs)
 	deck := &Deck{}
+	ids := make([]string, 0, 0)
+
+	for _, lrig := range formDeck.UniqueLrigs {
+		ids = append(ids, strconv.Itoa(lrig.Id))
+	}
+	for _, main := range formDeck.UniqueMains {
+		ids = append(ids, strconv.Itoa(main.Id))
+	}
+
+	for _, lrig := range formDeck.Lrig {
+		if lrig.Color == "white" {
+			deck.White = true
+		}
+		if lrig.Color == "red" {
+			deck.Red = true
+		}
+		if lrig.Color == "blue" {
+			deck.Blue = true
+		}
+		if lrig.Color == "green" {
+			deck.Green = true
+		}
+		if lrig.Color == "black" {
+			deck.Black = true
+		}
+	}
+	for _, main := range formDeck.Main {
+		if main.Color == "white" {
+			deck.White = true
+		}
+		if main.Color == "red" {
+			deck.Red = true
+		}
+		if main.Color == "blue" {
+			deck.Blue = true
+		}
+		if main.Color == "green" {
+			deck.Green = true
+		}
+		if main.Color == "black" {
+			deck.Black = true
+		}
+	}
+	deck.Lrig01 = formDeck.Lrig[0].KeyName
+	deck.Lrig02 = formDeck.Lrig[1].KeyName
+	deck.Lrig03 = formDeck.Lrig[2].KeyName
+	deck.Lrig04 = formDeck.Lrig[3].KeyName
+	deck.Lrig05 = formDeck.Lrig[4].KeyName
+	deck.Lrig06 = formDeck.Lrig[5].KeyName
+	deck.Lrig07 = formDeck.Lrig[6].KeyName
+	deck.Lrig08 = formDeck.Lrig[7].KeyName
+	deck.Lrig09 = formDeck.Lrig[8].KeyName
+	deck.Lrig10 = formDeck.Lrig[9].KeyName
+
+	deck.Main01 = formDeck.Main[0].KeyName
+	deck.Main02 = formDeck.Main[1].KeyName
+	deck.Main03 = formDeck.Main[2].KeyName
+	deck.Main04 = formDeck.Main[3].KeyName
+	deck.Main05 = formDeck.Main[4].KeyName
+	deck.Main06 = formDeck.Main[5].KeyName
+	deck.Main07 = formDeck.Main[6].KeyName
+	deck.Main08 = formDeck.Main[7].KeyName
+	deck.Main09 = formDeck.Main[8].KeyName
+	deck.Main10 = formDeck.Main[9].KeyName
+	deck.Main11 = formDeck.Main[10].KeyName
+	deck.Main12 = formDeck.Main[11].KeyName
+	deck.Main13 = formDeck.Main[12].KeyName
+	deck.Main14 = formDeck.Main[13].KeyName
+	deck.Main15 = formDeck.Main[14].KeyName
+	deck.Main16 = formDeck.Main[15].KeyName
+	deck.Main17 = formDeck.Main[16].KeyName
+	deck.Main18 = formDeck.Main[17].KeyName
+	deck.Main19 = formDeck.Main[18].KeyName
+	deck.Main20 = formDeck.Main[19].KeyName
+	deck.Main21 = formDeck.Main[20].KeyName
+	deck.Main22 = formDeck.Main[21].KeyName
+	deck.Main23 = formDeck.Main[22].KeyName
+	deck.Main24 = formDeck.Main[23].KeyName
+	deck.Main25 = formDeck.Main[24].KeyName
+	deck.Main26 = formDeck.Main[25].KeyName
+	deck.Main27 = formDeck.Main[26].KeyName
+	deck.Main28 = formDeck.Main[27].KeyName
+	deck.Main29 = formDeck.Main[28].KeyName
+	deck.Main30 = formDeck.Main[29].KeyName
+	deck.Main31 = formDeck.Main[30].KeyName
+	deck.Main32 = formDeck.Main[31].KeyName
+	deck.Main33 = formDeck.Main[32].KeyName
+	deck.Main34 = formDeck.Main[33].KeyName
+	deck.Main35 = formDeck.Main[34].KeyName
+	deck.Main36 = formDeck.Main[35].KeyName
+	deck.Main37 = formDeck.Main[36].KeyName
+	deck.Main38 = formDeck.Main[37].KeyName
+	deck.Main39 = formDeck.Main[38].KeyName
+	deck.Main40 = formDeck.Main[39].KeyName
+
 	deck.Title = formDeck.Title
 	deck.Introduction = formDeck.Introduction
 	deck.Description = formDeck.Description
 	deck.Scope = formDeck.Scope
+
+	deck.Use0500 = CreateUseDeckStr(ids, 1, 500)
+	deck.Use1000 = CreateUseDeckStr(ids, 501, 1000)
+	deck.Use1500 = CreateUseDeckStr(ids, 1001, 1500)
+	deck.Use2000 = CreateUseDeckStr(ids, 1501, 2000)
+
+	deck.Owner = "" // TODO loginUser
 	deck.CreatedAt = time.Now()
 	deck.UpdatedAt = time.Now()
-	//deck.Main01 = entities[0].KeyName
 	key := datastore.NewKey(c, "Deck", "", 0, nil)
 	key, err := datastore.Put(c, key, deck)
 	if err != nil {

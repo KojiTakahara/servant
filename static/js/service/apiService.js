@@ -119,7 +119,22 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
   /** デッキ保存 **/
   service.saveDeck = function(params) {
     var deferred = $q.defer();
-    console.log(params);
+    params.Lrig = [];
+    params.Main = [];
+    for (var i = 0; i < 10; i++) {
+      if (!angular.isUndefined(params.lrig[i])) {
+        for (var j = 0; j < params.lrig[i].num; j++) {
+          params.Lrig.push(params.lrig[i]);
+        }
+      } else {
+        params.Lrig.push({ KeyName: "" });
+      }
+    }
+    for (var i in params.main) {
+      for (var j = 0; j < params.main[i].num; j++) {
+        params.Main.push(params.main[i]);
+      }
+    }
     if (params.Id) {
       // 更新
     } else {
