@@ -171,7 +171,7 @@ func CreateCard(id int, req *http.Request) *Card {
 }
 
 func GetName(s string, card *Card) string {
-	if card.Expansion == "PR" {
+	if card.Expansion == "PR" || -1 < strings.Index(card.Expansion, "SP") {
 		return strings.Split(TrimLinefeed(s), "(")[0]
 	}
 	return s

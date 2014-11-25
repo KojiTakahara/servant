@@ -41,18 +41,22 @@ func LoginTwitter(w http.ResponseWriter, r *http.Request) {
 func LoginUser(r render.Render, req *http.Request, session sessions.Session) {
 	accessToken := GetAccessToken(session)
 	if accessToken != nil {
-		c := appengine.NewContext(req)
-		consumer.HttpClient = urlfetch.Client(c)
-		response, _ := consumer.Get("https://api.twitter.com/1.1/account/verify_credentials.json", nil, accessToken)
-		result := make([]byte, 1024*1024)
-		response.Body.Read(result)
-		resultString := string(result)
-		datas := strings.Split(strings.Trim(resultString, "\x00"), "&")
-		accountInfo, _ := mxj.NewMapJson([]byte(datas[0]))
-		r.JSON(200, accountInfo)
+		r.JSON(200, GetUser(req, accessToken))
 	} else {
 		r.Redirect("/api/twitter/login")
 	}
+}
+
+func GetUser(req *http.Request, accessToken *oauth.AccessToken) mxj.Map {
+	c := appengine.NewContext(req)
+	consumer.HttpClient = urlfetch.Client(c)
+	response, _ := consumer.Get("https://api.twitter.com/1.1/account/verify_credentials.json", nil, accessToken)
+	result := make([]byte, 1024*1024)
+	response.Body.Read(result)
+	resultString := string(result)
+	datas := strings.Split(strings.Trim(resultString, "\x00"), "&")
+	accountInfo, _ := mxj.NewMapJson([]byte(datas[0]))
+	return accountInfo
 }
 
 /**

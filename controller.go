@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
+	"github.com/martini-contrib/sessions"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -215,9 +216,14 @@ func GetTypeList(r render.Render, req *http.Request) {
 
 }
 
-func CreateDeck(r render.Render, req *http.Request, formDeck FormDeck) {
+func CreateDeck(r render.Render, req *http.Request, formDeck FormDeck, session sessions.Session) {
 	c := appengine.NewContext(req)
-	c.Infof("%s", formDeck.UniqueLrigs)
+	accessToken := GetAccessToken(session)
+	if accessToken == nil {
+		r.JSON(400, "") // TODO
+	}
+	user := GetUser(req, accessToken)
+
 	deck := &Deck{}
 	ids := make([]string, 0, 0)
 
@@ -324,7 +330,7 @@ func CreateDeck(r render.Render, req *http.Request, formDeck FormDeck) {
 	deck.Use1500 = CreateUseDeckStr(ids, 1001, 1500)
 	deck.Use2000 = CreateUseDeckStr(ids, 1501, 2000)
 
-	deck.Owner = "" // TODO loginUser
+	deck.Owner = fmt.Sprintf("%v", user["screen_name"])
 	deck.CreatedAt = time.Now()
 	deck.UpdatedAt = time.Now()
 	key := datastore.NewKey(c, "Deck", "", 0, nil)
@@ -333,7 +339,6 @@ func CreateDeck(r render.Render, req *http.Request, formDeck FormDeck) {
 		c.Criticalf("%s", err)
 		r.JSON(400, err)
 	} else {
-		c.Infof("success. IntID: %s", key.IntID())
 		r.JSON(200, deck)
 	}
 }

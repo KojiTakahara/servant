@@ -16,6 +16,7 @@ func GetCardByNameAndId(name string, id int, req *http.Request) []Card {
 	q := datastore.NewQuery("Card")
 	q = q.Filter("Name=", name)
 	q = q.Filter("Id<", id)
+	q = q.Order("Id")
 	cards := make([]Card, 0, 10)
 	keys, err := q.GetAll(c, &cards)
 	if err != nil {

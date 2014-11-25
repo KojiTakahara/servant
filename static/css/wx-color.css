@@ -19,8 +19,8 @@
   border-color: #967ADC;
 }
 .card.colorless {
-  background-color: #E6E9ED;
-  border-color: #E6E9ED;
+  background-color: #BCBCBC;
+  border-color: #BCBCBC;
 }
 
 .text.white {
@@ -39,5 +39,5 @@
   color: #967ADC;
 }
 .text.colorless {
-  color: #E6E9ED;
+  color: #BCBCBC;
 }
