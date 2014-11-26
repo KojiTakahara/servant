@@ -4,7 +4,6 @@ import (
 	"appengine"
 	"appengine/datastore"
 	"appengine/memcache"
-	"container/list"
 	"fmt"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
@@ -361,7 +360,7 @@ func GetCardByExpansion(r render.Render, params martini.Params, req *http.Reques
 func GetCard(r render.Render, params martini.Params, req *http.Request) {
 	c := appengine.NewContext(req)
 	keyStr := params["expansion"] + "-" + fmt.Sprintf("%03d", ToInt(params["no"]))
-	card := GetCardByKey(keyStr, c)
+	card, _ := GetCardByKey(keyStr, c)
 	r.JSON(200, card)
 }
 
@@ -374,7 +373,7 @@ func GetDeck(r render.Render, params martini.Params, req *http.Request) {
 		c.Criticalf(err.Error())
 	}
 	viewDeck := &ViewDeck{}
-	viewDeck.Id = deck.Id
+	viewDeck.Id = id
 	viewDeck.Owner = deck.Owner
 	viewDeck.Title = deck.Title
 	viewDeck.Introduction = deck.Introduction
@@ -436,13 +435,14 @@ func GetDeck(r render.Render, params martini.Params, req *http.Request) {
 	addUnique(mains, deck.Main38)
 	addUnique(mains, deck.Main39)
 	addUnique(mains, deck.Main40)
-	viewDeck.Lrig = list.New()
 	for k := range lrigs {
-		viewDeck.Lrig.PushBack(GetCardByKey(k, c))
+		card, _ := GetCardByKey(k, c)
+		viewDeck.Lrig = append(viewDeck.Lrig, card)
 	}
-	viewDeck.Main = list.New()
 	for k := range mains {
-		viewDeck.Main.PushBack(GetCardByKey(k, c))
+		c.Infof("%s", mains[k])
+		card, _ := GetCardByKey(k, c)
+		viewDeck.Main = append(viewDeck.Main, card)
 	}
 	viewDeck.Scope = deck.Scope
 	viewDeck.CreatedAt = deck.CreatedAt

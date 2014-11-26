@@ -116,6 +116,20 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
     return deferred.promise;
   };
 
+  service.getDeckById = function(id) {
+    var deferred = $q.defer();
+    $http({
+      method: 'GET',
+      url: '/api/deck/' + id,
+      cache: true
+    }).success(function(data, status, headers, config) {
+      deferred.resolve(data);
+    }).error(function(data, status, headers, config) {
+      deferred.reject(data);
+    });
+    return deferred.promise;
+  };
+
   /** デッキ保存 **/
   service.saveDeck = function(params) {
     var deferred = $q.defer();

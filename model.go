@@ -1,7 +1,6 @@
 package servant
 
 import (
-	"container/list"
 	"time"
 )
 
@@ -163,8 +162,8 @@ type ViewDeck struct {
 	Blue         bool
 	Green        bool
 	Black        bool
-	Lrig         *list.List
-	Main         *list.List
+	Lrig         []Card
+	Main         []Card
 	Scope        string
 	CreatedAt    time.Time
 	UpdatedAt    time.Time

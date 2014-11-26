@@ -4,7 +4,7 @@ var app = angular.module('mypageCtrl', [
   'apiService',
 ]);
 
-app.controller('editDeckController', ['$scope', '$location', 'cardService', function($scope, $location, cardService) {
+app.controller('editDeckController', ['$scope', '$stateParams', '$location', 'cardService', function($scope, $stateParams, $location, cardService) {
   $scope.alerts = [];
   $scope.cardNums = [1, 2, 3, 4];
   $scope.deck = {
@@ -13,22 +13,32 @@ app.controller('editDeckController', ['$scope', '$location', 'cardService', func
     Scope: 'PRIVATE',
   };
 
+  var init = function() {
+    var id = $stateParams.id;
+    cardService.getDeckById(id).then(function(res) {
+      $scope.deck = res;
+    }, function(err) {
+      alert('error');
+    });
+  };
+  init();
+
   $scope.addCard = function(card) {
     var deck = $scope.deck;
-    if (isLrigDeck(card) && !isContain(deck.lrig, card)) {
+    if (isLrigDeck(card) && !isContain(deck.Lrig, card)) {
       card.num = 1;
-      deck.lrig.push(card);
-    } else if (isMainDeck(card) && !isContain(deck.main, card)) {
+      deck.Lrig.push(card);
+    } else if (isMainDeck(card) && !isContain(deck.Main, card)) {
       card.num = 1;
-      deck.main.push(card);
+      deck.Main.push(card);
     }
   };
 
   $scope.removeCard = function(category, index) {
     if (isLrigDeck({Category: category})) {
-      $scope.deck.lrig.splice(index, 1);
+      $scope.deck.Lrig.splice(index, 1);
     } else if (isMainDeck({Category: category})) {
-      $scope.deck.main.splice(index, 1);
+      $scope.deck.Main.splice(index, 1);
     }
   };
 
@@ -63,16 +73,18 @@ app.controller('editDeckController', ['$scope', '$location', 'cardService', func
 
   /** デッキ保存処理 **/
   $scope.save = function() {
-    var lrigDeck = $scope.deck.lrig,
-        mainDeck = $scope.deck.main,
+    var lrigDeck = $scope.deck.Lrig,
+        mainDeck = $scope.deck.Main,
         lrigNum = 0,
-        mainNum = 0;
+        mainNum = 0,
+        burstNum = 0;
     $scope.alerts = [];
     for (var i in lrigDeck) {
       lrigNum += lrigDeck[i].num;
     }
     for (var i in mainDeck) {
       mainNum += mainDeck[i].num;
+      burstNum += mainDeck[i].Bursted ? mainDeck[i].num : 0;
     }
     if ($scope.isEmpty($scope.deck.Title)) {
       $scope.alerts.push({ type: 'warning', msg: 'デッキ名を入力してください。' });
@@ -82,6 +94,9 @@ app.controller('editDeckController', ['$scope', '$location', 'cardService', func
     }
     if (mainNum !== 40) {
       $scope.alerts.push({ type: 'warning', msg: 'メインデッキは合計40枚にしてください。' });
+    }
+    if (burstNum !== 20) {
+      $scope.alerts.push({ type: 'warning', msg: 'ライフバーストを持つカードは合計20枚にしてください。' });
     }
     if (0 < $scope.alerts.length) {
       return;

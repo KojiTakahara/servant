@@ -45,7 +45,7 @@
       <th class="lrig wx20 pointer" ng-click="sort('lrig', 'Category')" nowrap>種類</th>
       <th class="lrig wx20 pointer" ng-click="sort('lrig', 'Level')" nowrap>レベル</th>
     </tr>
-    <tr ng-repeat="card in deck.lrig | orderBy:deck.lrigPredicate:deck.lrigReverse">
+    <tr ng-repeat="card in deck.Lrig | orderBy:deck.lrigPredicate:deck.lrigReverse">
       <td class="align-c card {{card.Color}}" style="padding:0"></td>
       <td class="align-c ">
         <i class="fa fa-trash fa-lg pointer" ng-click="removeCard(card.Category, $index);"></i>
@@ -53,7 +53,9 @@
       <td class=" num-column">
         <select selectize ng-model="card.num" ng-options="f for f in cardNums"></select>
       </td>
-      <td class="">{{card.Name}}</td>
+      <td class="">
+        <a href="/card/{{card.Expansion}}/{{card.No}}" target="_blank">{{card.Name}}</a>
+      </td>
       <td class="align-c ">{{card.Category}}</td>
       <td class="align-c ">
         <span ng-show="-1 < card.Level">{{card.Level}}</span>
@@ -73,7 +75,7 @@
         <i class="fa fa-asterisk fa-lg"></i>
       </th>
     </tr>
-    <tr ng-repeat="card in deck.main | orderBy:deck.mainPredicate:deck.mainReverse">
+    <tr ng-repeat="card in deck.Main | orderBy:deck.mainPredicate:deck.mainReverse">
       <td class="align-c card {{card.Color}}" style="padding:0"></td>
       <td class="align-c ">
         <i class="fa fa-trash fa-lg pointer" ng-click="removeCard(card.Category, $index);"></i>
@@ -81,7 +83,9 @@
       <td class=" num-column">
         <select selectize ng-model="card.num" ng-options="f for f in cardNums"></select>
       </td>
-      <td class="">{{card.Name}}</td>
+      <td class="">
+        <a href="/card/{{card.Expansion}}/{{card.No}}" target="_blank">{{card.Name}}</a>
+      </td>
       <td class="align-c ">{{card.Category}}</td>
       <td class="align-c ">
         <span ng-show="-1 < card.Level">{{card.Level}}</span>
