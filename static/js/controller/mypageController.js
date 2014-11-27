@@ -26,10 +26,10 @@ app.controller('editDeckController', ['$scope', '$stateParams', '$location', 'ca
   $scope.addCard = function(card) {
     var deck = $scope.deck;
     if (isLrigDeck(card) && !isContain(deck.Lrig, card)) {
-      card.num = 1;
+      card.Num = 1;
       deck.Lrig.push(card);
     } else if (isMainDeck(card) && !isContain(deck.Main, card)) {
-      card.num = 1;
+      card.Num = 1;
       deck.Main.push(card);
     }
   };
@@ -80,11 +80,11 @@ app.controller('editDeckController', ['$scope', '$stateParams', '$location', 'ca
         burstNum = 0;
     $scope.alerts = [];
     for (var i in lrigDeck) {
-      lrigNum += lrigDeck[i].num;
+      lrigNum += lrigDeck[i].Num;
     }
     for (var i in mainDeck) {
-      mainNum += mainDeck[i].num;
-      burstNum += mainDeck[i].Bursted ? mainDeck[i].num : 0;
+      mainNum += mainDeck[i].Num;
+      burstNum += mainDeck[i].Bursted ? mainDeck[i].Num : 0;
     }
     if ($scope.isEmpty($scope.deck.Title)) {
       $scope.alerts.push({ type: 'warning', msg: 'デッキ名を入力してください。' });
@@ -129,14 +129,14 @@ app.controller('editDeckController', ['$scope', '$stateParams', '$location', 'ca
     'PUBLIC': '公開',
   };
 
-  cardService.search({ category: 'ルリグ' }).then(function(res) { $scope.lrigList = res; });
-  cardService.search({ category: 'アーツ' }).then(function(res) { $scope.artsList = res; });
-  cardService.search({ category: 'シグニ' }).then(function(res) { $scope.signiList = res; });
-  cardService.search({ category: 'スペル' }).then(function(res) { $scope.spellList = res; });
+  // cardService.search({ category: 'ルリグ' }).then(function(res) { $scope.lrigList = res; });
+  // cardService.search({ category: 'アーツ' }).then(function(res) { $scope.artsList = res; });
+  // cardService.search({ category: 'シグニ' }).then(function(res) { $scope.signiList = res; });
+  // cardService.search({ category: 'スペル' }).then(function(res) { $scope.spellList = res; });
 
 }]);
 
-app.controller('mypageController', ['$scope', '$location', function($scope, $location) {
+app.controller('mypageController', ['$scope', '$location', 'cardService', function($scope, $location, cardService) {
   $scope.decks = [];
 
   $scope.editDeck = function() {
@@ -151,7 +151,16 @@ app.controller('mypageController', ['$scope', '$location', function($scope, $loc
     $location.path('/mypage/deck/0');
   };
 
+
   var init = function() {
+
+    cardService.getDeckByUserId("dm_plateau").then(function(res) {
+      console.log(res);
+      $scope.decks = res;
+    }, function(err) {
+      //
+    });
+    /**
     for (var i = 0; i < 10; i++) {
       $scope.decks.push({
         Title: 'テストデッキ' + i,
@@ -165,6 +174,7 @@ app.controller('mypageController', ['$scope', '$location', function($scope, $loc
         UpdatedAt: new Date()
       });
     }
+    */
   };
   init();
 

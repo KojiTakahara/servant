@@ -31,6 +31,7 @@ type Card struct {
 	Name          string
 	NameKana      string
 	No            int
+	Num           int
 	Power         int
 	Reality       string
 	SearchText    string
@@ -82,7 +83,7 @@ type Constraint struct {
  * デッキ
  */
 type Deck struct {
-	Id           int
+	Id           int64
 	Owner        string
 	Title        string
 	Introduction string
@@ -152,7 +153,7 @@ type Deck struct {
 }
 
 type ViewDeck struct {
-	Id           int
+	Id           int64
 	Owner        string
 	Title        string
 	Introduction string

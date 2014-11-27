@@ -35,6 +35,7 @@ func init() {
 	m.Get("/api/deck/:id", GetDeck)
 	m.Get("/api/card/:expansion", GetCardByExpansion)
 	m.Get("/api/card/:expansion/:no", GetCard)
+	m.Get("/api/:userId/deck", GetUserDeckList)
 	m.Post("/api/setTestSession", SetTestSettion)
 
 	http.ListenAndServe(":8080", m)

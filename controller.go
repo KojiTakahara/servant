@@ -364,6 +364,22 @@ func GetCard(r render.Render, params martini.Params, req *http.Request) {
 	r.JSON(200, card)
 }
 
+func GetUserDeckList(r render.Render, params martini.Params, req *http.Request) {
+	c := appengine.NewContext(req)
+	q := datastore.NewQuery("Deck")
+	q = q.Filter("Owner=", params["userId"])
+	decks := make([]Deck, 0, 10)
+	keys, err := q.GetAll(c, &decks)
+	if err != nil {
+		c.Criticalf(err.Error())
+		r.JSON(200, err)
+	}
+	for i := range decks {
+		decks[i].Id = keys[i].IntID()
+	}
+	r.JSON(200, decks)
+}
+
 func GetDeck(r render.Render, params martini.Params, req *http.Request) {
 	c := appengine.NewContext(req)
 	id, _ := strconv.Atoi(params["id"])
@@ -373,7 +389,7 @@ func GetDeck(r render.Render, params martini.Params, req *http.Request) {
 		c.Criticalf(err.Error())
 	}
 	viewDeck := &ViewDeck{}
-	viewDeck.Id = id
+	viewDeck.Id = int64(id)
 	viewDeck.Owner = deck.Owner
 	viewDeck.Title = deck.Title
 	viewDeck.Introduction = deck.Introduction
@@ -437,11 +453,12 @@ func GetDeck(r render.Render, params martini.Params, req *http.Request) {
 	addUnique(mains, deck.Main40)
 	for k := range lrigs {
 		card, _ := GetCardByKey(k, c)
+		card.Num = lrigs[k]
 		viewDeck.Lrig = append(viewDeck.Lrig, card)
 	}
 	for k := range mains {
-		c.Infof("%s", mains[k])
 		card, _ := GetCardByKey(k, c)
+		card.Num = mains[k]
 		viewDeck.Main = append(viewDeck.Main, card)
 	}
 	viewDeck.Scope = deck.Scope

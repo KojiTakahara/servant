@@ -51,7 +51,7 @@
         <i class="fa fa-trash fa-lg pointer" ng-click="removeCard(card.Category, $index);"></i>
       </td>
       <td class=" num-column">
-        <select selectize ng-model="card.num" ng-options="f for f in cardNums"></select>
+        <select selectize ng-model="card.Num" ng-options="f for f in cardNums"></select>
       </td>
       <td class="">
         <a href="/card/{{card.Expansion}}/{{card.No}}" target="_blank">{{card.Name}}</a>
@@ -81,7 +81,7 @@
         <i class="fa fa-trash fa-lg pointer" ng-click="removeCard(card.Category, $index);"></i>
       </td>
       <td class=" num-column">
-        <select selectize ng-model="card.num" ng-options="f for f in cardNums"></select>
+        <select selectize ng-model="card.Num" ng-options="f for f in cardNums"></select>
       </td>
       <td class="">
         <a href="/card/{{card.Expansion}}/{{card.No}}" target="_blank">{{card.Name}}</a>
