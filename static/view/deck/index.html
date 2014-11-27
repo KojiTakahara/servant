@@ -1,0 +1,34 @@
+<div class='five columns' style="font-size:10px;">
+  <cardsearchform></cardsearchform>
+  <amazon></amazon>
+</div>
+<div class='eleven columns'>
+  <div style="padding-top:20px;"></div>
+  <table ng-hide="decks.length == 0">
+    <tr>
+      <th class="wx90" nowrap></th>
+      <th class="wx200" nowrap>デッキ名</th>
+      <th class="wx90" nowrap>作成者</th>
+      <th class="wx90" nowrap>更新日付</th>
+    </tr>
+    <tr ng-repeat="deck in decks">
+      <td class="align-c">
+        <span class="card white square" ng-show="deck.White"></span>
+        <span class="card red square" ng-show="deck.Red"></span>
+        <span class="card blue square" ng-show="deck.Blue"></span>
+        <span class="card green square" ng-show="deck.Green"></span>
+        <span class="card black square" ng-show="deck.Black"></span>
+      </td>
+      <td class="">
+        <a ng-href="/mypage/deck/{{deck.Id}}">{{deck.Title}}</a>
+      </td>
+      <td class="align-c">
+        <a href="/user/{{deck.Owner}}">{{deck.Owner}}</a>
+      </td>
+      <td class="align-c">{{deck.UpdatedAt | date:'yy/MM/dd' }}</td>
+    </tr>
+  </table>
+  <div class="align-c" ng-show="decks.length == 0">
+    投稿されているデッキはありません。
+  </div>
+</div>

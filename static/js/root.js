@@ -8,6 +8,7 @@ var app = angular.module('app', [
   'ui.bootstrap',
   'indexCtrl',
   'cardCtrl',
+  'deckCtrl',
   'mypageCtrl',
   'userService',
   'selectize',
@@ -51,6 +52,15 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       mainContent: {
         templateUrl: '/view/card/detail.html',
         controller: 'cardDetailController'
+      }
+    }
+  });
+  $stateProvider.state('deck', {
+    url: '/deck',
+    views: {
+      mainContent: {
+        templateUrl: '/view/deck/index.html',
+        controller: 'deckController'
       }
     }
   });
