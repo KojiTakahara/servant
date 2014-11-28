@@ -200,6 +200,13 @@ func GetSearchText(s *goquery.Selection) string {
 
 func ReplaceIcon(str string) string {
 	str = strings.Replace(str, "<img src=\"../images/icon_txt_null_01.png\" width=\"26\" height=\"23\" alt=\"無×1\"/>", "(無)", -1)
+	str = strings.Replace(str, "<img src=\"../images/icon_txt_null_02.png\" width=\"26\" height=\"23\" alt=\"無×3\"/>", "(無)(無)", -1)
+	str = strings.Replace(str, "<img src=\"../images/icon_txt_null_03.png\" width=\"26\" height=\"23\" alt=\"無×3\"/>", "(無)(無)(無)", -1)
+	str = strings.Replace(str, "<img src=\"../images/icon_txt_null_04.png\" width=\"26\" height=\"23\" alt=\"無×3\"/>", "(無)(無)(無)(無)", -1)
+	str = strings.Replace(str, "<img src=\"../images/icon_txt_white_01.png\" width=\"26\" height=\"23\" alt=\"白×1\"/>", "(白)", -1)
+	str = strings.Replace(str, "<img src=\"../images/icon_txt_white_02.png\" width=\"26\" height=\"23\" alt=\"白×1\"/>", "(白)(白)", -1)
+	str = strings.Replace(str, "<img src=\"../images/icon_txt_white_03.png\" width=\"26\" height=\"23\" alt=\"白×1\"/>", "(白)(白)(白)", -1)
+	str = strings.Replace(str, "<img src=\"../images/icon_txt_white_04.png\" width=\"26\" height=\"23\" alt=\"白×1\"/>", "(白)(白)(白)(白)", -1)
 	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_starting.png\" width=\"26\" height=\"23\" alt=\"起動能力\"/>", "[起]", -1)
 	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_regular.png\" width=\"26\" height=\"23\" alt=\"常\"/>", "[常]", -1)
 	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_regular.png\" width=\"26\" height=\"23\" alt=\"常時能力\"/>", "[常]", -1)
