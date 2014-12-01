@@ -42,8 +42,9 @@ func LoginUser(r render.Render, req *http.Request, session sessions.Session) {
 	accessToken := GetAccessToken(session)
 	if accessToken != nil {
 		r.JSON(200, GetUser(req, accessToken))
+		return
 	} else {
-		r.Redirect("/api/twitter/login")
+		r.JSON(400, "")
 	}
 }
 
@@ -55,6 +56,9 @@ func GetUser(req *http.Request, accessToken *oauth.AccessToken) mxj.Map {
 	response.Body.Read(result)
 	resultString := string(result)
 	datas := strings.Split(strings.Trim(resultString, "\x00"), "&")
+	if datas[0] == "" {
+		return nil
+	}
 	accountInfo, _ := mxj.NewMapJson([]byte(datas[0]))
 	return accountInfo
 }
@@ -101,7 +105,7 @@ func CallbackTwitter(r render.Render, w http.ResponseWriter, req *http.Request, 
 			c.Infof("")
 		}
 		// TODO トップページへリダイレクト
-		r.Redirect("/api/loginUser")
+		r.Redirect("/mypage")
 	} else { //　ログイン失敗
 		r.Redirect("/")
 	}
@@ -314,13 +318,24 @@ func (this *OAuth1) ExchangeToken(token string, verifier string, targetUrl strin
 }
 
 func GetAccessToken(session sessions.Session) *oauth.AccessToken {
+	token := session.Get("accessToken")
+	secret := session.Get("accessTokenSecret")
+	if token == nil || token == "" || secret == nil || secret == "" {
+		return nil
+	}
 	return &oauth.AccessToken{
-		Token:  session.Get("accessToken").(string),
-		Secret: session.Get("accessTokenSecret").(string),
+		Token:  token.(string),
+		Secret: secret.(string),
 	}
 }
 
 func SetTestSettion(r render.Render, req *http.Request, session sessions.Session) {
+	token := req.FormValue("token")
+	secret := req.FormValue("secret")
+	if token == "" || secret == "" {
+		r.JSON(400, "fail")
+		return
+	}
 	session.Set("accessToken", req.FormValue("token"))
 	session.Set("accessTokenSecret", req.FormValue("secret"))
 	r.JSON(200, "success")

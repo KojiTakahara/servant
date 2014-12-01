@@ -10,6 +10,7 @@ var app = angular.module('app', [
   'cardCtrl',
   'deckCtrl',
   'mypageCtrl',
+  'usersCtrl',
   'userService',
   'selectize',
   'angular-loading-bar',
@@ -61,6 +62,15 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       mainContent: {
         templateUrl: '/view/deck/index.html',
         controller: 'deckController'
+      }
+    }
+  });
+  $stateProvider.state('users', {
+    url: '/users',
+    views: {
+      mainContent: {
+        templateUrl: '/view/users/index.html',
+        controller: 'usersController'
       }
     }
   });

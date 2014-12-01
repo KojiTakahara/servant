@@ -5,7 +5,10 @@ dir.directive('mainmenu', function() {
     restrict: 'E',
     replace: true,
     templateUrl: '/view/common/menu.html',
-    controller: function($scope, $location, userService) {
+    controller: function($scope, $window, $location, userService) {
+      $scope.login = function() {
+        $window.location.href = '/api/twitter/login';
+      };
       $scope.setHeaderClass = function() {
         if ($location.path() === '/') {
           $('header').addClass('top');
