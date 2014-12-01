@@ -11,6 +11,7 @@ var app = angular.module('app', [
   'deckCtrl',
   'mypageCtrl',
   'usersCtrl',
+  'deckService',
   'userService',
   'selectize',
   'angular-loading-bar',

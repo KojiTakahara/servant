@@ -2,29 +2,29 @@
   <input type="text" id="cursor" style="position: absolute; z-index: -1; border: 0;">
   <div style="margin-top: 15px;">
     <tabset justified="true">
-      <tab heading="ルリグ">
+      <tab heading="ルリグ" deselect="deselect(lrigSearchText)" select="selectTab('lrig')">
         <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
-          <input type="text" class="form-control search-query" ng-model="searchText" placeholder="キーワード">
+          <input type="text" class="form-control search-query" ng-model="lrigSearchText" placeholder="キーワード">
         </div>
-        <cardsmalllist ng-repeat="card in lrigList | filter:searchText" ng-show="!isEmpty(searchText)"></cardsmalllist>
+        <cardsmalllist ng-repeat="card in lrigList | filter:lrigSearchText" ng-show="1 < lrigSearchText.length"></cardsmalllist>
       </tab>
-      <tab heading="アーツ">
+      <tab heading="アーツ" deselect="deselect(artsSearchText)" select="selectTab('arts')">
         <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
-          <input type="text" class="form-control search-query" ng-model="searchText" placeholder="キーワード">
+          <input type="text" class="form-control search-query" ng-model="artsSearchText" placeholder="キーワード">
         </div>
-        <cardsmalllist ng-repeat="card in artsList | filter:searchText" ng-show="!isEmpty(searchText)"></cardsmalllist>
+        <cardsmalllist ng-repeat="card in artsList | filter:artsSearchText" ng-show="1 < artsSearchText.length"></cardsmalllist>
       </tab>
-      <tab heading="シグニ">
+      <tab heading="シグニ" deselect="deselect(signiSearchText)" select="selectTab('signi')">
         <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
-          <input type="text" class="form-control search-query" ng-model="searchText" placeholder="キーワード">
+          <input type="text" class="form-control search-query" ng-model="signiSearchText" placeholder="キーワード">
         </div>
-        <cardsmalllist ng-repeat="card in signiList | filter:searchText" ng-show="!isEmpty(searchText)"></cardsmalllist>
+        <cardsmalllist ng-repeat="card in signiList | filter:signiSearchText" ng-show="1 < signiSearchText.length"></cardsmalllist>
       </tab>
-      <tab heading="スペル">
+      <tab heading="スペル" deselect="deselect(spellSearchText)" select="selectTab('spell')">
         <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
-          <input type="text" class="form-control search-query" ng-model="searchText" placeholder="キーワード">
+          <input type="text" class="form-control search-query" ng-model="spellSearchText" placeholder="キーワード">
         </div>
-        <cardsmalllist ng-repeat="card in spellList | filter:searchText" ng-show="!isEmpty(searchText)"></cardsmalllist>
+        <cardsmalllist ng-repeat="card in spellList | filter:spellSearchText" ng-show="1 < spellSearchText.length"></cardsmalllist>
       </tab>
     </tabset>
   </div>

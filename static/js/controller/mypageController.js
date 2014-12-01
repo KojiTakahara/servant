@@ -2,19 +2,24 @@
 
 var app = angular.module('mypageCtrl', [
   'apiService',
+  'deckService',
 ]);
 
-app.controller('editDeckController', ['$scope', '$stateParams', '$location', 'cardService', function($scope, $stateParams, $location, cardService) {
+app.controller('editDeckController', ['$scope', '$stateParams', '$location', 'cardService', 'deckService', function($scope, $stateParams, $location, cardService, deckService) {
   $scope.alerts = [];
   $scope.cardNums = [1, 2, 3, 4];
   $scope.deck = {
-    lrig: [],
-    main: [],
+    Lrig: [],
+    Main: [],
     Scope: 'PRIVATE',
   };
+  $scope.searchText = '';
 
   var init = function() {
     var id = $stateParams.id;
+    if (id === '0') {
+      return;
+    }
     cardService.getDeckById(id).then(function(res) {
       $scope.deck = res;
     }, function(err) {
@@ -73,31 +78,7 @@ app.controller('editDeckController', ['$scope', '$stateParams', '$location', 'ca
 
   /** デッキ保存処理 **/
   $scope.save = function() {
-    var lrigDeck = $scope.deck.Lrig,
-        mainDeck = $scope.deck.Main,
-        lrigNum = 0,
-        mainNum = 0,
-        burstNum = 0;
-    $scope.alerts = [];
-    for (var i in lrigDeck) {
-      lrigNum += lrigDeck[i].Num;
-    }
-    for (var i in mainDeck) {
-      mainNum += mainDeck[i].Num;
-      burstNum += mainDeck[i].Bursted ? mainDeck[i].Num : 0;
-    }
-    if ($scope.isEmpty($scope.deck.Title)) {
-      $scope.alerts.push({ type: 'warning', msg: 'デッキ名を入力してください。' });
-    }
-    if (10 < lrigNum) {
-      $scope.alerts.push({ type: 'warning', msg: 'ルリグデッキは合計10枚までにしてください。' });
-    }
-    if (mainNum !== 40) {
-      $scope.alerts.push({ type: 'warning', msg: 'メインデッキは合計40枚にしてください。' });
-    }
-    if (burstNum !== 20) {
-      $scope.alerts.push({ type: 'warning', msg: 'ライフバーストを持つカードは合計20枚にしてください。' });
-    }
+    $scope.alerts = deckService.validate($scope.deck);
     if (0 < $scope.alerts.length) {
       return;
     }
@@ -129,10 +110,37 @@ app.controller('editDeckController', ['$scope', '$stateParams', '$location', 'ca
     'PUBLIC': '公開',
   };
 
-  // cardService.search({ category: 'ルリグ' }).then(function(res) { $scope.lrigList = res; });
-  // cardService.search({ category: 'アーツ' }).then(function(res) { $scope.artsList = res; });
-  // cardService.search({ category: 'シグニ' }).then(function(res) { $scope.signiList = res; });
-  // cardService.search({ category: 'スペル' }).then(function(res) { $scope.spellList = res; });
+  $scope.deselect = function(text) {
+    $scope.searchText = text;
+  };
+
+  $scope.selectTab = function(category) {
+    if (category === 'lrig') {
+      if ($scope.lrigList === undefined) {
+        cardService.search({ category: 'ルリグ' }).then(function(res) { $scope.lrigList = res; });
+      }
+      $scope.lrigSearchText = $scope.searchText;
+    }
+    if (category === 'arts') {
+      if ($scope.artsList === undefined) {
+        cardService.search({ category: 'アーツ' }).then(function(res) { $scope.artsList = res; });
+      }
+      $scope.artsSearchText = $scope.searchText;
+    }
+    if (category === 'signi') {
+      if ($scope.signiList === undefined) {
+        cardService.search({ category: 'シグニ' }).then(function(res) { $scope.signiList = res; });
+      }
+      $scope.signiSearchText = $scope.searchText;
+    }
+    if (category === 'spell') {
+      if ($scope.spellList === undefined) {
+        cardService.search({ category: 'スペル' }).then(function(res) { $scope.spellList = res; });
+      }
+      $scope.spellSearchText = $scope.searchText;
+    }
+  }; 
+  $scope.selectTab('lrig');
 
 }]);
 
@@ -151,30 +159,13 @@ app.controller('mypageController', ['$scope', '$location', 'cardService', functi
     $location.path('/mypage/deck/0');
   };
 
-
   var init = function() {
-
     cardService.getDeckByUserId("dm_plateau").then(function(res) {
       console.log(res);
       $scope.decks = res;
     }, function(err) {
       //
     });
-    /**
-    for (var i = 0; i < 10; i++) {
-      $scope.decks.push({
-        Title: 'テストデッキ' + i,
-        Id: 1000 + i,
-        White: true,
-        Red: true,
-        Blue: true,
-        Green: true,
-        Black: true,
-        Scope: 'SELECT',
-        UpdatedAt: new Date()
-      });
-    }
-    */
   };
   init();
 
