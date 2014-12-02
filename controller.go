@@ -373,6 +373,26 @@ func GetUserDeckList(r render.Render, params martini.Params, req *http.Request) 
 	if err != nil {
 		c.Criticalf(err.Error())
 		r.JSON(200, err)
+		return
+	}
+	for i := range decks {
+		decks[i].Id = keys[i].IntID()
+	}
+	r.JSON(200, decks)
+}
+
+func GetPublicDeckList(r render.Render, params martini.Params, req *http.Request) {
+	c := appengine.NewContext(req)
+	q := datastore.NewQuery("Deck")
+	q = q.Filter("Scope=", "PUBLIC")
+	q = q.Limit(ToInt(params["limit"]))
+	q = q.Offset(ToInt(params["offset"]))
+	decks := make([]Deck, 0, 10)
+	keys, err := q.GetAll(c, &decks)
+	if err != nil {
+		c.Criticalf(err.Error())
+		r.JSON(200, err)
+		return
 	}
 	for i := range decks {
 		decks[i].Id = keys[i].IntID()

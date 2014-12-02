@@ -31,6 +31,7 @@ func init() {
 	m.Get("/api/twitter/login", LoginTwitter)
 	m.Get("/api/twitter/callback", CallbackTwitter)
 	m.Get("/api/loginUser", LoginUser)
+	m.Get("/api/deck", GetPublicDeckList)
 	m.Post("/api/deck", binding.Json(FormDeck{}), CreateDeck)
 	m.Get("/api/deck/:id", GetDeck)
 	m.Get("/api/card/:expansion", GetCardByExpansion)
