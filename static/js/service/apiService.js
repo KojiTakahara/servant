@@ -147,20 +147,22 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
   /** デッキ保存 **/
   service.saveDeck = function(params) {
     var deferred = $q.defer();
-    params.Lrig = [];
-    params.Main = [];
+    params.UniqueLrigs = angular.copy(params.Lrig);
+    params.UniqueMains = angular.copy(params.Main);
+    params.OriginalLrigs = [];
+    params.OriginalMains = [];
     for (var i = 0; i < 10; i++) {
-      if (!angular.isUndefined(params.lrig[i])) {
-        for (var j = 0; j < params.lrig[i].num; j++) {
-          params.Lrig.push(params.lrig[i]);
+      if (!angular.isUndefined(params.UniqueLrigs[i])) {
+        for (var j = 0; j < params.UniqueLrigs[i].Num; j++) {
+          params.OriginalLrigs.push(params.UniqueLrigs[i]);
         }
       } else {
-        params.Lrig.push({ KeyName: "" });
+        params.OriginalLrigs.push({ KeyName: "" });
       }
     }
-    for (var i in params.main) {
-      for (var j = 0; j < params.main[i].num; j++) {
-        params.Main.push(params.main[i]);
+    for (var i in params.UniqueMains) {
+      for (var j = 0; j < params.UniqueMains[i].Num; j++) {
+        params.OriginalMains.push(params.UniqueMains[i]);
       }
     }
     if (params.Id) {

@@ -212,7 +212,6 @@ func GetTypeList(r render.Render, req *http.Request) {
 		memcache.Gob.Add(c, mem_item)
 	}
 	r.JSON(200, res)
-
 }
 
 func CreateDeck(r render.Render, req *http.Request, formDeck FormDeck, session sessions.Session) {
@@ -220,6 +219,7 @@ func CreateDeck(r render.Render, req *http.Request, formDeck FormDeck, session s
 	accessToken := GetAccessToken(session)
 	if accessToken == nil {
 		r.JSON(400, "") // TODO
+		return
 	}
 	user := GetUser(req, accessToken)
 
@@ -233,7 +233,7 @@ func CreateDeck(r render.Render, req *http.Request, formDeck FormDeck, session s
 		ids = append(ids, strconv.Itoa(main.Id))
 	}
 
-	for _, lrig := range formDeck.Lrig {
+	for _, lrig := range formDeck.OriginalLrigs {
 		if lrig.Color == "white" {
 			deck.White = true
 		}
@@ -250,7 +250,7 @@ func CreateDeck(r render.Render, req *http.Request, formDeck FormDeck, session s
 			deck.Black = true
 		}
 	}
-	for _, main := range formDeck.Main {
+	for _, main := range formDeck.OriginalMains {
 		if main.Color == "white" {
 			deck.White = true
 		}
@@ -267,57 +267,57 @@ func CreateDeck(r render.Render, req *http.Request, formDeck FormDeck, session s
 			deck.Black = true
 		}
 	}
-	deck.Lrig01 = formDeck.Lrig[0].KeyName
-	deck.Lrig02 = formDeck.Lrig[1].KeyName
-	deck.Lrig03 = formDeck.Lrig[2].KeyName
-	deck.Lrig04 = formDeck.Lrig[3].KeyName
-	deck.Lrig05 = formDeck.Lrig[4].KeyName
-	deck.Lrig06 = formDeck.Lrig[5].KeyName
-	deck.Lrig07 = formDeck.Lrig[6].KeyName
-	deck.Lrig08 = formDeck.Lrig[7].KeyName
-	deck.Lrig09 = formDeck.Lrig[8].KeyName
-	deck.Lrig10 = formDeck.Lrig[9].KeyName
+	deck.Lrig01 = formDeck.OriginalLrigs[0].KeyName
+	deck.Lrig02 = formDeck.OriginalLrigs[1].KeyName
+	deck.Lrig03 = formDeck.OriginalLrigs[2].KeyName
+	deck.Lrig04 = formDeck.OriginalLrigs[3].KeyName
+	deck.Lrig05 = formDeck.OriginalLrigs[4].KeyName
+	deck.Lrig06 = formDeck.OriginalLrigs[5].KeyName
+	deck.Lrig07 = formDeck.OriginalLrigs[6].KeyName
+	deck.Lrig08 = formDeck.OriginalLrigs[7].KeyName
+	deck.Lrig09 = formDeck.OriginalLrigs[8].KeyName
+	deck.Lrig10 = formDeck.OriginalLrigs[9].KeyName
 
-	deck.Main01 = formDeck.Main[0].KeyName
-	deck.Main02 = formDeck.Main[1].KeyName
-	deck.Main03 = formDeck.Main[2].KeyName
-	deck.Main04 = formDeck.Main[3].KeyName
-	deck.Main05 = formDeck.Main[4].KeyName
-	deck.Main06 = formDeck.Main[5].KeyName
-	deck.Main07 = formDeck.Main[6].KeyName
-	deck.Main08 = formDeck.Main[7].KeyName
-	deck.Main09 = formDeck.Main[8].KeyName
-	deck.Main10 = formDeck.Main[9].KeyName
-	deck.Main11 = formDeck.Main[10].KeyName
-	deck.Main12 = formDeck.Main[11].KeyName
-	deck.Main13 = formDeck.Main[12].KeyName
-	deck.Main14 = formDeck.Main[13].KeyName
-	deck.Main15 = formDeck.Main[14].KeyName
-	deck.Main16 = formDeck.Main[15].KeyName
-	deck.Main17 = formDeck.Main[16].KeyName
-	deck.Main18 = formDeck.Main[17].KeyName
-	deck.Main19 = formDeck.Main[18].KeyName
-	deck.Main20 = formDeck.Main[19].KeyName
-	deck.Main21 = formDeck.Main[20].KeyName
-	deck.Main22 = formDeck.Main[21].KeyName
-	deck.Main23 = formDeck.Main[22].KeyName
-	deck.Main24 = formDeck.Main[23].KeyName
-	deck.Main25 = formDeck.Main[24].KeyName
-	deck.Main26 = formDeck.Main[25].KeyName
-	deck.Main27 = formDeck.Main[26].KeyName
-	deck.Main28 = formDeck.Main[27].KeyName
-	deck.Main29 = formDeck.Main[28].KeyName
-	deck.Main30 = formDeck.Main[29].KeyName
-	deck.Main31 = formDeck.Main[30].KeyName
-	deck.Main32 = formDeck.Main[31].KeyName
-	deck.Main33 = formDeck.Main[32].KeyName
-	deck.Main34 = formDeck.Main[33].KeyName
-	deck.Main35 = formDeck.Main[34].KeyName
-	deck.Main36 = formDeck.Main[35].KeyName
-	deck.Main37 = formDeck.Main[36].KeyName
-	deck.Main38 = formDeck.Main[37].KeyName
-	deck.Main39 = formDeck.Main[38].KeyName
-	deck.Main40 = formDeck.Main[39].KeyName
+	deck.Main01 = formDeck.OriginalMains[0].KeyName
+	deck.Main02 = formDeck.OriginalMains[1].KeyName
+	deck.Main03 = formDeck.OriginalMains[2].KeyName
+	deck.Main04 = formDeck.OriginalMains[3].KeyName
+	deck.Main05 = formDeck.OriginalMains[4].KeyName
+	deck.Main06 = formDeck.OriginalMains[5].KeyName
+	deck.Main07 = formDeck.OriginalMains[6].KeyName
+	deck.Main08 = formDeck.OriginalMains[7].KeyName
+	deck.Main09 = formDeck.OriginalMains[8].KeyName
+	deck.Main10 = formDeck.OriginalMains[9].KeyName
+	deck.Main11 = formDeck.OriginalMains[10].KeyName
+	deck.Main12 = formDeck.OriginalMains[11].KeyName
+	deck.Main13 = formDeck.OriginalMains[12].KeyName
+	deck.Main14 = formDeck.OriginalMains[13].KeyName
+	deck.Main15 = formDeck.OriginalMains[14].KeyName
+	deck.Main16 = formDeck.OriginalMains[15].KeyName
+	deck.Main17 = formDeck.OriginalMains[16].KeyName
+	deck.Main18 = formDeck.OriginalMains[17].KeyName
+	deck.Main19 = formDeck.OriginalMains[18].KeyName
+	deck.Main20 = formDeck.OriginalMains[19].KeyName
+	deck.Main21 = formDeck.OriginalMains[20].KeyName
+	deck.Main22 = formDeck.OriginalMains[21].KeyName
+	deck.Main23 = formDeck.OriginalMains[22].KeyName
+	deck.Main24 = formDeck.OriginalMains[23].KeyName
+	deck.Main25 = formDeck.OriginalMains[24].KeyName
+	deck.Main26 = formDeck.OriginalMains[25].KeyName
+	deck.Main27 = formDeck.OriginalMains[26].KeyName
+	deck.Main28 = formDeck.OriginalMains[27].KeyName
+	deck.Main29 = formDeck.OriginalMains[28].KeyName
+	deck.Main30 = formDeck.OriginalMains[29].KeyName
+	deck.Main31 = formDeck.OriginalMains[30].KeyName
+	deck.Main32 = formDeck.OriginalMains[31].KeyName
+	deck.Main33 = formDeck.OriginalMains[32].KeyName
+	deck.Main34 = formDeck.OriginalMains[33].KeyName
+	deck.Main35 = formDeck.OriginalMains[34].KeyName
+	deck.Main36 = formDeck.OriginalMains[35].KeyName
+	deck.Main37 = formDeck.OriginalMains[36].KeyName
+	deck.Main38 = formDeck.OriginalMains[37].KeyName
+	deck.Main39 = formDeck.OriginalMains[38].KeyName
+	deck.Main40 = formDeck.OriginalMains[39].KeyName
 
 	deck.Title = formDeck.Title
 	deck.Introduction = formDeck.Introduction
