@@ -1,6 +1,20 @@
 <div class='five columns' style="font-size:10px;">
   <input type="text" id="cursor" style="position: absolute; z-index: -1; border: 0;">
   <div style="margin-top: 15px;">
+      <table style="font-size:12px">
+        <tr>
+          <th style="width:50%">ルリグデッキ</th>
+          <td>{{countLrig()}}</td>
+        </tr>
+        <tr>
+          <th>メインデッキ</th>
+          <td>{{countMain()}}</td>
+        </tr>
+        <tr>
+          <th>ライフバースト</th>
+          <td>{{countLifeBurst()}}</td>
+        </tr>
+      </table>
     <tabset justified="true">
       <tab heading="ルリグ" deselect="deselect(lrigSearchText)" select="selectTab('lrig')">
         <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">

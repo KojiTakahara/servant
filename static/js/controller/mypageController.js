@@ -76,6 +76,18 @@ app.controller('editDeckController', ['$scope', '$stateParams', '$location', 'ca
     return obj === undefined || obj === "";
   };
 
+  $scope.countLrig = function() {
+    return deckService.countLrig($scope.deck);
+  };
+
+  $scope.countMain = function() {
+    return deckService.countMain($scope.deck);
+  };
+
+  $scope.countLifeBurst = function() {
+    return deckService.countBurst($scope.deck);
+  };
+
   /** デッキ保存処理 **/
   $scope.save = function() {
     $scope.alerts = deckService.validate($scope.deck);
