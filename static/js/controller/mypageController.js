@@ -164,7 +164,13 @@ app.controller('mypageController', ['$scope', '$location', 'cardService', functi
   };
 
   $scope.deleteDeck = function(index) {
-    alert('削除処理を実装してね ' + index);
+    var deck = $scope.decks[index];
+    cardService.deleteDeck(deck).then(function(res) {
+      alert('削除しました');
+    }, function(err) {
+      console.log(err);
+      alert('削除に失敗しました');
+    });
   };
 
   $scope.createDeck = function() {

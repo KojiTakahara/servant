@@ -33,6 +33,7 @@ func init() {
 	m.Get("/api/loginUser", LoginUser)
 	m.Get("/api/deck", GetPublicDeckList)
 	m.Post("/api/deck", binding.Json(FormDeck{}), CreateDeck)
+	m.Delete("/api/deck/:owner/:id", DeleteDeck)
 	m.Get("/api/deck/:id", GetDeck)
 	m.Get("/api/card/:expansion", GetCardByExpansion)
 	m.Get("/api/card/:expansion/:no", GetCard)

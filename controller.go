@@ -487,6 +487,27 @@ func GetDeck(r render.Render, params martini.Params, req *http.Request) {
 	r.JSON(200, viewDeck)
 }
 
+func DeleteDeck(r render.Render, req *http.Request, params martini.Params, session sessions.Session) {
+	c := appengine.NewContext(req)
+	accessToken := GetAccessToken(session)
+	if accessToken == nil {
+		r.JSON(400, "") // TODO
+		return
+	}
+	user := GetUser(req, accessToken)
+	if params["owner"] != fmt.Sprintf("%v", user["screen_name"]) {
+		r.JSON(400, "削除に失敗しました")
+		return
+	}
+	key := datastore.NewKey(c, "Deck", "", int64(ToInt(params["id"])), nil)
+	err := datastore.Delete(c, key)
+	if err != nil {
+		r.JSON(400, "削除に失敗しました")
+		return
+	}
+	r.JSON(200, "成功")
+}
+
 func addUnique(m map[string]int, key string) {
 	if key == "" {
 		return

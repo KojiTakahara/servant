@@ -3,6 +3,7 @@ package servant
 type FormDeck struct {
 	Title         string     `json:"Title"`
 	Id            int        `json:"Id"`
+	Owner         string     `json:"Owner"`
 	Introduction  string     `json:"Introduction"`
 	Description   string     `json:"Description"`
 	White         bool       `json:"White"`

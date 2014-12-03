@@ -197,5 +197,19 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
     return deferred.promise;
   };
 
+  /** デッキ削除 **/
+  service.deleteDeck = function(deck) {
+    var deferred = $q.defer();
+    $http({
+      method: 'DELETE',
+      url: '/api/deck/' + deck.Owner + '/' + deck.Id
+    }).success(function(data, status, headers, config) {
+      deferred.resolve(data);
+    }).error(function(data, status, headers, config) {
+      deferred.reject(data);
+    });
+    return deferred.promise;
+  };
+
   return service;
 }]);
