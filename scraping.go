@@ -39,6 +39,13 @@ func CreateCard(id int, req *http.Request) *Card {
 			card.Expansion, card.No = cardNo[0], ToInt(cardNo[1])
 			cardName := strings.Split(s.Find("h3").Text(), "＜")
 			card.Name = GetName(cardName[0], card)
+			if 0 == strings.Index(card.Name, "サーバント") {
+				card.Name = strings.TrimSpace(card.Name)
+				if -1 == strings.Index(card.Name, "　") {
+					split := strings.Split(card.Name, "サーバント")
+					card.Name = "サーバント　" + split[1]
+				}
+			}
 			card.NameKana = strings.Trim(cardName[1], "＞")
 		})
 		card.Reality = strings.TrimRight(strings.TrimLeft(strings.TrimSpace(s.Find(".card_rarity").Text()), "\n\u0009"), "\n")
