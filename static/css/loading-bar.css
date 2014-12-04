@@ -1,5 +1,17 @@
 
-/* Make clicks pass-through */
+#loading-bar {
+  background-color: white;
+  opacity: .5;
+  position: absolute;
+  top: -150px;
+  left: -100px;
+  right: -100px;
+  bottom: -500px;
+  z-index: 1500;
+  pointer-events: auto;
+}
+
+/* Make clicks pass-through 
 #loading-bar,
 #loading-bar-spinner {
   pointer-events: none;
@@ -9,6 +21,7 @@
   -o-transition: 350ms linear all;
   transition: 350ms linear all;
 }
+*/
 
 #loading-bar.ng-enter,
 #loading-bar.ng-leave.ng-leave-active,
@@ -23,6 +36,8 @@
 #loading-bar-spinner.ng-leave {
   opacity: 1;
 }
+
+/**
 
 #loading-bar .bar {
   -webkit-transition: width 350ms;
@@ -41,7 +56,7 @@
   border-top-right-radius: 1px;
 }
 
-/* Fancy blur effect */
+/* Fancy blur effect *
 #loading-bar .peg {
   position: absolute;
   width: 70px;
@@ -58,22 +73,26 @@
   border-radius: 100%;
 }
 
+**/
+
 #loading-bar-spinner {
   display: block;
   position: fixed;
   z-index: 10002;
-  top: 10px;
-  left: 10px;
+  top: 50%;
+  left: 50%;
 }
 
 #loading-bar-spinner .spinner-icon {
-  width: 14px;
-  height: 14px;
+  width: 30px;
+  height: 30px;
+  margin-top: -15px;
+  margin-left: -15px;
 
-  border:  solid 2px transparent;
+  border:  solid 3px transparent;
   border-top-color:  #29d;
   border-left-color: #29d;
-  border-radius: 10px;
+  border-radius: 20px;
 
   -webkit-animation: loading-bar-spinner 400ms linear infinite;
   -moz-animation:    loading-bar-spinner 400ms linear infinite;

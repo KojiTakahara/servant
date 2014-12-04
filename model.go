@@ -34,8 +34,8 @@ type Card struct {
 	Num           int
 	Power         int
 	Reality       string
-	SearchText    string
-	Text          string
+	SearchText    string `datastore:",noindex"`
+	Text          string `datastore:",noindex"`
 	Type          string
 	Url           string
 	ParentKeyName string
@@ -86,8 +86,8 @@ type Deck struct {
 	Id           int64
 	Owner        string
 	Title        string
-	Introduction string
-	Description  string
+	Introduction string `datastore:",noindex"`
+	Description  string `datastore:",noindex"`
 	White        bool
 	Red          bool
 	Blue         bool

@@ -1,15 +1,25 @@
 <div class='five columns' style="font-size:10px;">
-  <cardsearchform></cardsearchform>
   <amazon></amazon>
 </div>
 <div class='eleven columns'>
-  <div style="padding-top:20px;"></div>
+  <div style="padding-top:15px;"></div>
+  <div class="search-box">
+    <label><checkbox ng-model="deckForm.white"></checkbox> 白</label>
+    <label><checkbox ng-model="deckForm.red"></checkbox> 赤</label>
+    <label><checkbox ng-model="deckForm.blue"></checkbox> 青</label>
+    <label><checkbox ng-model="deckForm.green"></checkbox> 緑</label>
+    <label><checkbox ng-model="deckForm.black"></checkbox> 黒</label>
+    <hr>
+    <button class="btn btn-nomal" ng-click="deckFormReset()">リセット</button>
+    <button class="btn btn-success" ng-click="deckSearch()">検索</button>
+  </div>
+  <div style="padding-top:15px;"></div>
   <table ng-hide="decks.length == 0">
     <tr>
-      <th class="wx90" nowrap></th>
+      <th class="wx80" nowrap></th>
       <th class="wx200" nowrap>デッキ名</th>
       <th class="wx90" nowrap>作成者</th>
-      <th class="wx90" nowrap>更新日付</th>
+      <th class="wx80" nowrap>更新日付</th>
     </tr>
     <tr ng-repeat="deck in decks">
       <td class="align-c">
@@ -20,14 +30,18 @@
         <span class="card black square" ng-show="deck.Black"></span>
       </td>
       <td class="">
-        <a ng-href="/mypage/deck/{{deck.Id}}">{{deck.Title}}</a>
+        <a ng-href="/deck/{{deck.Id}}">{{deck.Title}}</a>
       </td>
       <td class="align-c">
-        <a href="/user/{{deck.Owner}}">{{deck.Owner}}</a>
+        <a href="/users/{{deck.Owner}}">{{deck.Owner}}</a>
       </td>
       <td class="align-c">{{deck.UpdatedAt | date:'yy/MM/dd' }}</td>
     </tr>
   </table>
+  <div style="padding-top:15px;"></div>
+  <div class="align-c">
+    <button class="btn btn-default" ng-click="more()" ng-hide="end">さらに見る</button>
+  </div>
   <div class="align-c" ng-show="decks.length == 0">
     投稿されているデッキはありません。
   </div>

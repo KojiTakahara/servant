@@ -6,6 +6,9 @@ var app = angular.module('app', [
   'numberFilter',
   'ui.router',
   'ui.bootstrap',
+  'ui.checkbox',
+  'ui.sortable',
+  'ui.select',
   'indexCtrl',
   'cardCtrl',
   'deckCtrl',
@@ -13,11 +16,14 @@ var app = angular.module('app', [
   'usersCtrl',
   'deckService',
   'userService',
-  'selectize',
   'angular-loading-bar',
   'ngAnimate',
+  'simpleUiSelect',
 ]);
-app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', function($locationProvider, $stateProvider, $urlRouterProvider) {
+app.config(['$httpProvider', '$locationProvider', '$stateProvider', '$urlRouterProvider', 'uiSelectConfig', function($httpProvider, $locationProvider, $stateProvider, $urlRouterProvider, uiSelectConfig) {
+  $httpProvider.defaults.headers.common = {'X-Requested-With': 'XMLHttpRequest'};
+  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+  uiSelectConfig.theme = 'selectize';
   $locationProvider.html5Mode(true);
   $urlRouterProvider.otherwise("");
   $stateProvider.state('top', {
@@ -36,6 +42,15 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       mainContent: {
         templateUrl: '/view/card/index.html',
         controller: 'cardController'
+      }
+    }
+  });
+  $stateProvider.state('cardSearch', {
+    url: '/search',
+    views: {
+      mainContent: {
+        templateUrl: '/view/card/search.html',
+        controller: 'cardSearchController'
       }
     }
   });
@@ -66,12 +81,30 @@ app.config(['$locationProvider', '$stateProvider', '$urlRouterProvider', functio
       }
     }
   });
+  $stateProvider.state('deckDetail', {
+    url: '/deck/:id',
+    views: {
+      mainContent: {
+        templateUrl: '/view/deck/detail.html',
+        controller: 'deckDetailController'
+      }
+    }
+  });
   $stateProvider.state('users', {
     url: '/users',
     views: {
       mainContent: {
         templateUrl: '/view/users/index.html',
         controller: 'usersController'
+      }
+    }
+  });
+  $stateProvider.state('userDetail', {
+    url: '/users/:userId',
+    views: {
+      mainContent: {
+        templateUrl: '/view/users/detail.html',
+        controller: 'userDetailController'
       }
     }
   });

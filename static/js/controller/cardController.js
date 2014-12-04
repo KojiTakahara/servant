@@ -7,66 +7,45 @@ var ctrl = angular.module('cardCtrl', [
 ]);
 
 /** カードTOP **/
-ctrl.controller('cardController', ['$scope', '$location', 'cardService', function($scope, $location, cardService) {
-  $scope.categories = ['ルリグ', 'アーツ', 'シグニ', 'スペル'];
-  $scope.realities = ['LR', 'LC', 'SR', 'R', 'C', 'ST', 'PR'];
-  $scope.levels = [0, 1, 2, 3, 4];
-  $scope.powers = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000];
-  $scope.costs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+ctrl.controller('cardController', ['$rootScope', '$scope', '$location', 'cardService', function($rootScope, $scope, $location, cardService) {
+}]);
 
-  var init = function() {
-    cardService.getIllustrator().then(function(data) {
-      $scope.illustrators = data;
-    }, function() {
-      // error
-    });
-
-    cardService.getConstraint().then(function(data) {
-      $scope.constraints = data;
-    }, function() {
-      // error
-    });
-
-    cardService.getProduct().then(function(data) {
-      $scope.products = data;
-    }, function() {
-      // error
-    });
-
-    cardService.getType().then(function(data) {
-      $scope.types = data;
-    }, function() {
-      // error
-    });
-
-    var form = {expansion:'WX01'};
-    cardService.search(form).then(function(data) {
+/** 検索 **/
+ctrl.controller('cardSearchController', ['$rootScope', '$scope', '$stateParams', '$anchorScroll', 'cardService', function($rootScope, $scope, $stateParams, $anchorScroll, cardService) {
+  $anchorScroll.yOffset = 0;
+  $anchorScroll();
+  $scope.cardSearch = function() {
+    if (!$rootScope.searchCondition) {
+      $anchorScroll.yOffset = 0;
+      $anchorScroll();
+      $scope.cardList = [];
+      return;
+    }
+    cardService.search($rootScope.searchCondition).then(function(data) {
+      if ($rootScope.searchCondition) {
+        $scope.textSearch = $rootScope.searchCondition.text;
+      }
+      $anchorScroll.yOffset = 0;
+      $anchorScroll();
       $scope.cardList = data;
     });
-
-    setTimeout(function() {
-      $("input").iCheck({
-        checkboxClass: "icheckbox_square-yellow", //使用するテーマのスキンを指定する
-        radioClass: "iradio_square-yellow" //使用するテーマのスキンを指定する
-      });
-    }, 500);
   };
-  init();
-
-  $scope.reset = function() {
-    $scope.form = {};
-  };
+  $scope.cardSearch();
 }]);
 
 /** エキスパンションリスト **/
-ctrl.controller('cardExController', ['$scope', '$stateParams', 'cardService', function($scope, $stateParams, cardService) {
+ctrl.controller('cardExController', ['$rootScope', '$scope', '$stateParams', '$anchorScroll', 'cardService', function($rootScope, $scope, $stateParams, $anchorScroll, cardService) {
+  $anchorScroll.yOffset = 0;
+  $anchorScroll();
   cardService.getCardByExpansion($stateParams.expansion).then(function(data) {
     $scope.cardList = data;
   });
 }]);
 
 /** カード詳細 **/
-ctrl.controller('cardDetailController', ['$scope', '$stateParams', 'cardService', function($scope, $stateParams, cardService) {
+ctrl.controller('cardDetailController', ['$rootScope', '$scope', '$stateParams', '$anchorScroll', 'cardService', function($rootScope, $scope, $stateParams, $anchorScroll, cardService) {
+  $anchorScroll.yOffset = 0;
+  $anchorScroll();
   cardService.getCardByExpansionAndNo($stateParams.expansion, $stateParams.no).then(function(data) {
     $scope.card = data;
   });

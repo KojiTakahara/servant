@@ -14,3 +14,158 @@ indexes:
   properties:
   - name: Name
   - name: Id
+
+- kind: Card
+  properties:
+  - name: NameKana
+  - name: Id
+
+- kind: Deck
+  properties:
+  - name: Black
+  - name: Blue
+  - name: Green
+  - name: Red
+  - name: Scope
+  - name: White
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Black
+  - name: Blue
+  - name: Green
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Black
+  - name: Blue
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Black
+  - name: Green
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Black
+  - name: Red
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Black
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Black
+  - name: Scope
+  - name: White
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Blue
+  - name: Green
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Blue
+  - name: Green
+  - name: Scope
+  - name: White
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Blue
+  - name: Red
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Blue
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Blue
+  - name: Scope
+  - name: White
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Green
+  - name: Red
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Green
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Green
+  - name: Scope
+  - name: White
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Red
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Red
+  - name: Scope
+  - name: White
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: Scope
+  - name: White
+  - name: CreatedAt
+    direction: desc

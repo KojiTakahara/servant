@@ -58,3 +58,15 @@ fil.filter('scope', function() {
     }
   };
 });
+
+fil.filter('mediumImage', function() {
+  return function(str) {
+    return str.replace("_normal", "_reasonably_small");
+  };
+});
+
+fil.filter('bigImage', function() {
+  return function(str) {
+    return str.replace("_normal", "_400x400");
+  };
+});

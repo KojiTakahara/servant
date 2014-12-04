@@ -138,6 +138,18 @@ func CreateModels(r render.Render, req *http.Request) {
 	r.JSON(200, response)
 }
 
+func GetUser(r render.Render, params martini.Params, req *http.Request) {
+	c := appengine.NewContext(req)
+	key := datastore.NewKey(c, "User", params["userId"], 0, nil)
+	var user User
+	if err := datastore.Get(c, key, &user); err != nil {
+		c.Criticalf(err.Error())
+		r.JSON(400, "")
+		return
+	}
+	r.JSON(200, user)
+}
+
 func GetProductList(r render.Render, req *http.Request) {
 	c := appengine.NewContext(req)
 	res := make([]Product, 0, 0)
@@ -221,7 +233,7 @@ func CreateDeck(r render.Render, req *http.Request, formDeck FormDeck, session s
 		r.JSON(400, "") // TODO
 		return
 	}
-	user := GetUser(req, accessToken)
+	user := GetTwitterUser(req, accessToken)
 
 	deck := &Deck{}
 	ids := make([]string, 0, 0)
@@ -333,6 +345,9 @@ func CreateDeck(r render.Render, req *http.Request, formDeck FormDeck, session s
 	deck.CreatedAt = time.Now()
 	deck.UpdatedAt = time.Now()
 	key := datastore.NewKey(c, "Deck", "", 0, nil)
+	if formDeck.Id != 0 {
+		key = datastore.NewKey(c, "Deck", "", int64(formDeck.Id), nil)
+	}
 	key, err := datastore.Put(c, key, deck)
 	if err != nil {
 		c.Criticalf("%s", err)
@@ -366,8 +381,11 @@ func GetCard(r render.Render, params martini.Params, req *http.Request) {
 
 func GetUserDeckList(r render.Render, params martini.Params, req *http.Request) {
 	c := appengine.NewContext(req)
+	u, _ := url.Parse(req.URL.String())
+	query := u.Query()
 	q := datastore.NewQuery("Deck")
 	q = q.Filter("Owner=", params["userId"])
+	q = EqualQuery(q, query, "scope")
 	decks := make([]Deck, 0, 10)
 	keys, err := q.GetAll(c, &decks)
 	if err != nil {
@@ -381,17 +399,27 @@ func GetUserDeckList(r render.Render, params martini.Params, req *http.Request) 
 	r.JSON(200, decks)
 }
 
-func GetPublicDeckList(r render.Render, params martini.Params, req *http.Request) {
+func GetPublicDeckList(r render.Render, req *http.Request) {
 	c := appengine.NewContext(req)
+	u, _ := url.Parse(req.URL.String())
+	params := u.Query()
 	q := datastore.NewQuery("Deck")
 	q = q.Filter("Scope=", "PUBLIC")
-	q = q.Limit(ToInt(params["limit"]))
-	q = q.Offset(ToInt(params["offset"]))
+	q = EqualQuery(q, params, "white")
+	q = EqualQuery(q, params, "red")
+	q = EqualQuery(q, params, "blue")
+	q = EqualQuery(q, params, "green")
+	q = EqualQuery(q, params, "black")
+	q = q.Order("-CreatedAt")
+	if params["cards"] == nil {
+		q = q.Limit(ToInt(params["limit"][0]))
+		q = q.Offset(ToInt(params["offset"][0]))
+	}
 	decks := make([]Deck, 0, 10)
 	keys, err := q.GetAll(c, &decks)
 	if err != nil {
 		c.Criticalf(err.Error())
-		r.JSON(200, err)
+		r.JSON(400, err)
 		return
 	}
 	for i := range decks {
@@ -494,7 +522,7 @@ func DeleteDeck(r render.Render, req *http.Request, params martini.Params, sessi
 		r.JSON(400, "") // TODO
 		return
 	}
-	user := GetUser(req, accessToken)
+	user := GetTwitterUser(req, accessToken)
 	if params["owner"] != fmt.Sprintf("%v", user["screen_name"]) {
 		r.JSON(400, "削除に失敗しました")
 		return

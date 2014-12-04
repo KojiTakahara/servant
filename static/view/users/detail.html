@@ -1,0 +1,36 @@
+<div class="five columns" style="font-size:10px;">
+  <amazon></amazon>
+</div>
+<div class="eleven columns">
+  <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+  <div style="padding-top:15px;"></div>
+  <div class="container offset-by-two three columns row" ng-show="userInfo">
+    <a href="https://twitter.com/{{userInfo.screen_name}}" target="blank">
+      <img ng-src="{{userInfo.profile_image_url}}" class="circle" ng-show="user">
+    </a>
+  </div>
+  <div class="five columns row" ng-show="userInfo">
+    <h1>{{userInfo.name}}</h1>
+    <h4><a href="https://twitter.com/{{userInfo.screen_name}}" target="blank">@{{userInfo.screen_name}}</a></h4>
+  </div>
+  <table ng-hide="decks.length == 0">
+    <tr>
+      <th class="wx80" nowrap></th>
+      <th class="wx200" nowrap>デッキ名</th>
+      <th class="wx80" nowrap>更新日付</th>
+    </tr>
+    <tr ng-repeat="deck in decks">
+      <td class="align-c">
+        <span class="card white square" ng-show="deck.White"></span>
+        <span class="card red square" ng-show="deck.Red"></span>
+        <span class="card blue square" ng-show="deck.Blue"></span>
+        <span class="card green square" ng-show="deck.Green"></span>
+        <span class="card black square" ng-show="deck.Black"></span>
+      </td>
+      <td class="">
+        <a ng-href="/deck/{{deck.Id}}">{{deck.Title}}</a>
+      </td>
+      <td class="align-c">{{deck.UpdatedAt | date:'yy/MM/dd' }}</td>
+    </tr>
+  </table>
+</div>

@@ -12,7 +12,9 @@ import (
 func GetCardByKey(keyStr string, c appengine.Context) (card Card, err error) {
 	k := datastore.NewKey(c, "Card", keyStr, 0, nil)
 	e := Card{}
-	return e, datastore.Get(c, k, &e)
+	err = datastore.Get(c, k, &e)
+	e.KeyName = k.StringID()
+	return e, err
 }
 
 func EqualQuery(query *datastore.Query, values url.Values, s string) *datastore.Query {

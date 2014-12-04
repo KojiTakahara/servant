@@ -20,6 +20,10 @@ handlers:
   static_files: static/index.html
   upload: static/index.html
 
+- url: /search
+  static_files: static/index.html
+  upload: static/index.html
+
 - url: /deck
   static_files: static/index.html
   upload: static/index.html
@@ -29,6 +33,10 @@ handlers:
   upload: static/index.html
 
 - url: /users
+  static_files: static/index.html
+  upload: static/index.html
+
+- url: /users/(.*)
   static_files: static/index.html
   upload: static/index.html
 

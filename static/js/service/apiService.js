@@ -64,7 +64,7 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
       method: 'GET',
       url: '/api/search',
       params: params,
-      cache: true
+      cache: false
     }).success(function(data, status, headers, config) {
       for (var i in data) {
         var cost = [];
@@ -117,16 +117,18 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
   };
 
   /** 公開されているデッキを取得する **/
-  service.getPublicDecks = function(limit, offset) {
+  service.getPublicDecks = function(params) {
     var deferred = $q.defer();
+    params.white = (params.white === true) ? true : undefined;
+    params.red = (params.red === true) ? true : undefined;
+    params.blue = (params.blue === true) ? true : undefined;
+    params.green = (params.green === true) ? true : undefined;
+    params.black = (params.black === true) ? true : undefined;
     $http({
       method: 'GET',
       url: '/api/deck',
-      params: {
-        limit: limit,
-        offset: offset
-      },
-      cache: true
+      params: params,
+      cache: false
     }).success(function(data, status, headers, config) {
       deferred.resolve(data);
     }).error(function(data, status, headers, config) {
@@ -135,12 +137,22 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
     return deferred.promise;
   };
 
-  service.getDeckById = function(id) {
+  /**
+   * IDに一致するデッキを取得
+   * @param {long} id ID
+   * @param {string} scope スコープ
+   * @param {bool} mypage マイページ表示はtrue
+   */
+  service.getDeckById = function(id, scope, mypage) {
     var deferred = $q.defer();
     $http({
       method: 'GET',
       url: '/api/deck/' + id,
-      cache: true
+      params: {
+        scope: scope,
+        mypage: mypage
+      },
+      cache: false
     }).success(function(data, status, headers, config) {
       deferred.resolve(data);
     }).error(function(data, status, headers, config) {
@@ -149,12 +161,15 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
     return deferred.promise;
   };
 
-  service.getDeckByUserId = function(userId) {
+  service.getDeckByUserId = function(userId, scope) {
     var deferred = $q.defer();
     $http({
       method: 'GET',
       url: '/api/' + userId + '/deck',
-      cache: true
+      params: {
+        scope: scope,
+      },
+      cache: false
     }).success(function(data, status, headers, config) {
       deferred.resolve(data);
     }).error(function(data, status, headers, config) {
@@ -184,16 +199,11 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
         params.OriginalMains.push(params.UniqueMains[i]);
       }
     }
-    if (params.Id) {
-      // 更新
-    } else {
-      $http.post('/api/deck', params).success(function(data, status, headers, config) {
-        deferred.resolve(data);
-      }).error(function(data, status, headers, config) {
-        deferred.reject(data);
-      });
-    }
-
+    $http.post('/api/deck', params).success(function(data, status, headers, config) {
+      deferred.resolve(data);
+    }).error(function(data, status, headers, config) {
+      deferred.reject(data);
+    });
     return deferred.promise;
   };
 
@@ -203,6 +213,34 @@ service.factory('cardService', ['$http', '$q', function($http, $q) {
     $http({
       method: 'DELETE',
       url: '/api/deck/' + deck.Owner + '/' + deck.Id
+    }).success(function(data, status, headers, config) {
+      deferred.resolve(data);
+    }).error(function(data, status, headers, config) {
+      deferred.reject(data);
+    });
+    return deferred.promise;
+  };
+
+  service.getUser = function(userId) {
+    var deferred = $q.defer();
+    $http({
+      method: 'GET',
+      url: '/api/user/' + userId,
+      cache: true
+    }).success(function(data, status, headers, config) {
+      deferred.resolve(data);
+    }).error(function(data, status, headers, config) {
+      deferred.reject(data);
+    });
+    return deferred.promise;
+  };
+
+  service.getTwitterUser = function(userId) {
+    var deferred = $q.defer();
+    $http({
+      method: 'GET',
+      url: '/api/twitter/user/' + userId,
+      cache: true
     }).success(function(data, status, headers, config) {
       deferred.resolve(data);
     }).error(function(data, status, headers, config) {

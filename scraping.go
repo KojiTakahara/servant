@@ -28,7 +28,8 @@ func CreateCard(id int, req *http.Request) *Card {
 	resp, _ := client.Get(url)
 
 	doc, _ := goquery.NewDocumentFromResponse(resp)
-	if doc.Find(".card_detail_title p").Text() == "" || strings.TrimLeft(doc.Find(".card_img").Text(), "Illust ") == "" {
+	title := doc.Find(".card_detail_title p").Text()
+	if title == "" || title == "No Data" {
 		c.Warningf("data not found. id: %d", id)
 		return card
 	}
@@ -56,7 +57,7 @@ func CreateCard(id int, req *http.Request) *Card {
 					card.Image, _ = s.Attr("src")
 				})
 			})
-			card.Illus = strings.TrimLeft(s.Find(".card_img").Text(), "Illust ")
+			card.Illus = strings.TrimSpace(strings.TrimLeft(strings.TrimSpace(s.Find(".card_img").Text()), "Illust"))
 			count := 0
 			s.Find("tbody").Find("tr").Each(func(_ int, s *goquery.Selection) {
 				count++
@@ -160,7 +161,7 @@ func CreateCard(id int, req *http.Request) *Card {
 		})
 	})
 
-	cards := GetCardByNameAndId(card.Name, id, req)
+	cards := GetCardByNameKana(card.NameKana, id, req)
 	if len(cards) != 0 {
 		card.ParentKeyName = cards[0].KeyName
 	}
@@ -209,11 +210,20 @@ func ReplaceIcon(str string) string {
 	str = strings.Replace(str, "<img src=\"../images/icon_txt_null_01.png\" width=\"26\" height=\"23\" alt=\"無×1\"/>", "(無)", -1)
 	str = strings.Replace(str, "<img src=\"../images/icon_txt_null_02.png\" width=\"26\" height=\"23\" alt=\"無×3\"/>", "(無)(無)", -1)
 	str = strings.Replace(str, "<img src=\"../images/icon_txt_null_03.png\" width=\"26\" height=\"23\" alt=\"無×3\"/>", "(無)(無)(無)", -1)
-	str = strings.Replace(str, "<img src=\"../images/icon_txt_null_04.png\" width=\"26\" height=\"23\" alt=\"無×3\"/>", "(無)(無)(無)(無)", -1)
+	str = strings.Replace(str, "<img src=\"../images/icon_txt_null_04.png\" width=\"26\" height=\"23\" alt=\"無×4\"/>", "(無)(無)(無)(無)", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_null_01.png\" width=\"26\" height=\"23\" alt=\"無×1\"/>", "(無)", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_null_02.png\" width=\"26\" height=\"23\" alt=\"無×3\"/>", "(無)(無)", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_null_03.png\" width=\"26\" height=\"23\" alt=\"無×3\"/>", "(無)(無)(無)", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_null_04.png\" width=\"26\" height=\"23\" alt=\"無×4\"/>", "(無)(無)(無)(無)", -1)
 	str = strings.Replace(str, "<img src=\"../images/icon_txt_white_01.png\" width=\"26\" height=\"23\" alt=\"白×1\"/>", "(白)", -1)
-	str = strings.Replace(str, "<img src=\"../images/icon_txt_white_02.png\" width=\"26\" height=\"23\" alt=\"白×1\"/>", "(白)(白)", -1)
-	str = strings.Replace(str, "<img src=\"../images/icon_txt_white_03.png\" width=\"26\" height=\"23\" alt=\"白×1\"/>", "(白)(白)(白)", -1)
-	str = strings.Replace(str, "<img src=\"../images/icon_txt_white_04.png\" width=\"26\" height=\"23\" alt=\"白×1\"/>", "(白)(白)(白)(白)", -1)
+	str = strings.Replace(str, "<img src=\"../images/icon_txt_white_02.png\" width=\"26\" height=\"23\" alt=\"白×2\"/>", "(白)(白)", -1)
+	str = strings.Replace(str, "<img src=\"../images/icon_txt_white_03.png\" width=\"26\" height=\"23\" alt=\"白×3\"/>", "(白)(白)(白)", -1)
+	str = strings.Replace(str, "<img src=\"../images/icon_txt_white_04.png\" width=\"26\" height=\"23\" alt=\"白×4\"/>", "(白)(白)(白)(白)", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_white_00.png\" width=\"26\" height=\"23\" alt=\"白×0\"/>", "0", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_white_01.png\" width=\"26\" height=\"23\" alt=\"白×1\"/>", "(白)", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_white_02.png\" width=\"26\" height=\"23\" alt=\"白×2\"/>", "(白)(白)", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_white_03.png\" width=\"26\" height=\"23\" alt=\"白×3\"/>", "(白)(白)(白)", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_white_04.png\" width=\"26\" height=\"23\" alt=\"白×4\"/>", "(白)(白)(白)(白)", -1)
 	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_starting.png\" width=\"26\" height=\"23\" alt=\"起動能力\"/>", "[起]", -1)
 	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_regular.png\" width=\"26\" height=\"23\" alt=\"常\"/>", "[常]", -1)
 	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_regular.png\" width=\"26\" height=\"23\" alt=\"常時能力\"/>", "[常]", -1)
@@ -224,7 +234,15 @@ func ReplaceIcon(str string) string {
 	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_green.png\" width=\"26\" height=\"23\" alt=\"緑\"/>", "(緑)", -1)
 	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_black.png\" width=\"26\" height=\"23\" alt=\"黒\"/>", "(黒)", -1)
 	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_null.png\" width=\"26\" height=\"23\" alt=\"無\"/>", "(無)", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_white2.png\" width=\"26\" height=\"23\" alt=\"白\"/>", "(白)", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_red2.png\" width=\"26\" height=\"23\" alt=\"赤\"/>", "(赤)", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_blue2.png\" width=\"26\" height=\"23\" alt=\"青\"/>", "(青)", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_green2.png\" width=\"26\" height=\"23\" alt=\"緑\"/>", "(緑)", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_black2.png\" width=\"26\" height=\"23\" alt=\"黒\"/>", "(黒)", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_null2.png\" width=\"26\" height=\"23\" alt=\"無\"/>", "(無)", -1)
 	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_down.png\" width=\"26\" height=\"23\" alt=\"タップ\"/>", "(Ｔ)", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_down.png\" width=\"26\" height=\"23\" alt=\"ダウン\"/>", "(Ｔ)", -1)
+	str = strings.Replace(str, "<img src=\"/products/wixoss/images/icon_txt_grow.png\" alt=\"グロウ\"/>", "[グロウ]", -1)
 	return str
 }
 

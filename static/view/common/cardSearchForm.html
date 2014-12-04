@@ -1,23 +1,23 @@
 <div class="search-box" style="margin-top: 15px;">
-
+  {{form}}
   <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
     <input type="text" class="form-control search-query" ng-model="form.text" placeholder="キーワード">
   </div>
 
-  <div class="btn-group" style="padding-bottom: 0.3em;" ng-show="isDetail">
+  <div class="btn-group" style="padding-bottom: 0.3em;" ng-show="form.isDetail">
     <label class="btn btn-warning lrig" ng-model="form.category" btn-radio="'ルリグ'" uncheckable>ルリグ</label>
     <label class="btn btn-warning lrig" ng-model="form.category" btn-radio="'アーツ'" uncheckable>アーツ</label>
     <label class="btn btn-warning lrig" ng-model="form.category" btn-radio="'シグニ'" uncheckable>シグニ</label>
     <label class="btn btn-warning lrig" ng-model="form.category" btn-radio="'スペル'" uncheckable>スペル</label>
   </div>
-
-  <div ng-show="isDetail">
-    <select selectize ng-model="form.typeTemp" ng-options="t.Name for t in types">
-      <option value="" selected="selected">-- タイプ --</option>
-    </select>
+  <div ng-show="form.isDetail">
+    <ui-select ng-model="form.type">
+      <ui-select-match placeholder="タイプ">{{$select.selected.Name}}</ui-select-match>
+      <ui-select-choices repeat="type.Name as type in types | filter: $select.search">{{type.Name}}</ui-select-choices>
+    </ui-select>
   </div>
 
-  <div class="btn-group" style="padding-bottom: 0.3em;" ng-show="isDetail">
+  <div class="btn-group" style="padding-bottom: 0.3em;" ng-show="form.isDetail">
     <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'LR'" uncheckable>LR</label>
     <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'LC'" uncheckable>LC</label>
     <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'SR'" uncheckable>SR</label>
@@ -27,7 +27,7 @@
     <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'PR'" uncheckable>PR</label>
   </div>
 
-  <div class="btn-group" style="padding-bottom: 0.3em;" ng-show="isDetail">
+  <div class="btn-group" style="padding-bottom: 0.3em;" ng-show="form.isDetail">
     <label class="btn btn-warning color" ng-model="form.color" btn-radio="'white'" uncheckable>白</label>
     <label class="btn btn-warning color" ng-model="form.color" btn-radio="'red'" uncheckable>赤</label>
     <label class="btn btn-warning color" ng-model="form.color" btn-radio="'blue'" uncheckable>青</label>
@@ -36,126 +36,97 @@
     <label class="btn btn-warning color" ng-model="form.color" btn-radio="'colorless'" uncheckable>無</label>
   </div>
 
-  <div style="display: -webkit-box" ng-show="isDetail">
-    <select selectize class="mini" ng-model="form.levelFrom" ng-options="f for f in levels">
-      <option value="" selected="selected">-</option>
-    </select>
+  <div style="display: -webkit-box" ng-show="form.isDetail">
+    <simple-select ng-model="form.levelFrom" items="levels" style="width: 75px;"></simple-select>
     <div style="padding: 1em 0.5em;">
       ≦ レベル ≦
     </div>
-    <select selectize class="mini" ng-model="form.levelTo" ng-options="f for f in levels">
-      <option value="" selected="selected">-</option>
-    </select>
+    <simple-select ng-model="form.levelTo" items="levels" style="width: 75px;"></simple-select>
   </div>
-
-  <div style="display: -webkit-box" ng-show="isDetail">
-    <select selectize class="mini" ng-model="form.powerFrom" ng-options="f for f in powers">
-      <option value="" selected="selected">-</option>
-    </select>
+  <div style="display: -webkit-box" ng-show="form.isDetail">
+    <simple-select ng-model="form.powerFrom" items="powers" style="width: 75px;"></simple-select>
     <div style="padding: 1em 0.5em;">
       ≦ パワー ≦
     </div>
-    <select selectize class="mini" ng-model="form.powerTo" ng-options="f for f in powers">
-      <option value="" selected="selected">-</option>
-    </select>
+    <simple-select ng-model="form.powerTo" items="powers" style="width: 75px;"></simple-select>
   </div>
 
-  <div style="display: -webkit-box" ng-show="isDetail">
-    <select selectize class="mini" ng-model="form.costWhiteFrom" ng-options="f for f in costs">
-      <option value="" selected="selected">-</option>
-    </select>
+  <div style="display: -webkit-box" ng-show="form.isDetail">
+    <simple-select ng-model="form.costWhiteFrom" items="costs" style="width: 75px;"></simple-select>
     <div style="padding: 1em 0.5em;">
       ≦ 白 ≦
     </div>
-    <select selectize class="mini" ng-model="form.costWhiteTo" ng-options="f for f in costs">
-      <option value="" selected="selected">-</option>
-    </select>
+    <simple-select ng-model="form.costWhiteTo" items="costs" style="width: 75px;"></simple-select>
   </div>
-  <div style="display: -webkit-box" ng-show="isDetail">
-    <select selectize class="mini" ng-model="form.costRedFrom" ng-options="f for f in costs">
-      <option value="" selected="selected">-</option>
-    </select>
+  <div style="display: -webkit-box" ng-show="form.isDetail">
+    <simple-select ng-model="form.costRedFrom" items="costs" style="width: 75px;"></simple-select>
     <div style="padding: 1em 0.5em;">
       ≦ 赤 ≦
     </div>
-    <select selectize class="mini" ng-model="form.costRedTo" ng-options="f for f in costs">
-      <option value="" selected="selected">-</option>
-    </select>
+    <simple-select ng-model="form.costRedTo" items="costs" style="width: 75px;"></simple-select>
   </div>
 
-  <div style="display: -webkit-box" ng-show="isDetail">
-    <select selectize class="mini" ng-model="form.costBlueFrom" ng-options="f for f in costs">
-      <option value="" selected="selected">-</option>
-    </select>
+  <div style="display: -webkit-box" ng-show="form.isDetail">
+    <simple-select ng-model="form.costBlueFrom" items="costs" style="width: 75px;"></simple-select>
     <div style="padding: 1em 0.5em;">
       ≦ 青 ≦
     </div>
-    <select selectize class="mini" ng-model="form.costBlueTo" ng-options="f for f in costs">
-      <option value="" selected="selected">-</option>
-    </select>
+    <simple-select ng-model="form.costBlueTo" items="costs" style="width: 75px;"></simple-select>
   </div>
-  <div style="display: -webkit-box" ng-show="isDetail">
-    <select selectize class="mini" ng-model="form.costGreenFrom" ng-options="f for f in costs">
-      <option value="" selected="selected">-</option>
-    </select>
+  <div style="display: -webkit-box" ng-show="form.isDetail">
+    <simple-select ng-model="form.costGreenFrom" items="costs" style="width: 75px;"></simple-select>
     <div style="padding: 1em 0.5em;">
       ≦ 緑 ≦
     </div>
-    <select selectize class="mini" ng-model="form.costGreenTo" ng-options="f for f in costs">
-      <option value="" selected="selected">-</option>
-    </select>
+    <simple-select ng-model="form.costGreenTo" items="costs" style="width: 75px;"></simple-select>
   </div>
-  <div style="display: -webkit-box" ng-show="isDetail">
-    <select selectize class="mini" ng-model="form.costBlackFrom" ng-options="f for f in costs">
-      <option value="" selected="selected">-</option>
-    </select>
+  <div style="display: -webkit-box" ng-show="form.isDetail">
+    <simple-select ng-model="form.costBlackFrom" items="costs" style="width: 75px;"></simple-select>
     <div style="padding: 1em 0.5em;">
       ≦ 黒 ≦
     </div>
-    <select selectize class="mini" ng-model="form.costBlackTo" ng-options="f for f in costs">
-      <option value="" selected="selected">-</option>
-    </select>
+    <simple-select ng-model="form.costBlackTo" items="costs" style="width: 75px;"></simple-select>
   </div>
-  <div style="display: -webkit-box" ng-show="isDetail">
-    <select selectize class="mini" ng-model="form.costColorlessFrom" ng-options="f for f in costs">
-      <option value="" selected="selected">-</option>
-    </select>
+  <div style="display: -webkit-box" ng-show="form.isDetail">
+    <simple-select ng-model="form.costColorlessFrom" items="costs" style="width: 75px;"></simple-select>
     <div style="padding: 1em 0.5em;">
       ≦ 無 ≦
     </div>
-    <select selectize class="mini" ng-model="form.costColorlessTo" ng-options="f for f in costs">
-      <option value="" selected="selected">-</option>
-    </select>
+    <simple-select ng-model="form.costColorlessTo" items="costs" style="width: 75px;"></simple-select>
   </div>
 
-  <div ng-show="isDetail">
-    <select selectize ng-model="form.constraintTemp" ng-options="c.Type for c in constraints">
-      <option value="" selected="selected">-- 限定 --</option>
-    </select>
+  <div ng-show="form.isDetail">
+    <ui-select ng-model="form.constraint">
+      <ui-select-match placeholder="限定">{{$select.selected.Type}}</ui-select-match>
+      <ui-select-choices repeat="constraint.Type as constraint in constraints | filter: $select.search">{{constraint.Type}}</ui-select-choices>
+    </ui-select>
   </div>
-  <label ng-show="isDetail">
-    <input type="checkbox" ng-model="form.bursted">　バーストアイコン
+  <label ng-show="form.isDetail">
+    <checkbox ng-model="form.bursted" style="margin-bottom: 3px;"></checkbox>　バーストアイコン
   </label>
-  <div ng-show="isDetail">
-    <select selectize ng-model="form.expansionTemp" ng-options="p.Id for p in products" >
-      <option value="" selected="selected">-- エキスパンション --</option>
-    </select>
+  <br>
+  <div ng-show="form.isDetail">
+    <ui-select ng-model="form.expansion">
+      <ui-select-match placeholder="エキスパンション">{{$select.selected.Id}}</ui-select-match>
+      <ui-select-choices repeat="product.Id as product in products | filter: $select.search">{{product.Id}}</ui-select-choices>
+    </ui-select>
   </div>
-  <div ng-show="isDetail">
-    <select selectize ng-model="form.illusTemp" ng-options="i.Name for i in illustrators">
-      <option value="" selected="selected">-- イラストレーター --</option>
-    </select>
+  <div ng-show="form.isDetail">
+    <ui-select ng-model="form.illus" input-model="illustrators">
+      <ui-select-match placeholder="イラストレーター">{{$select.selected.Name}}</ui-select-match>
+      <ui-select-choices repeat="illustrator.Name as illustrator in illustrators | filter: $select.search">{{illustrator.Name}}</ui-select-choices>
+    </ui-select>
   </div>
-  <button type="button" class="btn btn-nomal btn-block" ng-click="reset();" ng-show="isDetail">リセット</button>
+  <button type="button" class="btn btn-default btn-block" ng-show="form.isDetail" ng-click="reset();">リセット</button>
   <button type="button" class="btn btn-info btn-block" ng-click="search();">検索</button>
 
   <div style="text-align: right; padding: 0.7em 1.5em 0.5em 1.5em;">
     <a href="javascript:void(0)" ng-click="toggleDetail()">
-      <span ng-hide="isDetail">
+      <span ng-hide="form.isDetail">
         詳細検索
       </span>
-      <span ng-show="isDetail">
-        簡単検索
+      <span ng-show="form.isDetail">
+        簡易検索
       </span>
     </a>
   </div>

@@ -9,6 +9,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"github.com/clbanning/mxj"
+	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
 	"github.com/martini-contrib/sessions"
 	"github.com/mrjones/oauth"
@@ -41,14 +42,14 @@ func LoginTwitter(w http.ResponseWriter, r *http.Request) {
 func LoginUser(r render.Render, req *http.Request, session sessions.Session) {
 	accessToken := GetAccessToken(session)
 	if accessToken != nil {
-		r.JSON(200, GetUser(req, accessToken))
+		r.JSON(200, GetTwitterUser(req, accessToken))
 		return
 	} else {
 		r.JSON(400, "")
 	}
 }
 
-func GetUser(req *http.Request, accessToken *oauth.AccessToken) mxj.Map {
+func GetTwitterUser(req *http.Request, accessToken *oauth.AccessToken) mxj.Map {
 	c := appengine.NewContext(req)
 	consumer.HttpClient = urlfetch.Client(c)
 	response, _ := consumer.Get("https://api.twitter.com/1.1/account/verify_credentials.json", nil, accessToken)
@@ -210,6 +211,17 @@ func (this *OAuth1) Request(method string, targetUrl string, params map[string]s
 	resultString = strings.Trim(resultString, "\x00")
 
 	return resultString
+}
+
+func GetTwitterUserById(r render.Render, params martini.Params, req *http.Request) {
+	c := appengine.NewContext(req)
+	oauth := NewOAuth1(c, TWITTER_CALLBACK_URL)
+	url := "https://api.twitter.com/1.1/users/show.json"
+	parameters := map[string]string{"screen_name": params["userId"]}
+	secret := []string{TWITTER_CONSUMER_SECRET, ""}
+	response := oauth.Request("GET", url, parameters, "", secret)
+	user, _ := mxj.NewMapJson([]byte(response))
+	r.JSON(200, user)
 }
 
 /**

@@ -1,20 +1,20 @@
 <div class='five columns' style="font-size:10px;">
   <input type="text" id="cursor" style="position: absolute; z-index: -1; border: 0;">
   <div style="margin-top: 15px;">
-      <table style="font-size:12px">
-        <tr>
-          <th style="width:50%">ルリグデッキ</th>
-          <td>{{countLrig()}}</td>
-        </tr>
-        <tr>
-          <th>メインデッキ</th>
-          <td>{{countMain()}}</td>
-        </tr>
-        <tr>
-          <th>ライフバースト</th>
-          <td>{{countLifeBurst()}}</td>
-        </tr>
-      </table>
+    <table style="font-size:12px">
+      <tr>
+        <th style="width:50%; border-bottom: 1px solid; background: #999999;">ルリグデッキ</th>
+        <td>{{countLrig()}}</td>
+      </tr>
+      <tr>
+        <th style="width:50%; border-bottom: 1px solid; background: #999999;">メインデッキ</th>
+        <td>{{countMain()}}</td>
+      </tr>
+      <tr>
+        <th style="width:50%; border-bottom: 1px solid; background: #999999;">ライフバースト</th>
+        <td>{{countLifeBurst()}}</td>
+      </tr>
+    </table>
     <tabset justified="true">
       <tab heading="ルリグ" deselect="deselect(lrigSearchText)" select="selectTab('lrig')">
         <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
@@ -50,62 +50,66 @@
   <!-- 白デッキ -->
   <table class="row">
     <tr>
-      <th class="lrig wx10 pointer" ng-click="sort('lrig', 'Color')" style="padding:0" nowrap></th>
+      <th class="lrig wx10" ng-click="sort('lrig', 'Color')" style="padding:0" nowrap></th>
       <th class="lrig wx10" nowrap></th>
       <th class="lrig wx20" nowrap></th>
-      <th class="lrig wx180 pointer" ng-click="sort('lrig', 'Name')" nowrap>カード名</th>
-      <th class="lrig wx20 pointer" ng-click="sort('lrig', 'Category')" nowrap>種類</th>
-      <th class="lrig wx20 pointer" ng-click="sort('lrig', 'Level')" nowrap>レベル</th>
+      <th class="lrig wx180" ng-click="sort('lrig', 'Name')" nowrap>カード名</th>
+      <th class="lrig wx20" ng-click="sort('lrig', 'Category')" nowrap>種類</th>
+      <th class="lrig wx20" ng-click="sort('lrig', 'Level')" nowrap>レベル</th>
     </tr>
-    <tr ng-repeat="card in deck.Lrig | orderBy:deck.lrigPredicate:deck.lrigReverse">
-      <td class="align-c card {{card.Color}}" style="padding:0"></td>
-      <td class="align-c ">
-        <i class="fa fa-trash fa-lg pointer" ng-click="removeCard(card.Category, $index);"></i>
-      </td>
-      <td class=" num-column">
-        <select selectize ng-model="card.Num" ng-options="f for f in cardNums"></select>
-      </td>
-      <td class="">
-        <a href="/card/{{card.Expansion}}/{{card.No}}" target="_blank">{{card.Name}}</a>
-      </td>
-      <td class="align-c ">{{card.Category}}</td>
-      <td class="align-c ">
-        <span ng-show="-1 < card.Level">{{card.Level}}</span>
-      </td>
-    </tr>
+    <tbody ui-sortable ng-model="deck.Lrig">
+      <tr ng-repeat="card in deck.Lrig | orderBy:deck.lrigPredicate:deck.lrigReverse">
+        <td class="align-c card {{card.Color}}" style="padding:0"></td>
+        <td class="align-c ">
+          <i class="fa fa-trash fa-lg pointer" ng-click="removeCard(card.Category, $index);"></i>
+        </td>
+        <td class="">
+          <simple-select ng-model="card.Num" items="cardNums" style="width:50px;"></simple-select>
+        </td>
+        <td class="">
+          <a href="/card/{{card.Expansion}}/{{card.No}}" target="_blank">{{card.Name}}</a>
+        </td>
+        <td class="align-c ">{{card.Category}}</td>
+        <td class="align-c ">
+          <span ng-show="-1 < card.Level">{{card.Level}}</span>
+        </td>
+      </tr>
+    </tbody>
   </table>
   <!-- 黒デッキ -->
   <table class="row">
     <tr>
-      <th class="main wx10 pointer" ng-click="sort('main', 'Color')" style="padding:0" nowrap></th>
+      <th class="main wx10" ng-click="sort('main', 'Color')" style="padding:0" nowrap></th>
       <th class="main wx10" nowrap></th>
       <th class="main wx20" nowrap></th>
-      <th class="main wx170 pointer" ng-click="sort('main', 'Name')" nowrap>カード名</th>
-      <th class="main wx20 pointer" ng-click="sort('main', 'Category')" nowrap>種類</th>
-      <th class="main wx20 pointer" ng-click="sort('main', 'Level')" nowrap>レベル</th>
-      <th class="main wx10 pointer" ng-click="sort('main', 'Burst')" nowrap>
+      <th class="main wx170" ng-click="sort('main', 'Name')" nowrap>カード名</th>
+      <th class="main wx20" ng-click="sort('main', 'Category')" nowrap>種類</th>
+      <th class="main wx20" ng-click="sort('main', 'Level')" nowrap>レベル</th>
+      <th class="main wx10" ng-click="sort('main', 'Burst')" nowrap>
         <i class="fa fa-asterisk fa-lg"></i>
       </th>
     </tr>
-    <tr ng-repeat="card in deck.Main | orderBy:deck.mainPredicate:deck.mainReverse">
-      <td class="align-c card {{card.Color}}" style="padding:0"></td>
-      <td class="align-c ">
-        <i class="fa fa-trash fa-lg pointer" ng-click="removeCard(card.Category, $index);"></i>
-      </td>
-      <td class=" num-column">
-        <select selectize ng-model="card.Num" ng-options="f for f in cardNums"></select>
-      </td>
-      <td class="">
-        <a href="/card/{{card.Expansion}}/{{card.No}}" target="_blank">{{card.Name}}</a>
-      </td>
-      <td class="align-c ">{{card.Category}}</td>
-      <td class="align-c ">
-        <span ng-show="-1 < card.Level">{{card.Level}}</span>
-      </td>
-      <td class="align-c ">
-        <i class="fa fa-asterisk fa-lg" ng-show="card.Burst"></i>
-      </td>
-    </tr>
+    <tbody ui-sortable ng-model="deck.Main">
+      <tr ng-repeat="card in deck.Main | orderBy:deck.mainPredicate:deck.mainReverse">
+        <td class="align-c card {{card.Color}}" style="padding:0"></td>
+        <td class="align-c ">
+          <i class="fa fa-trash fa-lg pointer" ng-click="removeCard(card.Category, $index);"></i>
+        </td>
+        <td class="">
+          <simple-select ng-model="card.Num" items="cardNums" style="width:50px;"></simple-select>
+        </td>
+        <td class="">
+          <a href="/card/{{card.Expansion}}/{{card.No}}" target="_blank">{{card.Name}}</a>
+        </td>
+        <td class="align-c ">{{card.Category}}</td>
+        <td class="align-c ">
+          <span ng-show="-1 < card.Level">{{card.Level}}</span>
+        </td>
+        <td class="align-c ">
+          <i class="fa fa-asterisk fa-lg" ng-show="card.Burst"></i>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <div style="text-align: center;">
@@ -123,7 +127,10 @@
     公開設定
   </div>
   <div class="eight columns row scope-column">
-    <select selectize ng-model="deck.Scope" ng-options="key as value for (key, value) in scopes"></select>
+    <ui-select ng-model="deck.Scope">
+      <ui-select-match placeholder="公開設定">{{$select.selected | scope}}</ui-select-match>
+      <ui-select-choices repeat="scope in scopes | filter: $select.search">{{scope | scope}}</ui-select-choices>
+    </ui-select>
   </div>
 
   <div class="two columns">

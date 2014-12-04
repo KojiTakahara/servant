@@ -1,7 +1,10 @@
 <nav ng-class="setHeaderClass()">
   <div class='container'>
     <div class='four columns logo'>
-      <a href='/'>◯◯◯◯◯</a>
+      <a href='/'>
+        <img src="/img/mackerel-logo.png" height="50">
+      </a>
+      beta
     </div>
     <div class='eight columns'>
       <div class="centerMenu">
@@ -34,7 +37,6 @@
       </a>
       <a href='/mypage' ng-show="user">
         <img ng-src="{{user.profile_image_url}}" class="circle" ng-show="user">
-        <div>{{user.name}}</div>
       </a>
     </div>
   </div>

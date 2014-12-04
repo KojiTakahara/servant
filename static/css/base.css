@@ -1,3 +1,7 @@
+/**
+ * logo color : #1f7fbf; #303030;
+ */
+
 body {
   margin: 0;
   padding: 0;
@@ -105,6 +109,10 @@ table {
   font-size: 14px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
+table.detail td {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
 tr {
   background: #f6f6f6;
 }
@@ -112,15 +120,9 @@ tr:nth-child(odd) {
   background: #e9e9e9;
 }
 th {
-  /**
-    background: #e9e9e9;
-    background: #ea6153;
-    background: #27ae60;
-    background: #2980b9;
-  */
   padding: 6px 10px;
   color: #ffffff;
-  background: #ea6153;
+  background: #2980b9;
   border-style: solid;
   border-color: #ffffff;
   border-width: 0px 1px;
@@ -148,11 +150,6 @@ td:last-child, td:first-child {
   width: 94%;
   float: right;
 }
-.num-column > .selectize-control {
-  display: flex;
-  padding-bottom: 0px;
-}
-
 .pointer {
   cursor: pointer;
 }
@@ -192,6 +189,12 @@ td:last-child, td:first-child {
 }
 .wx90 {
   width: 90px;
+}
+.wx80 {
+  width: 80px;
+}
+.wx60 {
+  width: 60px;
 }
 .wx50 {
   width: 50px;

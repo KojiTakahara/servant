@@ -1,0 +1,13 @@
+<div class='five columns' style="font-size:10px;">
+  <cardsearchform></cardsearchform>
+  <amazon></amazon>
+</div>
+<div class='eleven columns'>
+  <div ng-if="cardList == undefined || cardList.length == 0" class="align-c" style="margin-top: 15px;">該当する検索結果がありません。</div>
+  <div class="panel" ng-repeat="card in cardList | filter:textSearch">
+    <cardlist card="card"></cardlist>
+  </div>
+  <!--
+  <dir-pagination-controls pagination-id="cust"></dir-pagination-controls>
+  -->
+</div>

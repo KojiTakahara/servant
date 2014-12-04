@@ -30,6 +30,7 @@ func init() {
 	})
 	m.Get("/api/twitter/login", LoginTwitter)
 	m.Get("/api/twitter/callback", CallbackTwitter)
+	m.Get("/api/twitter/user/:userId", GetTwitterUserById)
 	m.Get("/api/loginUser", LoginUser)
 	m.Get("/api/deck", GetPublicDeckList)
 	m.Post("/api/deck", binding.Json(FormDeck{}), CreateDeck)
@@ -37,6 +38,7 @@ func init() {
 	m.Get("/api/deck/:id", GetDeck)
 	m.Get("/api/card/:expansion", GetCardByExpansion)
 	m.Get("/api/card/:expansion/:no", GetCard)
+	m.Get("/api/user/:userId", GetUser)
 	m.Get("/api/:userId/deck", GetUserDeckList)
 	m.Post("/api/setTestSession", SetTestSettion)
 	m.Get("/api/card/hoge/:name/:id", func(r render.Render, params martini.Params, req *http.Request) {

@@ -175,7 +175,7 @@ blockquote {
 }
 .btn-default {
   color: #434a54;
-  border-color: #aab2bd !important;
+  border-color: #d0d0d0 !important;
 }
 .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active {
   background-color: #ccd1d9;

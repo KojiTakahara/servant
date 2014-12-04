@@ -5,7 +5,7 @@ var app = angular.module('mypageCtrl', [
   'deckService',
 ]);
 
-app.controller('editDeckController', ['$scope', '$stateParams', '$location', 'cardService', 'deckService', function($scope, $stateParams, $location, cardService, deckService) {
+app.controller('editDeckController', ['$scope', '$stateParams', '$location', '$filter', '$anchorScroll', 'cardService', 'deckService', function($scope, $stateParams, $location, $filter, $anchorScroll, cardService, deckService) {
   $scope.alerts = [];
   $scope.cardNums = [1, 2, 3, 4];
   $scope.deck = {
@@ -94,33 +94,38 @@ app.controller('editDeckController', ['$scope', '$stateParams', '$location', 'ca
     if (0 < $scope.alerts.length) {
       return;
     }
+    $scope.deck.Main = $filter('orderBy')($scope.deck.Main, $scope.deck.mainPredicate, $scope.deck.mainReverse);
+    $scope.deck.Lrig = $filter('orderBy')($scope.deck.Lrig, $scope.deck.lrigPredicate, $scope.deck.lrigReverse);
+    $anchorScroll.yOffset = 0;
     cardService.saveDeck($scope.deck).then(function(res) {
       $scope.alerts.push({ type: 'success', msg: '保存しました。' });
+      $anchorScroll();
     }, function(err) {
       $scope.alerts.push({ type: 'danger', msg: '保存できませんでした。' });
+      $anchorScroll();
     });
   };
 
   $scope.sort = function(list, predicate) {
-    if (list === 'lrig') {
-      $scope.deck.lrigPredicate = predicate;
-      $scope.deck.lrigReverse = !$scope.deck.lrigReverse;
-    }
-    if (list === 'main') {
-      $scope.deck.mainPredicate = predicate;
-      $scope.deck.mainReverse = !$scope.deck.mainReverse;
-    }
+    // if (list === 'lrig') {
+    //   $scope.deck.lrigPredicate = predicate;
+    //   $scope.deck.lrigReverse = !$scope.deck.lrigReverse;
+    // }
+    // if (list === 'main') {
+    //   $scope.deck.mainPredicate = predicate;
+    //   $scope.deck.mainReverse = !$scope.deck.mainReverse;
+    // }
   };
 
   $scope.closeAlert = function(index) {
     $scope.alerts.splice(index, 1);
   };
 
-  $scope.scopes = {
-    'PRIVATE': '非公開',
-    'SELECT': '限定公開',
-    'PUBLIC': '公開',
-  };
+  $scope.scopes = [
+    'PRIVATE',
+    // 'SELECT',
+    'PUBLIC'
+  ];
 
   $scope.deselect = function(text) {
     $scope.searchText = text;
@@ -151,12 +156,12 @@ app.controller('editDeckController', ['$scope', '$stateParams', '$location', 'ca
       }
       $scope.spellSearchText = $scope.searchText;
     }
-  }; 
+  };
   $scope.selectTab('lrig');
 
 }]);
 
-app.controller('mypageController', ['$scope', '$location', 'cardService', function($scope, $location, cardService) {
+app.controller('mypageController', ['$scope', '$location', '$window', 'cardService', function($scope, $location, $window, cardService) {
   $scope.decks = [];
 
   $scope.editDeck = function() {
@@ -165,12 +170,13 @@ app.controller('mypageController', ['$scope', '$location', 'cardService', functi
 
   $scope.deleteDeck = function(index) {
     var deck = $scope.decks[index];
-    cardService.deleteDeck(deck).then(function(res) {
-      alert('削除しました');
-    }, function(err) {
-      console.log(err);
-      alert('削除に失敗しました');
-    });
+    if ($window.confirm(deck.Title + 'を削除しますか？')) {
+      cardService.deleteDeck(deck).then(function(res) {
+        alert('削除しました');
+      }, function(err) {
+        alert('削除に失敗しました');
+      });
+    }
   };
 
   $scope.createDeck = function() {
