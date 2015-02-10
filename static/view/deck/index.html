@@ -4,14 +4,22 @@
 <div class='eleven columns'>
   <div style="padding-top:15px;"></div>
   <div class="search-box">
-    <label><checkbox ng-model="deckForm.white"></checkbox> 白</label>
-    <label><checkbox ng-model="deckForm.red"></checkbox> 赤</label>
-    <label><checkbox ng-model="deckForm.blue"></checkbox> 青</label>
-    <label><checkbox ng-model="deckForm.green"></checkbox> 緑</label>
-    <label><checkbox ng-model="deckForm.black"></checkbox> 黒</label>
+    ルリグデッキ
+    <label><checkbox ng-model="deckForm.white" class="btn-warning"></checkbox></label>
+    <label><checkbox ng-model="deckForm.red" class="btn-danger"></checkbox></label>
+    <label><checkbox ng-model="deckForm.blue" class="btn-primary"></checkbox></label>
+    <label><checkbox ng-model="deckForm.green" class="btn-success"></checkbox></label>
+    <label><checkbox ng-model="deckForm.black" class="btn-default"></checkbox></label>
+    <hr>
+    メインデッキ
+    <label><checkbox ng-model="deckForm.white" class="btn-warning"></checkbox></label>
+    <label><checkbox ng-model="deckForm.red" class="btn-danger"></checkbox></label>
+    <label><checkbox ng-model="deckForm.blue" class="btn-primary"></checkbox></label>
+    <label><checkbox ng-model="deckForm.green" class="btn-success"></checkbox></label>
+    <label><checkbox ng-model="deckForm.black" class="btn-default"></checkbox></label>
     <hr>
     <button class="btn btn-nomal" ng-click="deckFormReset()">リセット</button>
-    <button class="btn btn-success" ng-click="deckSearch()">検索</button>
+    <button class="btn btn-info" ng-click="deckSearch()">検索</button>
   </div>
   <div style="padding-top:15px;"></div>
   <table ng-hide="decks.length == 0">
