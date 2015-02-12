@@ -247,36 +247,36 @@ func CreateDeck(r render.Render, req *http.Request, formDeck FormDeck, session s
 
 	for _, lrig := range formDeck.OriginalLrigs {
 		if lrig.Color == "white" {
-			deck.White = true
+			deck.LrigWhite = true
 		}
 		if lrig.Color == "red" {
-			deck.Red = true
+			deck.LrigRed = true
 		}
 		if lrig.Color == "blue" {
-			deck.Blue = true
+			deck.LrigBlue = true
 		}
 		if lrig.Color == "green" {
-			deck.Green = true
+			deck.LrigGreen = true
 		}
 		if lrig.Color == "black" {
-			deck.Black = true
+			deck.LrigBlack = true
 		}
 	}
 	for _, main := range formDeck.OriginalMains {
 		if main.Color == "white" {
-			deck.White = true
+			deck.MainWhite = true
 		}
 		if main.Color == "red" {
-			deck.Red = true
+			deck.MainRed = true
 		}
 		if main.Color == "blue" {
-			deck.Blue = true
+			deck.MainBlue = true
 		}
 		if main.Color == "green" {
-			deck.Green = true
+			deck.MainGreen = true
 		}
 		if main.Color == "black" {
-			deck.Black = true
+			deck.MainBlack = true
 		}
 	}
 	deck.Lrig01 = formDeck.OriginalLrigs[0].KeyName
@@ -336,10 +336,7 @@ func CreateDeck(r render.Render, req *http.Request, formDeck FormDeck, session s
 	deck.Description = formDeck.Description
 	deck.Scope = formDeck.Scope
 
-	deck.Use0500 = CreateUseDeckStr(ids, 1, 500)
-	deck.Use1000 = CreateUseDeckStr(ids, 501, 1000)
-	deck.Use1500 = CreateUseDeckStr(ids, 1001, 1500)
-	deck.Use2000 = CreateUseDeckStr(ids, 1501, 2000)
+	deck.UseCard = CreateUseDeckStr(ids, 1, 1500)
 
 	deck.Owner = fmt.Sprintf("%v", user["screen_name"])
 	deck.CreatedAt = time.Now()
@@ -405,11 +402,16 @@ func GetPublicDeckList(r render.Render, req *http.Request) {
 	params := u.Query()
 	q := datastore.NewQuery("Deck")
 	q = q.Filter("Scope=", "PUBLIC")
-	q = EqualQuery(q, params, "white")
-	q = EqualQuery(q, params, "red")
-	q = EqualQuery(q, params, "blue")
-	q = EqualQuery(q, params, "green")
-	q = EqualQuery(q, params, "black")
+	q = EqualQuery(q, params, "lrigWhite")
+	q = EqualQuery(q, params, "lrigRed")
+	q = EqualQuery(q, params, "lrigBlue")
+	q = EqualQuery(q, params, "lrigGreen")
+	q = EqualQuery(q, params, "lrigBlack")
+	q = EqualQuery(q, params, "mainWhite")
+	q = EqualQuery(q, params, "mainRed")
+	q = EqualQuery(q, params, "mainBlue")
+	q = EqualQuery(q, params, "mainGreen")
+	q = EqualQuery(q, params, "mainBlack")
 	q = q.Order("-CreatedAt")
 	if params["cards"] == nil {
 		q = q.Limit(ToInt(params["limit"][0]))
@@ -442,11 +444,16 @@ func GetDeck(r render.Render, params martini.Params, req *http.Request) {
 	viewDeck.Title = deck.Title
 	viewDeck.Introduction = deck.Introduction
 	viewDeck.Description = deck.Description
-	viewDeck.White = deck.White
-	viewDeck.Red = deck.Red
-	viewDeck.Blue = deck.Blue
-	viewDeck.Green = deck.Green
-	viewDeck.Black = deck.Black
+	viewDeck.LrigWhite = deck.LrigWhite
+	viewDeck.LrigRed = deck.LrigRed
+	viewDeck.LrigBlue = deck.LrigBlue
+	viewDeck.LrigGreen = deck.LrigGreen
+	viewDeck.LrigBlack = deck.LrigBlack
+	viewDeck.MainWhite = deck.MainWhite
+	viewDeck.MainRed = deck.MainRed
+	viewDeck.MainBlue = deck.MainBlue
+	viewDeck.MainGreen = deck.MainGreen
+	viewDeck.MainBlack = deck.MainBlack
 	lrigs := make(map[string]int)
 	addUnique(lrigs, deck.Lrig01)
 	addUnique(lrigs, deck.Lrig02)

@@ -88,11 +88,16 @@ type Deck struct {
 	Title        string
 	Introduction string `datastore:",noindex"`
 	Description  string `datastore:",noindex"`
-	White        bool
-	Red          bool
-	Blue         bool
-	Green        bool
-	Black        bool
+	LrigWhite    bool
+	LrigRed      bool
+	LrigBlue     bool
+	LrigGreen    bool
+	LrigBlack    bool
+	MainWhite    bool
+	MainRed      bool
+	MainBlue     bool
+	MainGreen    bool
+	MainBlack    bool
 	Lrig01       string
 	Lrig02       string
 	Lrig03       string
@@ -144,10 +149,7 @@ type Deck struct {
 	Main39       string
 	Main40       string
 	Scope        string
-	Use0500      string
-	Use1000      string
-	Use1500      string
-	Use2000      string
+	UseCard      string `datastore:",noindex"`
 	CreatedAt    time.Time
 	UpdatedAt    time.Time
 }
@@ -158,11 +160,16 @@ type ViewDeck struct {
 	Title        string
 	Introduction string
 	Description  string
-	White        bool
-	Red          bool
-	Blue         bool
-	Green        bool
-	Black        bool
+	LrigWhite    bool
+	LrigRed      bool
+	LrigBlue     bool
+	LrigGreen    bool
+	LrigBlack    bool
+	MainWhite    bool
+	MainRed      bool
+	MainBlue     bool
+	MainGreen    bool
+	MainBlack    bool
 	Lrig         []Card
 	Main         []Card
 	Scope        string
