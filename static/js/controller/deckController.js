@@ -17,11 +17,16 @@ app.controller('deckController', ['$scope', '$timeout', 'cardService', function(
     search();
   };
   $scope.deckFormReset = function() {
-    $scope.deckForm.white = undefined;
-    $scope.deckForm.red = undefined;
-    $scope.deckForm.blue = undefined;
-    $scope.deckForm.green = undefined;
-    $scope.deckForm.black = undefined;
+    $scope.deckForm.lrigWhite = undefined;
+    $scope.deckForm.lrigRed = undefined;
+    $scope.deckForm.lrigBlue = undefined;
+    $scope.deckForm.lrigGreen = undefined;
+    $scope.deckForm.lrigBlack = undefined;
+    $scope.deckForm.mainWhite = undefined;
+    $scope.deckForm.mainRed = undefined;
+    $scope.deckForm.mainBlue = undefined;
+    $scope.deckForm.mainGreen = undefined;
+    $scope.deckForm.mainBlack = undefined;
   };
   $scope.deckSearch = function() {
     $scope.deckForm.offset = 0;
@@ -30,7 +35,18 @@ app.controller('deckController', ['$scope', '$timeout', 'cardService', function(
     search();
   };
   var search = function() {
-    cardService.getPublicDecks($scope.deckForm).then(function(data) {
+    var form = angular.copy($scope.deckForm);
+    form.lrigWhite = form.lrigWhite === false ? undefined : form.lrigWhite;
+    form.lrigRed = form.lrigRed === false ? undefined : form.lrigRed;
+    form.lrigBlue = form.lrigBlue === false ? undefined : form.lrigBlue;
+    form.lrigGreen = form.lrigGreen === false ? undefined : form.lrigGreen;
+    form.lrigBlack = form.lrigBlack === false ? undefined : form.lrigBlack;
+    form.mainWhite = form.mainWhite === false ? undefined : form.mainWhite;
+    form.mainRed = form.mainRed === false ? undefined : form.mainRed;
+    form.mainBlue = form.mainBlue === false ? undefined : form.mainBlue;
+    form.mainGreen = form.mainGreen === false ? undefined : form.mainGreen;
+    form.mainBlack = form.mainBlack === false ? undefined : form.mainBlack;
+    cardService.getPublicDecks(form).then(function(data) {
       if (data.length !== 0) {
         $scope.decks = $scope.decks.concat(data);
       } else {

@@ -144,6 +144,101 @@ indexes:
 
 - kind: Deck
   properties:
+  - name: LrigBlack
+  - name: LrigBlue
+  - name: LrigGreen
+  - name: LrigRed
+  - name: LrigWhite
+  - name: MainBlack
+  - name: MainBlue
+  - name: MainGreen
+  - name: MainRed
+  - name: MainWhite
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: LrigBlack
+  - name: LrigWhite
+  - name: MainBlack
+  - name: MainWhite
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: LrigBlack
+  - name: LrigWhite
+  - name: MainWhite
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: LrigBlack
+  - name: LrigWhite
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: LrigBlack
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: LrigRed
+  - name: LrigWhite
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: LrigWhite
+  - name: MainRed
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: LrigWhite
+  - name: MainWhite
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: LrigWhite
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: MainBlack
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: MainBlue
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
   - name: Red
   - name: Scope
   - name: CreatedAt

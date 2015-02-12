@@ -954,6 +954,45 @@ fieldset[disabled] .btn-link:focus {
   margin-top: 5px;
 }
 
+/*** add button type ***/
+.btn-dark {
+  color: #fff;
+}
+.btn-dark:hover,
+.btn-dark:focus,
+.btn-dark:active,
+.btn-dark.active,
+.open > .dropdown-toggle.btn-dark {
+  color: #fff;
+}
+.btn-dark, .btn-dark:active, .btn-dark.active, .btn-dark.disabled, .btn-dark[disabled] {
+  background-color: #7D42F6;
+  border-color: #7D42F6;
+}
+.btn-dark:hover, .btn-dark:focus {
+  background-color: #A054FF;
+  border-color: #A054FF;
+}
+.open .dropdown-toggle.btn-dark {
+  background-color: #A054FF;
+  border-color: #A054FF;
+}
+.btn-group .btn-dark, .btn-group .btn-dark:focus, .btn-group .btn-dark:active, .btn-group .btn-dark.active {
+  border-left-color: #790BEF;
+}
+.btn-group .btn:first-child, .btn-group .btn-primary:first-child, .btn-group .btn-success:first-child, .btn-group .btn-dark:first-child, .btn-group .btn-danger:first-child, .btn-group .btn-info:first-child {
+  border-left-color: transparent;
+}
+.btn-group-vertical .btn-dark, .btn-group-vertical .btn-dark:focus, .btn-group-vertical .btn-dark:active, .btn-group-vertical .btn-dark.active, .btn-group-vertical .btn-group .btn-dark {
+  border-top-color: #790BEF !important;
+}
+.btn-group-vertical .btn:not(.btn-default):first-child, .btn-group-vertical .btn-primary:first-child, .btn-group-vertical .btn-success:first-child, .btn-group-vertical .btn-dark:first-child, .btn-group-vertical .btn-danger:first-child, .btn-group-vertical .btn-info:first-child {
+  border-top: none;
+}
+.input-group-btn .btn + .btn.btn-dark {
+  border-color: #7620F4;
+}
+
 /** short card **/
 .close-card {
   border-radius: 4px;

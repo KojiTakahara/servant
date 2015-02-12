@@ -4,19 +4,22 @@
 <div class='eleven columns'>
   <div style="padding-top:15px;"></div>
   <div class="search-box">
-    ルリグデッキ
-    <label><checkbox ng-model="deckForm.lrigWhite" class="btn-warning"></checkbox></label>
-    <label><checkbox ng-model="deckForm.lrigRed" class="btn-danger"></checkbox></label>
-    <label><checkbox ng-model="deckForm.lrigBlue" class="btn-primary"></checkbox></label>
-    <label><checkbox ng-model="deckForm.lrigGreen" class="btn-success"></checkbox></label>
-    <label><checkbox ng-model="deckForm.lrigBlack" class="btn-default"></checkbox></label>
-    <hr>
-    メインデッキ
-    <label><checkbox ng-model="deckForm.mainWhite" class="btn-warning"></checkbox></label>
-    <label><checkbox ng-model="deckForm.mainRed" class="btn-danger"></checkbox></label>
-    <label><checkbox ng-model="deckForm.mainBlue" class="btn-primary"></checkbox></label>
-    <label><checkbox ng-model="deckForm.mainGreen" class="btn-success"></checkbox></label>
-    <label><checkbox ng-model="deckForm.mainBlack" class="btn-default"></checkbox></label>
+    <div>
+      <span style="font-size:11px;">ルリグデッキ</span><br>
+      <label><checkbox ng-model="deckForm.lrigWhite" class="btn-warning"></checkbox></label>
+      <label><checkbox ng-model="deckForm.lrigRed" class="btn-danger"></checkbox></label>
+      <label><checkbox ng-model="deckForm.lrigBlue" class="btn-primary"></checkbox></label>
+      <label><checkbox ng-model="deckForm.lrigGreen" class="btn-success"></checkbox></label>
+      <label><checkbox ng-model="deckForm.lrigBlack" class="btn-dark"></checkbox></label>
+    </div>
+    <div>
+      <span style="font-size:11px;">メインデッキ</span><br>
+      <label><checkbox ng-model="deckForm.mainWhite" class="btn-warning"></checkbox></label>
+      <label><checkbox ng-model="deckForm.mainRed" class="btn-danger"></checkbox></label>
+      <label><checkbox ng-model="deckForm.mainBlue" class="btn-primary"></checkbox></label>
+      <label><checkbox ng-model="deckForm.mainGreen" class="btn-success"></checkbox></label>
+      <label><checkbox ng-model="deckForm.mainBlack" class="btn-dark"></checkbox></label>
+    </div>
     <hr>
     <button class="btn btn-nomal" ng-click="deckFormReset()">リセット</button>
     <button class="btn btn-info" ng-click="deckSearch()">検索</button>
@@ -30,15 +33,24 @@
       <th class="wx80" nowrap>更新日付</th>
     </tr>
     <tr ng-repeat="deck in decks">
-      <td class="align-c">
+      <td class="align-c" style="padding-top: 10px;">
         <span class="card white square" ng-show="deck.LrigWhite"></span>
         <span class="card red square" ng-show="deck.LrigRed"></span>
         <span class="card blue square" ng-show="deck.LrigBlue"></span>
         <span class="card green square" ng-show="deck.LrigGreen"></span>
         <span class="card black square" ng-show="deck.LrigBlack"></span>
+        <div style="padding-bottom:3px"><br></div>
+        <span class="card white square" ng-show="deck.MainWhite"></span>
+        <span class="card red square" ng-show="deck.MainRed"></span>
+        <span class="card blue square" ng-show="deck.MainBlue"></span>
+        <span class="card green square" ng-show="deck.MainGreen"></span>
+        <span class="card black square" ng-show="deck.MainBlack"></span>
       </td>
       <td class="">
-        <a ng-href="/deck/{{deck.Id}}">{{deck.Title}}</a>
+        <a ng-href="/deck/{{deck.Id}}">
+          {{deck.Title}}<br>
+          <span style="font-size:10px;">{{deck.Introduction}}</span>
+        </a>
       </td>
       <td class="align-c">
         <a href="/users/{{deck.Owner}}">{{deck.Owner}}</a>
