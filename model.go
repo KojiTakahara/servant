@@ -154,12 +154,11 @@ type Deck struct {
 	UpdatedAt    time.Time
 }
 
-type ViewDeck struct {
+type SearchDeck struct {
 	Id           int64
 	Owner        string
 	Title        string
-	Introduction string
-	Description  string
+	Introduction string `datastore:",noindex"`
 	LrigWhite    bool
 	LrigRed      bool
 	LrigBlue     bool
@@ -170,9 +169,29 @@ type ViewDeck struct {
 	MainBlue     bool
 	MainGreen    bool
 	MainBlack    bool
-	Lrig         []Card
-	Main         []Card
 	Scope        string
-	CreatedAt    time.Time
 	UpdatedAt    time.Time
+}
+
+type ViewDeck struct {
+	Id           int64
+	Owner        string
+	Title        string
+	Introduction string
+	Description  string
+	// LrigWhite    bool
+	// LrigRed      bool
+	// LrigBlue     bool
+	// LrigGreen    bool
+	// LrigBlack    bool
+	// MainWhite    bool
+	// MainRed      bool
+	// MainBlue     bool
+	// MainGreen    bool
+	// MainBlack    bool
+	Lrig      []Card
+	Main      []Card
+	Scope     string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }

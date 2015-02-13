@@ -188,6 +188,33 @@ indexes:
 - kind: Deck
   properties:
   - name: LrigBlack
+  - name: MainBlue
+  - name: MainRed
+  - name: MainWhite
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: LrigBlack
+  - name: MainBlue
+  - name: MainWhite
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: LrigBlack
+  - name: MainBlue
+  - name: Scope
+  - name: CreatedAt
+    direction: desc
+
+- kind: Deck
+  properties:
+  - name: LrigBlack
   - name: Scope
   - name: CreatedAt
     direction: desc

@@ -390,8 +390,10 @@ func GetUserDeckList(r render.Render, params martini.Params, req *http.Request) 
 		r.JSON(200, err)
 		return
 	}
+	searchDecks := make([]SearchDeck, 0, len(decks))
 	for i := range decks {
 		decks[i].Id = keys[i].IntID()
+		searchDecks = append(searchDecks, convertSearchDeck(decks[i]))
 	}
 	r.JSON(200, decks)
 }
@@ -424,10 +426,33 @@ func GetPublicDeckList(r render.Render, req *http.Request) {
 		r.JSON(400, err)
 		return
 	}
+	searchDecks := make([]SearchDeck, 0, len(decks))
 	for i := range decks {
 		decks[i].Id = keys[i].IntID()
+		searchDecks = append(searchDecks, convertSearchDeck(decks[i]))
 	}
-	r.JSON(200, decks)
+	r.JSON(200, searchDecks)
+}
+
+func convertSearchDeck(d Deck) SearchDeck {
+	s := SearchDeck{}
+	s.Id = d.Id
+	s.Owner = d.Owner
+	s.Title = d.Title
+	s.Introduction = d.Introduction
+	s.LrigWhite = d.LrigWhite
+	s.LrigRed = d.LrigRed
+	s.LrigBlue = d.LrigBlue
+	s.LrigGreen = d.LrigGreen
+	s.LrigBlack = d.LrigBlack
+	s.MainWhite = d.MainWhite
+	s.MainRed = d.MainRed
+	s.MainBlue = d.MainBlue
+	s.MainGreen = d.MainGreen
+	s.MainBlack = d.MainBlack
+	s.Scope = d.Scope
+	s.UpdatedAt = d.UpdatedAt
+	return s
 }
 
 func GetDeck(r render.Render, params martini.Params, req *http.Request) {
@@ -444,16 +469,16 @@ func GetDeck(r render.Render, params martini.Params, req *http.Request) {
 	viewDeck.Title = deck.Title
 	viewDeck.Introduction = deck.Introduction
 	viewDeck.Description = deck.Description
-	viewDeck.LrigWhite = deck.LrigWhite
-	viewDeck.LrigRed = deck.LrigRed
-	viewDeck.LrigBlue = deck.LrigBlue
-	viewDeck.LrigGreen = deck.LrigGreen
-	viewDeck.LrigBlack = deck.LrigBlack
-	viewDeck.MainWhite = deck.MainWhite
-	viewDeck.MainRed = deck.MainRed
-	viewDeck.MainBlue = deck.MainBlue
-	viewDeck.MainGreen = deck.MainGreen
-	viewDeck.MainBlack = deck.MainBlack
+	// viewDeck.LrigWhite = deck.LrigWhite
+	// viewDeck.LrigRed = deck.LrigRed
+	// viewDeck.LrigBlue = deck.LrigBlue
+	// viewDeck.LrigGreen = deck.LrigGreen
+	// viewDeck.LrigBlack = deck.LrigBlack
+	// viewDeck.MainWhite = deck.MainWhite
+	// viewDeck.MainRed = deck.MainRed
+	// viewDeck.MainBlue = deck.MainBlue
+	// viewDeck.MainGreen = deck.MainGreen
+	// viewDeck.MainBlack = deck.MainBlack
 	lrigs := make(map[string]int)
 	viewDeck.Lrig = addUnique(viewDeck.Lrig, lrigs, deck.Lrig01, c)
 	viewDeck.Lrig = addUnique(viewDeck.Lrig, lrigs, deck.Lrig02, c)
