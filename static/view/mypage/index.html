@@ -15,15 +15,24 @@
       <th class="wx20" nowrap></th>
     </tr>
     <tr ng-repeat="deck in decks">
-      <td class="align-c">
-        <span class="card white square" ng-show="deck.White"></span>
-        <span class="card red square" ng-show="deck.Red"></span>
-        <span class="card blue square" ng-show="deck.Blue"></span>
-        <span class="card green square" ng-show="deck.Green"></span>
-        <span class="card black square" ng-show="deck.Black"></span>
+      <td class="align-c" style="padding-top: 10px;">
+        <span class="card white square" ng-show="deck.LrigWhite"></span>
+        <span class="card red square" ng-show="deck.LrigRed"></span>
+        <span class="card blue square" ng-show="deck.LrigBlue"></span>
+        <span class="card green square" ng-show="deck.LrigGreen"></span>
+        <span class="card black square" ng-show="deck.LrigBlack"></span>
+        <div style="padding-bottom:3px"><br></div>
+        <span class="card white square" ng-show="deck.MainWhite"></span>
+        <span class="card red square" ng-show="deck.MainRed"></span>
+        <span class="card blue square" ng-show="deck.MainBlue"></span>
+        <span class="card green square" ng-show="deck.MainGreen"></span>
+        <span class="card black square" ng-show="deck.MainBlack"></span>
       </td>
       <td class="">
-        <a ng-href="/mypage/deck/{{deck.Id}}">{{deck.Title}}</a>
+        <a ng-href="/mypage/deck/{{deck.Id}}">
+          {{deck.Title}}<br>
+          <span style="font-size:10px;">{{deck.Introduction}}</span>
+        </a>
       </td>
       <td class="align-c">{{deck.Scope | scope}}</td>
       <td class="align-c">{{deck.UpdatedAt | date:'yy/MM/dd' }}</td>

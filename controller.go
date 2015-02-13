@@ -455,66 +455,70 @@ func GetDeck(r render.Render, params martini.Params, req *http.Request) {
 	viewDeck.MainGreen = deck.MainGreen
 	viewDeck.MainBlack = deck.MainBlack
 	lrigs := make(map[string]int)
-	addUnique(lrigs, deck.Lrig01)
-	addUnique(lrigs, deck.Lrig02)
-	addUnique(lrigs, deck.Lrig03)
-	addUnique(lrigs, deck.Lrig04)
-	addUnique(lrigs, deck.Lrig05)
-	addUnique(lrigs, deck.Lrig06)
-	addUnique(lrigs, deck.Lrig07)
-	addUnique(lrigs, deck.Lrig08)
-	addUnique(lrigs, deck.Lrig09)
-	addUnique(lrigs, deck.Lrig10)
+	viewDeck.Lrig = addUnique(viewDeck.Lrig, lrigs, deck.Lrig01, c)
+	viewDeck.Lrig = addUnique(viewDeck.Lrig, lrigs, deck.Lrig02, c)
+	viewDeck.Lrig = addUnique(viewDeck.Lrig, lrigs, deck.Lrig03, c)
+	viewDeck.Lrig = addUnique(viewDeck.Lrig, lrigs, deck.Lrig04, c)
+	viewDeck.Lrig = addUnique(viewDeck.Lrig, lrigs, deck.Lrig05, c)
+	viewDeck.Lrig = addUnique(viewDeck.Lrig, lrigs, deck.Lrig06, c)
+	viewDeck.Lrig = addUnique(viewDeck.Lrig, lrigs, deck.Lrig07, c)
+	viewDeck.Lrig = addUnique(viewDeck.Lrig, lrigs, deck.Lrig08, c)
+	viewDeck.Lrig = addUnique(viewDeck.Lrig, lrigs, deck.Lrig09, c)
+	viewDeck.Lrig = addUnique(viewDeck.Lrig, lrigs, deck.Lrig10, c)
 	mains := make(map[string]int)
-	addUnique(mains, deck.Main01)
-	addUnique(mains, deck.Main02)
-	addUnique(mains, deck.Main03)
-	addUnique(mains, deck.Main04)
-	addUnique(mains, deck.Main05)
-	addUnique(mains, deck.Main06)
-	addUnique(mains, deck.Main07)
-	addUnique(mains, deck.Main08)
-	addUnique(mains, deck.Main09)
-	addUnique(mains, deck.Main10)
-	addUnique(mains, deck.Main11)
-	addUnique(mains, deck.Main12)
-	addUnique(mains, deck.Main13)
-	addUnique(mains, deck.Main14)
-	addUnique(mains, deck.Main15)
-	addUnique(mains, deck.Main16)
-	addUnique(mains, deck.Main17)
-	addUnique(mains, deck.Main18)
-	addUnique(mains, deck.Main19)
-	addUnique(mains, deck.Main20)
-	addUnique(mains, deck.Main21)
-	addUnique(mains, deck.Main22)
-	addUnique(mains, deck.Main23)
-	addUnique(mains, deck.Main24)
-	addUnique(mains, deck.Main25)
-	addUnique(mains, deck.Main26)
-	addUnique(mains, deck.Main27)
-	addUnique(mains, deck.Main28)
-	addUnique(mains, deck.Main29)
-	addUnique(mains, deck.Main30)
-	addUnique(mains, deck.Main31)
-	addUnique(mains, deck.Main32)
-	addUnique(mains, deck.Main33)
-	addUnique(mains, deck.Main34)
-	addUnique(mains, deck.Main35)
-	addUnique(mains, deck.Main36)
-	addUnique(mains, deck.Main37)
-	addUnique(mains, deck.Main38)
-	addUnique(mains, deck.Main39)
-	addUnique(mains, deck.Main40)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main01, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main02, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main03, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main04, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main05, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main06, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main07, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main08, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main09, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main10, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main11, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main12, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main13, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main14, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main15, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main16, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main17, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main18, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main19, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main20, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main21, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main22, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main23, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main24, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main25, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main26, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main27, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main28, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main29, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main30, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main31, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main32, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main33, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main34, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main35, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main36, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main37, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main38, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main39, c)
+	viewDeck.Main = addUnique(viewDeck.Main, mains, deck.Main40, c)
 	for k := range lrigs {
-		card, _ := GetCardByKey(k, c)
-		card.Num = lrigs[k]
-		viewDeck.Lrig = append(viewDeck.Lrig, card)
+		for i := range viewDeck.Lrig {
+			if viewDeck.Lrig[i].KeyName == k {
+				viewDeck.Lrig[i].Num = lrigs[k]
+			}
+		}
 	}
 	for k := range mains {
-		card, _ := GetCardByKey(k, c)
-		card.Num = mains[k]
-		viewDeck.Main = append(viewDeck.Main, card)
+		for i := range viewDeck.Main {
+			if viewDeck.Main[i].KeyName == k {
+				viewDeck.Main[i].Num = mains[k]
+			}
+		}
 	}
 	viewDeck.Scope = deck.Scope
 	viewDeck.CreatedAt = deck.CreatedAt
@@ -543,13 +547,33 @@ func DeleteDeck(r render.Render, req *http.Request, params martini.Params, sessi
 	r.JSON(200, "成功")
 }
 
-func addUnique(m map[string]int, key string) {
+/**
+ *
+ */
+func addUnique(deck []Card, m map[string]int, key string, c appengine.Context) []Card {
+	if addUniqueMap(m, key) == true {
+		card, _ := GetCardByKey(key, c)
+		deck = append(deck, card)
+	}
+	return deck
+}
+
+/**
+ * mapに指定したkeyがなければ追加する
+ * ある場合は、valueに +1 する
+ * @param m マップ
+ * @param key キー
+ * @return 追加した場合はtrue, それ以外はfalseを返す.
+ */
+func addUniqueMap(m map[string]int, key string) bool {
 	if key == "" {
-		return
+		return false
 	}
 	if m[key] == 0 {
 		m[key] = 1
+		return true
 	} else {
 		m[key]++
+		return false
 	}
 }
