@@ -40,6 +40,8 @@ func init() {
 	m.Get("/api/card/:expansion/:no", GetCard)
 	m.Get("/api/user/:userId", GetUser)
 	m.Get("/api/:userId/deck", GetUserDeckList)
+	m.Get("/api/amazon", GetAmazonList)
+	m.Post("/api/amazon", binding.Json(FormAmazon{}), CreateAmazon)
 	m.Post("/api/setTestSession", SetTestSettion)
 	m.Get("/api/card/hoge/:name/:id", func(r render.Render, params martini.Params, req *http.Request) {
 		r.JSON(200, GetCardByNameAndId(params["name"], ToInt(params["id"]), req))

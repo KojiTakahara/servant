@@ -4,7 +4,13 @@ module.exports = function (grunt) {
         concat: {
             files: {
                 // 元ファイルの指定
-                src : 'static/js/*.js',
+                src : [
+                    'static/js/root.js',
+                    'static/js/controller/**/*.js',
+                    'static/js/directive/**/*.js',
+                    'static/js/filter/**/*.js',
+                    'static/js/service/**/*.js'
+                ],
                 // 出力ファイルの指定
                 dest: 'static/js/concat/app.js'
             }
@@ -21,7 +27,7 @@ module.exports = function (grunt) {
 
         watch: {
             js: {
-                files: 'static/js/*.js',
+                files: 'static/js/**/*.js',
                 tasks: ['concat', 'uglify']
             }
         }

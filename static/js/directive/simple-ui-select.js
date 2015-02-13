@@ -15,18 +15,17 @@ dir.directive('simpleSelect', function() {
             + '    <ui-select-choices repeat="item in items">{{item}}</ui-select-choices>'
             + '  </ui-select>'
             + '</div>',
-    link: function($scope) {
+    link: ['$scope', function($scope) {
       $scope.$watch('value', function(newValue, oldValue) {
         if (!newValue) {
-          console.log(1);
           $scope.value = undefined;
         }
       });
-    },
-    controller: function($scope) {
+    }],
+    controller: ['$scope', function($scope) {
       $scope.setValue = function(select) {
         $scope.value = select.selected;
       };
-    }
+    }]
   };
 });

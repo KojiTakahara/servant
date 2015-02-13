@@ -602,3 +602,40 @@ func addUniqueMap(m map[string]int, key string) bool {
 		return false
 	}
 }
+
+func GetAmazonList(r render.Render, req *http.Request) {
+	c := appengine.NewContext(req)
+	res := make([]Amazon, 0, 0)
+	memcache.Gob.Get(c, "Amazon", &res)
+	if len(res) == 0 {
+		q := datastore.NewQuery("Amazon")
+		if _, err := q.GetAll(c, &res); err != nil {
+			c.Criticalf(err.Error())
+			r.JSON(400, err)
+		}
+		mem_item := &memcache.Item{
+			Key:    "Amazon",
+			Object: res,
+		}
+		memcache.Gob.Add(c, mem_item)
+	}
+	res = ShuffleAmazon(res)
+	r.JSON(200, res)
+}
+
+func CreateAmazon(r render.Render, req *http.Request, form FormAmazon) {
+	c := appengine.NewContext(req)
+	amazon := &Amazon{}
+	amazon.Name = form.Name
+	amazon.Weight = form.Weight
+	amazon.Html = form.Html
+	amazon.Enabled = form.Enabled
+	key := datastore.NewKey(c, "Amazon", form.Name, 0, nil)
+	key, err := datastore.Put(c, key, amazon)
+	if err != nil {
+		c.Criticalf("save error. Amazon: %v", amazon)
+	} else {
+		c.Infof("success. Amazon: %v", amazon)
+	}
+	r.JSON(200, key)
+}

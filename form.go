@@ -27,3 +27,10 @@ type FormCard struct {
 	ParentKeyName string `json:"ParentKeyName"`
 	num           int    `json:"num"`
 }
+
+type FormAmazon struct {
+	Name    string `json:"Name"`
+	Weight  int    `json:"Weight"`
+	Html    string `json:"Html"`
+	Enabled bool   `json:"Enabled"`
+}

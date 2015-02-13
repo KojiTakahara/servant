@@ -1,1 +1,3 @@
 node_modules/**
+static/js/concat/app.js
+static/js/min/app-min.js

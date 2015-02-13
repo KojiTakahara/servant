@@ -185,7 +185,6 @@ app.controller('mypageController', ['$scope', '$location', '$window', 'cardServi
 
   var init = function() {
     cardService.getDeckByUserId("dm_plateau").then(function(res) {
-      console.log(res);
       $scope.decks = res;
     }, function(err) {
       //

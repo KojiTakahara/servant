@@ -4,8 +4,10 @@ import (
 	"appengine"
 	"appengine/datastore"
 	"bytes"
+	"math/rand"
 	"net/http"
 	"strconv"
+	"time"
 )
 
 /**
@@ -62,4 +64,17 @@ func CreateUseDeckStr(ids []string, start int, end int) string {
 		}
 	}
 	return buffer.String()
+}
+
+/**
+ * Amazonをシャッフル
+ */
+func ShuffleAmazon(amazon []Amazon) []Amazon {
+	t := time.Now()
+	rand.Seed(t.UnixNano())
+	for i := range amazon {
+		j := rand.Intn(i + 1)
+		amazon[i], amazon[j] = amazon[j], amazon[i]
+	}
+	return amazon
 }

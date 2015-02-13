@@ -9,22 +9,28 @@ var app = angular.module('app', [
   'ui.checkbox',
   'ui.sortable',
   'ui.select',
+  'amazonCtrl',
   'indexCtrl',
   'cardCtrl',
   'deckCtrl',
   'mypageCtrl',
   'usersCtrl',
+  'amazonService',
   'deckService',
   'userService',
   'angular-loading-bar',
   'ngAnimate',
   'simpleUiSelect',
+  'trustFilter',
 ]);
 app.config(['$httpProvider', '$locationProvider', '$stateProvider', '$urlRouterProvider', 'uiSelectConfig', function($httpProvider, $locationProvider, $stateProvider, $urlRouterProvider, uiSelectConfig) {
   $httpProvider.defaults.headers.common = {'X-Requested-With': 'XMLHttpRequest'};
   $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
   uiSelectConfig.theme = 'selectize';
-  $locationProvider.html5Mode(true);
+  $locationProvider.html5Mode({
+    enabled: true,
+    requireBase: false
+  });
   $urlRouterProvider.otherwise("");
   $stateProvider.state('top', {
     url: '/',
@@ -123,6 +129,15 @@ app.config(['$httpProvider', '$locationProvider', '$stateProvider', '$urlRouterP
       mainContent: {
         templateUrl: '/view/mypage/edit.html',
         controller: 'editDeckController'
+      }
+    }
+  });
+  $stateProvider.state('admin', {
+    url: '/admin',
+    views: {
+      mainContent: {
+        templateUrl: '/admin/amazon/index.html',
+        controller: 'amazonController'
       }
     }
   });

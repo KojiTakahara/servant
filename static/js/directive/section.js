@@ -1,11 +1,15 @@
-var dir = angular.module('sectionDirective', ['cfp.loadingBar', 'apiService']);
+var dir = angular.module('sectionDirective', [
+  'cfp.loadingBar',
+  'apiService',
+  'amazonService',
+]);
 
 dir.directive('mainmenu', function() {
   return {
     restrict: 'E',
     replace: true,
     templateUrl: '/view/common/menu.html',
-    controller: function($scope, $window, $location, userService, cfpLoadingBar) {
+    controller: ['$scope', '$window', '$location', 'userService', 'cfpLoadingBar', function($scope, $window, $location, userService, cfpLoadingBar) {
       $scope.login = function() {
         $window.location.href = '/api/twitter/login';
       };
@@ -30,7 +34,7 @@ dir.directive('mainmenu', function() {
       }, function(e) {
         $scope.user = undefined;
       });
-    }
+    }]
   };
 });
 
@@ -118,17 +122,23 @@ dir.directive('amazon', function() {
   return {
     restrict: 'E',
     replace: true,
-    templateUrl: '/view/common/amazon.html'
+    templateUrl: '/view/common/amazon.html',
+    controller: ['$scope', 'amazonService', function($scope, amazonService) {
+      $scope.amazonList = [];
+      amazonService.search().then(function(data) {
+        $scope.amazonList = data.slice(0, 6);
+      });
+    }]
   };
 });
 
-dir.directive('cardsearchform', function($rootScope) {
+dir.directive('cardsearchform', ['$rootScope', function($rootScope) {
   return {
     restrict: 'E',
     replace: false,
     priority: 2,
-    templateUrl: '/view/common/cardsearchform.html',
-    link: function($scope, element) {
+    templateUrl: '/view/common/cardSearchForm.html',
+    link: ['$scope', 'element', function($scope, element) {
       if ($rootScope.searchCondition) {
         $scope.form = $rootScope.searchCondition;
       }
@@ -140,8 +150,8 @@ dir.directive('cardsearchform', function($rootScope) {
       $scope.levels = [0, 1, 2, 3, 4];
       $scope.powers = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000];
       $scope.costs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    },
-    controller: function($scope, $rootScope, $state, cardService) {
+    }],
+    controller: ['$scope', '$rootScope', '$state', 'cardService', function($scope, $rootScope, $state, cardService) {
       $scope.toggleDetail = function() {
         $scope.form.isDetail = !$scope.form.isDetail;
       };
@@ -181,9 +191,9 @@ dir.directive('cardsearchform', function($rootScope) {
         }
       };
       init();
-    }
+    }]
   };
-});
+}]);
 
 dir.directive('copyright', function() {
   return {
@@ -193,8 +203,8 @@ dir.directive('copyright', function() {
       name: '@'
     },
     template: '<small>Copyright &copy; {{year}} {{name}} All Rights Reserved.</small>',
-    link: function($scope) {
+    link: ['$scope', function($scope) {
       $scope.year = new Date().getFullYear();
-    }
+    }]
   };
 });

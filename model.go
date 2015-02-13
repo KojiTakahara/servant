@@ -195,3 +195,10 @@ type ViewDeck struct {
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
+
+type Amazon struct {
+	Name    string
+	Weight  int
+	Html    string `datastore:",noindex"`
+	Enabled bool
+}
