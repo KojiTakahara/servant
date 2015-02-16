@@ -136,9 +136,10 @@ dir.directive('cardsearchform', ['$rootScope', function($rootScope) {
   return {
     restrict: 'E',
     replace: false,
-    priority: 2,
     templateUrl: '/view/common/cardSearchForm.html',
     link: ['$scope', 'element', function($scope, element) {
+    }],
+    controller: ['$scope', '$rootScope', '$state', 'cardService', function($scope, $rootScope, $state, cardService) {
       if ($rootScope.searchCondition) {
         $scope.form = $rootScope.searchCondition;
       }
@@ -150,8 +151,6 @@ dir.directive('cardsearchform', ['$rootScope', function($rootScope) {
       $scope.levels = [0, 1, 2, 3, 4];
       $scope.powers = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000];
       $scope.costs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-    }],
-    controller: ['$scope', '$rootScope', '$state', 'cardService', function($scope, $rootScope, $state, cardService) {
       $scope.toggleDetail = function() {
         $scope.form.isDetail = !$scope.form.isDetail;
       };
