@@ -1,0 +1,57 @@
+<div class='five columns' style="font-size:10px;">
+  <amazon></amazon>
+</div>
+<div class='eleven columns'>
+  <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+  <h1>{{deck.Title}}</h1>
+  <h5>{{deck.Introduction}}</h5>
+  <!-- 白デッキ -->
+  <table class="row detail" ng-hide="error">
+    <tr>
+      <th class="lrig wx10 pointer" ng-click="sort('lrig', 'Color')" style="padding:0" nowrap></th>
+      <th class="lrig wx10 pointer" ng-click="sort('lrig', 'Num')" nowrap></th>
+      <th class="lrig wx180 pointer" ng-click="sort('lrig', 'Name')" nowrap>カード名</th>
+      <th class="lrig wx20 pointer" ng-click="sort('lrig', 'Category')" nowrap>種類</th>
+      <th class="lrig wx20 pointer" ng-click="sort('lrig', 'Level')" nowrap>レベル</th>
+    </tr>
+    <tr ng-repeat="card in deck.Lrig | orderBy:deck.lrigPredicate:deck.lrigReverse">
+      <td class="align-c card {{card.Color}}" style="padding:0"></td>
+      <td class="align-c">{{card.Num}}</td>
+      <td class="">
+        <a href="/card/{{card.Expansion}}/{{card.No}}" target="_blank">{{card.Name}}</a>
+      </td>
+      <td class="align-c ">{{card.Category}}</td>
+      <td class="align-c ">
+        <span ng-show="-1 < card.Level">{{card.Level}}</span>
+      </td>
+    </tr>
+  </table>
+  <!-- 黒デッキ -->
+  <table class="row detail" ng-hide="error">
+    <tr>
+      <th class="main wx10 pointer" ng-click="sort('main', 'Color')" style="padding:0" nowrap></th>
+      <th class="main wx10 pointer" ng-click="sort('main', 'Num')" nowrap></th>
+      <th class="main wx170 pointer" ng-click="sort('main', 'Name')" nowrap>カード名</th>
+      <th class="main wx20 pointer" ng-click="sort('main', 'Category')" nowrap>種類</th>
+      <th class="main wx20 pointer" ng-click="sort('main', 'Level')" nowrap>レベル</th>
+      <th class="main wx10 pointer" ng-click="sort('main', 'Burst')" nowrap>
+        <i class="fa fa-asterisk fa-lg"></i>
+      </th>
+    </tr>
+    <tr ng-repeat="card in deck.Main | orderBy:deck.mainPredicate:deck.mainReverse">
+      <td class="align-c card {{card.Color}}" style="padding:0"></td>
+      <td class="align-c num-column">{{card.Num}}</td>
+      <td class="">
+        <a href="/card/{{card.Expansion}}/{{card.No}}" target="_blank">{{card.Name}}</a>
+      </td>
+      <td class="align-c ">{{card.Category}}</td>
+      <td class="align-c ">
+        <span ng-show="-1 < card.Level">{{card.Level}}</span>
+      </td>
+      <td class="align-c ">
+        <i class="fa fa-asterisk fa-lg" ng-show="card.Burst"></i>
+      </td>
+    </tr>
+  </table>
+  <pre>{{deck.Description}}</pre>
+</div>

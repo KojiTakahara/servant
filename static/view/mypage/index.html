@@ -1,0 +1,47 @@
+<div class='five columns' style="font-size:10px;">
+  <div style="margin-top: 15px;">
+    <button type="button" class="btn btn-danger btn-block" ng-click="createDeck();">デッキ 新規作成</button>
+  </div>
+  <amazon></amazon>
+</div>
+<div class='eleven columns'>
+  <div style="padding-top:20px;"></div>
+  <table ng-hide="decks.length == 0">
+    <tr>
+      <th class="wx90" nowrap></th>
+      <th class="wx200" nowrap>デッキ名</th>
+      <th class="wx90" nowrap>公開状態</th>
+      <th class="wx90" nowrap>更新日付</th>
+      <th class="wx20" nowrap></th>
+    </tr>
+    <tr ng-repeat="deck in decks">
+      <td class="align-c" style="padding-top: 10px;">
+        <span class="card white square" ng-show="deck.LrigWhite"></span>
+        <span class="card red square" ng-show="deck.LrigRed"></span>
+        <span class="card blue square" ng-show="deck.LrigBlue"></span>
+        <span class="card green square" ng-show="deck.LrigGreen"></span>
+        <span class="card black square" ng-show="deck.LrigBlack"></span>
+        <div style="padding-bottom:3px"><br></div>
+        <span class="card white square" ng-show="deck.MainWhite"></span>
+        <span class="card red square" ng-show="deck.MainRed"></span>
+        <span class="card blue square" ng-show="deck.MainBlue"></span>
+        <span class="card green square" ng-show="deck.MainGreen"></span>
+        <span class="card black square" ng-show="deck.MainBlack"></span>
+      </td>
+      <td class="">
+        <a ng-href="/mypage/deck/{{deck.Id}}">
+          {{deck.Title}}<br>
+          <span style="font-size:10px;">{{deck.Introduction}}</span>
+        </a>
+      </td>
+      <td class="align-c">{{deck.Scope | scope}}</td>
+      <td class="align-c">{{deck.UpdatedAt | date:'yy/MM/dd' }}</td>
+      <td class="align-c">
+        <i class="fa fa-trash fa-lg pointer" ng-click="deleteDeck($index);"></i>
+      </td>
+    </tr>
+  </table>
+  <div class="align-c" ng-show="decks.length == 0">
+    保存しているデッキはありません。
+  </div>
+</div>

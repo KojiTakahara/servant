@@ -1,143 +1,144 @@
-var app = angular.module('app', ['sectionDirective', 'stringFilter','numberFilter', 'ui.bootstrap']);
-app.controller('indexController', ['$scope', '$http', '$location', '$anchorScroll', function($scope, $http, $location, $anchorScroll) {
+'use strict';
 
-  $scope.form = {};
-  $scope.textSearch;
-
-  $scope.levels = [0, 1, 2, 3, 4];
-  $scope.powers = [1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 11000, 12000, 13000, 14000, 15000];
-  $scope.costs = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-  $scope.handleKeydown = function(e) {
-    if (e.which === 13) {
-      $scope.textSearch = $scope.searchText;
-      setTimeout(function(){
-
-      $scope.search();
-      },100);
+var app = angular.module('app', [
+  'sectionDirective',
+  'stringFilter',
+  'numberFilter',
+  'ui.router',
+  'ui.bootstrap',
+  'ui.checkbox',
+  'ui.sortable',
+  'ui.select',
+  'amazonCtrl',
+  'indexCtrl',
+  'cardCtrl',
+  'deckCtrl',
+  'mypageCtrl',
+  'usersCtrl',
+  'amazonService',
+  'deckService',
+  'userService',
+  'angular-loading-bar',
+  'ngAnimate',
+  'simpleUiSelect',
+  'trustFilter',
+]);
+app.config(['$httpProvider', '$locationProvider', '$stateProvider', '$urlRouterProvider', 'uiSelectConfig', function($httpProvider, $locationProvider, $stateProvider, $urlRouterProvider, uiSelectConfig) {
+  $httpProvider.defaults.headers.common = {'X-Requested-With': 'XMLHttpRequest'};
+  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+  uiSelectConfig.theme = 'selectize';
+  $locationProvider.html5Mode({
+    enabled: true,
+    requireBase: false
+  });
+  $urlRouterProvider.otherwise("");
+  $stateProvider.state('top', {
+    url: '/',
+    views: {
+      headerContent: {
+        templateUrl: '/view/welcome.html',
+        controller: 'indexController'
+      },
+      mainContent: { templateUrl: '/view/top/menuDescription.html' }
     }
-  };
-
-  $scope.searchEvent = function() {
-    $scope.textSearch = $scope.searchText;
-    $scope.search();
-  };
-
-  $scope.search = function() {
-    if ($scope.form) {
-      if ($scope.form.constraintTemp) {
-        $scope.form.constraint = $scope.form.constraintTemp.Type;
-      }
-      if ($scope.form.illusTemp) {
-        $scope.form.illus = $scope.form.illusTemp.Name;
-      }
-      if ($scope.form.expansionTemp) {
-        $scope.form.expansion = $scope.form.expansionTemp.Id;
-      }
-      if ($scope.form.typeTemp) {
-        $scope.form.type = $scope.form.typeTemp.Name;
+  });
+  $stateProvider.state('card', {
+    url: '/card',
+    views: {
+      mainContent: {
+        templateUrl: '/view/card/index.html',
+        controller: 'cardController'
       }
     }
-    $http({
-      method: 'GET',
-      url: '/api/search',
-      params: $scope.form
-    }).success(function(data, status, headers, config) {
-      for (var i in data) {
-        var cost = [];
-        setCost(cost, data[i].CostWhite, '白');
-        setCost(cost, data[i].CostRed, '赤');
-        setCost(cost, data[i].CostBlue, '青');
-        setCost(cost, data[i].CostGreen, '緑');
-        setCost(cost, data[i].CostBlack, '黒');
-        setCost(cost, data[i].CostColorless, '無');
-        data[i].Cost = cost;
+  });
+  $stateProvider.state('cardSearch', {
+    url: '/search',
+    views: {
+      mainContent: {
+        templateUrl: '/view/card/search.html',
+        controller: 'cardSearchController'
       }
-      $scope.list = data;
-      $location.hash('search');
-      $anchorScroll();
-      $location.hash('');
-    });
-
-    var setCost = function(cost, color, str) {
-      for (var i = 0; i < color; i++) {
-        cost.push(str);
-      }
-    };
-  };
-
-  $scope.setColor = function(color) {
-    var result = 'color:';
-    switch (color){
-    case 'white':
-      result = '#f0bf00'; break;
-    case 'red':
-      result = '#E92C1C'; break;
-    case 'blue':
-      result = '#1C8FE9'; break;
-    case 'green':
-      result = '#11BB02'; break;
-    case 'black':
-      result = '#921197'; break;
-    case 'colorless':
-      result = '#8B8B8B'; break;
-    default:
-      result = ''; break;
     }
-    return "{color: '" + result + "'}";
-  };
-
-  $scope.reset = function() {
-    $scope.form = {};
-  };
-
-  $scope.getIllustrator = function() {
-    $http({
-      method: 'GET',
-      url: '/api/illustrator'
-    }).success(function(data, status, headers, config) {
-      $scope.illustrators = data;
-    });
-  };
-
-  $scope.getConstraint = function() {
-    $http({
-      method: 'GET',
-      url: '/api/constraint'
-    }).success(function(data, status, headers, config) {
-      $scope.constraints = data;
-    });
-  };
-
-  $scope.getProduct = function() {
-    $http({
-      method: 'GET',
-      url: '/api/product'
-    }).success(function(data, status, headers, config) {
-      $scope.products = data;
-    });
-  };
-
-  $scope.getType = function() {
-    $http({
-      method: 'GET',
-      url: '/api/type'
-    }).success(function(data, status, headers, config) {
-      $scope.types = data;
-    });
-  };
-
-  $scope.init = function() {
-    $scope.getIllustrator();
-    $scope.getConstraint();
-    $scope.getProduct();
-    $scope.getType();
-    $scope.list = [];
-  };
-
-  $scope.init();
-
-}]);
-app.config(['$locationProvider', function($locationProvider) {
-  $locationProvider.html5Mode(true);
+  });
+  $stateProvider.state('expansion', {
+    url: '/card/:expansion',
+    views: {
+      mainContent: {
+        templateUrl: '/view/card/expansion.html',
+        controller: 'cardExController'
+      }
+    }
+  });
+  $stateProvider.state('cardDetail', {
+    url: '/card/:expansion/:no',
+    views: {
+      mainContent: {
+        templateUrl: '/view/card/detail.html',
+        controller: 'cardDetailController'
+      }
+    }
+  });
+  $stateProvider.state('deck', {
+    url: '/deck',
+    views: {
+      mainContent: {
+        templateUrl: '/view/deck/index.html',
+        controller: 'deckController'
+      }
+    }
+  });
+  $stateProvider.state('deckDetail', {
+    url: '/deck/:id',
+    views: {
+      mainContent: {
+        templateUrl: '/view/deck/detail.html',
+        controller: 'deckDetailController'
+      }
+    }
+  });
+  $stateProvider.state('users', {
+    url: '/users',
+    views: {
+      mainContent: {
+        templateUrl: '/view/users/index.html',
+        controller: 'usersController'
+      }
+    }
+  });
+  $stateProvider.state('userDetail', {
+    url: '/users/:userId',
+    views: {
+      mainContent: {
+        templateUrl: '/view/users/detail.html',
+        controller: 'userDetailController'
+      }
+    }
+  });
+  $stateProvider.state('mypage', {
+    url: '/mypage',
+    views: {
+      mainContent: {
+        templateUrl: '/view/mypage/index.html',
+        controller: 'mypageController'
+      }
+    }
+  });
+  $stateProvider.state('mydeck', {
+    url: '/mypage/deck/:id',
+    views: {
+      mainContent: {
+        templateUrl: '/view/mypage/edit.html',
+        controller: 'editDeckController'
+      }
+    }
+  });
+  $stateProvider.state('admin', {
+    url: '/admin',
+    views: {
+      mainContent: {
+        templateUrl: '/admin/amazon/index.html',
+        controller: 'amazonController'
+      }
+    }
+  });
 }]);

@@ -1,0 +1,43 @@
+.card.white {
+  background-color: #F6BB42;
+  border-color: #F6BB42;
+}
+.card.red {
+  background-color: #DA4453;
+  border-color: #DA4453;
+}
+.card.blue {
+  background-color: #3BAFDA;
+  border-color: #3BAFDA;
+}
+.card.green {
+  background-color: #8CC152;
+  border-color: #8CC152;
+}
+.card.black {
+  background-color: #967ADC;
+  border-color: #967ADC;
+}
+.card.colorless {
+  background-color: #BCBCBC;
+  border-color: #BCBCBC;
+}
+
+.text.white {
+  color: #F6BB42;
+}
+.text.red {
+  color: #DA4453;
+}
+.text.blue {
+  color: #3BAFDA;
+}
+.text.green {
+  color: #8CC152;
+}
+.text.black {
+  color: #967ADC;
+}
+.text.colorless {
+  color: #BCBCBC;
+}

@@ -1,0 +1,39 @@
+<div class="panel">
+  <div class="panel-heading card {{card.Color}}" ng-class="{'close-card': !card.opend}" style="height: 29px">
+    <h4 class="panel-title"></h4>
+    <div style="padding: 0.4em;">
+      <button type="button" class="btn btn-default btn-xs" ng-click="addCard(card)" ng-keydown="returnCursor($last, $event)">
+        <i class="fa fa-plus"></i>
+      </button>
+      <span style="color:white; padding-left:0.5em;" class="pointer" ng-click="card.opend = !card.opend">
+        {{card.Name}}
+      </span>
+    </div>
+  </div>
+  <div class="panel-body" collapse="!card.opend" style="padding: 0 15px;">
+    <div style="padding: .8em 0 1.1em 0;">
+        <p ng-show="card.Category == 'ルリグ'">
+          レベル {{card.Level}} / リミット {{card.Limit}} / <span ng-repeat="c in card.Cost track by $index">({{c}})</span><span ng-show="card.Cost"> / </span>{{card.Type}}
+        </p>
+        <p ng-show="card.Category == 'アーツ'">
+          <span ng-repeat="c in card.Cost track by $index">({{c}})</span>
+          <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
+        </p>
+        <p ng-show="card.Category == 'シグニ'">
+          レベル {{card.Level}} / パワー {{card.Power}} / {{card.Type}} <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
+        </p>
+        <p ng-show="card.Category == 'スペル'">
+          <span ng-repeat="c in card.Cost track by $index">({{c}})</span>
+          <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
+        </p>
+    </div>
+    <p class="textframe" ng-show="card.Text" style="padding: .8em 0 1.1em 0;">
+      <span ng-repeat="text in card.Text.split(',')">
+        {{text}}<br/>
+      </span>
+    </p>
+    <p class="textframe" ng-show="card.Text" style="padding: .8em 0 1.1em 0;">
+      {{card.Burst}}
+    </p>
+  </div>
+</div>

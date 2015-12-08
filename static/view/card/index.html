@@ -1,0 +1,13 @@
+<div class='five columns' style="font-size:10px;">
+  <cardsearchform></cardsearchform>
+  <amazon></amazon>
+</div>
+<div class='eleven columns'>
+  <div style="padding-top:20px;"></div>
+  <div ng-repeat="p in products">
+    <a href="/card/{{p.Id}}">
+      {{p.Id | productId}} {{p.Name}}
+    </a>
+    <hr>
+  </div>
+</div>

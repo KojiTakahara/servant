@@ -1,136 +1,60 @@
 <!DOCTYPE HTML>
 <html lang="ja" ng-app="app">
 <head>
+  <title>wixoss-tcg</title>
   <meta charset="utf-8">
   <meta name="Keywords" content="WIXOSS,ウィクロス,カード,デッキ,ルリグ,シグニ,ウムル,ウリス,エルドラ,タマ,ピルルク,ユヅキ,緑子,花代" />
-  <title>wixoss-tcg</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link href="css/bootstrap.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
-  <link rel='stylesheet' id='prettyphoto-css'  href="css/prettyPhoto.css" type='text/css' media='all'>
-  <link href="css/fontello.css" type="text/css" rel="stylesheet">
-  <link href='http://fonts.googleapis.com/css?family=Quattrocento:400,700' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Patua+One' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-  <style>
-    body {
-      padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-    }
-    @media (min-width: 768px) and (max-width: 979px) {
-      ul#menu-main > li > a {
-        padding: 14px 15px;
-      }
-      ul#menu-main > li > a:hover {
-        padding: 14px 15px;
-      }
-    }
-    @media (max-width: 767px) {
-      ul#menu-main > li > a {
-        padding: 14px 15px;
-      }
-      ul#menu-main > li > a:hover {
-        padding: 14px 15px;
-      }
-    }
-    #page-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      font-size: 77%;
-    }
-    #page-top a {
-      background: #1abc9c;
-      text-decoration: none;
-      color: #fff;
-      width: 100px;
-      padding: 30px 0;
-      text-align: center;
-      display: block;
-      border-radius: 5px;
-    }
-    #page-top a:hover {
-      text-decoration: none;
-      background: #48c9b0;
-    }
-  </style>
-  <link href="css/bootstrap-responsive.css" rel="stylesheet">
+  <meta http-equiv="X-UA-Compatible" content="IE=9" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600&subset=latin,latin-ext' rel='stylesheet' type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Crete+Round&subset=latin,latin-ext' rel='stylesheet' type="text/css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/reset.css">
+  <!--
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/selectize.js/0.11.0/css/selectize.css" />
+  <link rel="stylesheet" href="/css/bootflat.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/skeleton.css">
+  <link rel="stylesheet" href="/css/layout.css">
+  <link rel="stylesheet" href="/css/loading-bar.css">
+  <link rel="stylesheet" href="/css/select.min.css">
+  <link rel="stylesheet" href="/css/wx-color.css">
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+  <script type="text/javascript" src="/js/validate.js"></script>
+  <script type="text/javascript" src="/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+  <link rel="stylesheet" type="text/css" href="/css/jquery.fancybox-1.3.4.css" media="screen" />
   <link rel="shortcut icon" href="img/favicon.ico">
-  <script type="text/javascript" src="js/lib/jquery-1.11.1.min.js"></script>
-  <script type="text/javascript" src="js/lib/jquery.scrollTo.min.js"></script>
-  <script type="text/javascript" src="js/lib/jquery.localscroll-1.2.7-min.js"></script>
-  <script type="text/javascript" charset="utf-8">
-    $(document).ready(function(){
-      $("a[rel^='prettyPhoto']").prettyPhoto();
-    });
-  </script>
 </head>
-<body ng-controller="indexController">
-  <div class="navbar-wrapper">
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-          <h1 class="brand"><a href="#top">wixoss-tcg</a></h1>
-          <nav class="pull-right nav-collapse collapse">
-            <ul id="menu-main" class="nav">
-              <li><a title="advanced" href="#advanced">詳細検索</a></li>
-              <li><a title="search" href="#search">検索結果</a></li>
-              <li><a title="about" href="#about">このサイトについて</a></li>
-              <li><a href="#"></a></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="top"></div>
-  <headerwrap></headerwrap>
-  <contact></contact>
-  <news></news>
-  <team></team>
-  <div footer></div>
-  <p id="page-top"><a href="#wrap">PAGE TOP</a></p>
-  <script type="text/javascript" src="js/lib/bootstrap.js"></script>
-  <script type="text/javascript" src="js/lib/jquery.prettyPhoto.js"></script>
-  <script type="text/javascript" src="js/lib/angular.min.js"></script>
-  <script type="text/javascript" src="js/lib/ui-bootstrap-tpls-0.11.0.min.js"></script>
-  <script type="text/javascript" src="js/root.js"></script>
-  <script type="text/javascript" src="js/directive/section.js"></script>
-  <script type="text/javascript" src="js/filter/stringFilter.js"></script>
-  <script type="text/javascript" src="js/filter/numberFilter.js"></script>
-  <script type="text/javascript">
-    jQuery(document).ready(function($) {
-      $('#nav-main, .brand').localScroll();
-      $('#search, .container').localScroll();
-    });
-    $(function() {
-      var showFlag = false;
-      var topBtn = $('#page-top');
-      topBtn.css('bottom', '-100px');
-      var showFlag = false;
-      $(window).scroll(function () {
-        if ($(this).scrollTop() > 800) {
-          if (showFlag == false) {
-              showFlag = true;
-              topBtn.stop().animate({'bottom' : '20px'}, 200);
-          }
-        } else {
-          if (showFlag) {
-              showFlag = false;
-              topBtn.stop().animate({'bottom' : '-100px'}, 200);
-          }
-        }
-      });
-      topBtn.click(function () {
-        $('body,html').animate({
-            scrollTop: 0
-        }, 800);
-        return false;
-      });
-    });
-  </script>
+<body>
+  <header>
+    <mainmenu></mainmenu>
+    <div class="container" ui-view="headerContent"></div>
+  </header>
+  <div class="clear"></div>
+  <div class="container" ui-view="mainContent"></div>
+  <div class="clear"></div>
+  <footer></footer>
+  <script type="text/javascript" src="/js/lib/jquery.fs.selecter.min.js"></script>
+  <script type="text/javascript" src="/js/lib/bootstrap.js"></script>
+  <script type="text/javascript" src="/js/lib/jquery.prettyPhoto.js"></script>
+  <script type="text/javascript" src="/js/lib/angular.min.js"></script>
+  <script type="text/javascript" src="/js/lib/angular-ui-router.js"></script>
+  <script type="text/javascript" src="/js/lib/angular-sanitize.js"></script>
+  <script type="text/javascript" src="/js/lib/angular-animate.js"></script>
+  <script type="text/javascript" src="/js/lib/ui-bootstrap-tpls-0.11.0.min.js"></script>
+  <script type="text/javascript" src="/js/lib/loading-bar.js"></script>
+  <script type="text/javascript" src="/js/lib/icheck.min.js"></script>
+  <script type="text/javascript" src="/js/lib/angular-bootstrap-checkbox.js"></script>
+  <script type="text/javascript" src="/js/lib/angular-selectize.js"></script>
+  <script type="text/javascript" src="/js/lib/dirPagination.js"></script>
+  <script type="text/javascript" src="/js/lib/ng-infinite-scroll.min.js"></script>
+  <script type="text/javascript" src="/js/lib/select.min.js"></script>
+  <script type="text/javascript" src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+  <script type="text/javascript" src="/js/min/app-min.js"></script>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

@@ -1,0 +1,27 @@
+<div class="panel-heading card {{card.Color}}" style="height: 8px">
+  <h4 class="panel-title"></h3>
+</div>
+<div class="panel-body">
+  <a href="/card/{{card.Expansion}}/{{card.No | padding}}">{{card.Name}}</a>
+  <div style="padding: .8em 0 1.1em 0;">
+    <div style="float: left; padding-top: 0.1em;">
+      <span class="label label-default">{{card.Category}}</span>
+    </div>
+    <div style="float: right; text-align: right;">
+      <p ng-show="card.Category == 'ルリグ'">
+        レベル {{card.Level}} / リミット {{card.Limit}} / <span ng-repeat="c in card.Cost track by $index">({{c}})</span><span ng-show="card.Cost"> / </span>{{card.Type}}
+      </p>
+      <p ng-show="card.Category == 'アーツ'">
+        <span ng-repeat="c in card.Cost track by $index">({{c}})</span>
+        <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
+      </p>
+      <p ng-show="card.Category == 'シグニ'">
+        レベル {{card.Level}} / パワー {{card.Power}} / {{card.Type}} <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
+      </p>
+      <p ng-show="card.Category == 'スペル'">
+        <span ng-repeat="c in card.Cost track by $index">({{c}})</span>
+        <span ng-show="card.Constraint">/ {{card.Constraint}}</span>
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<nav ng-class="setHeaderClass()">
+  <div class='container'>
+    <div class='four columns logo'>
+      <a href='/'>
+        <img src="/img/mackerel-logo.png" height="50">
+      </a>
+      beta
+    </div>
+    <div class='eight columns'>
+      <div class="centerMenu">
+        <ul class='mainMenu'>
+          <li>
+            <a href='/deck' title='deck'>
+              <i class="fa fa-th-list fa-2x"></i><br>デッキ集
+            </a>
+          </li>
+          <li class="boaderline">&nbsp</li>
+          <li>
+            <a href='/card' title='card'>
+              <i class="fa fa-search fa-2x"></i><br>カード検索
+            </a>
+          </li>
+          <li class="boaderline">&nbsp</li>
+          <li>
+            <a href='/users' title='users'>
+              <i class="fa fa-users fa-2x"></i><br>ユーザー
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class='four columns loginUser'>
+      <div ng-show="user && !user.name" style="font-size:14px">読み込み中...</div>
+      <a href='#' ng-hide="user" ng-click="login()">
+        <img src='img/social/twitter.png'>
+        <div>ログイン</div>
+      </a>
+      <a href='/mypage' ng-show="user">
+        <img ng-src="{{user.profile_image_url}}" class="circle" ng-show="user">
+      </a>
+    </div>
+  </div>
+</nav>

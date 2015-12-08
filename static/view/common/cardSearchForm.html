@@ -1,0 +1,133 @@
+<div class="search-box" style="margin-top: 15px;">
+  <div class="form-search" style="padding-bottom: 0.3em; padding-right: 1.2em;">
+    <input type="text" class="form-control search-query" ng-model="form.text" placeholder="キーワード">
+  </div>
+
+  <div class="btn-group" style="padding-bottom: 0.3em;" ng-show="form.isDetail">
+    <label class="btn btn-warning lrig" ng-model="form.category" btn-radio="'ルリグ'" uncheckable>ルリグ</label>
+    <label class="btn btn-warning lrig" ng-model="form.category" btn-radio="'アーツ'" uncheckable>アーツ</label>
+    <label class="btn btn-warning lrig" ng-model="form.category" btn-radio="'シグニ'" uncheckable>シグニ</label>
+    <label class="btn btn-warning lrig" ng-model="form.category" btn-radio="'スペル'" uncheckable>スペル</label>
+  </div>
+  <div ng-show="form.isDetail">
+    <ui-select ng-model="form.type">
+      <ui-select-match placeholder="タイプ">{{$select.selected.Name}}</ui-select-match>
+      <ui-select-choices repeat="type.Name as type in types | filter: $select.search">{{type.Name}}</ui-select-choices>
+    </ui-select>
+  </div>
+
+  <div class="btn-group" style="padding-bottom: 0.3em;" ng-show="form.isDetail">
+    <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'LR'" uncheckable>LR</label>
+    <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'LC'" uncheckable>LC</label>
+    <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'SR'" uncheckable>SR</label>
+    <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'R'" uncheckable>R</label>
+    <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'C'" uncheckable>C</label>
+    <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'ST'" uncheckable>ST</label>
+    <label class="btn btn-warning reality" ng-model="form.reality" btn-radio="'PR'" uncheckable>PR</label>
+  </div>
+
+  <div class="btn-group" style="padding-bottom: 0.3em;" ng-show="form.isDetail">
+    <label class="btn btn-warning color" ng-model="form.color" btn-radio="'white'" uncheckable>白</label>
+    <label class="btn btn-warning color" ng-model="form.color" btn-radio="'red'" uncheckable>赤</label>
+    <label class="btn btn-warning color" ng-model="form.color" btn-radio="'blue'" uncheckable>青</label>
+    <label class="btn btn-warning color" ng-model="form.color" btn-radio="'green'" uncheckable>緑</label>
+    <label class="btn btn-warning color" ng-model="form.color" btn-radio="'black'" uncheckable>黒</label>
+    <label class="btn btn-warning color" ng-model="form.color" btn-radio="'colorless'" uncheckable>無</label>
+  </div>
+
+  <div style="display: -webkit-box" ng-show="form.isDetail">
+    <simple-select ng-model="form.levelFrom" items="levels" style="width: 75px;"></simple-select>
+    <div style="padding: 1em 0.5em;">
+      ≦ レベル ≦
+    </div>
+    <simple-select ng-model="form.levelTo" items="levels" style="width: 75px;"></simple-select>
+  </div>
+  <div style="display: -webkit-box" ng-show="form.isDetail">
+    <simple-select ng-model="form.powerFrom" items="powers" style="width: 75px;"></simple-select>
+    <div style="padding: 1em 0.5em;">
+      ≦ パワー ≦
+    </div>
+    <simple-select ng-model="form.powerTo" items="powers" style="width: 75px;"></simple-select>
+  </div>
+
+  <div style="display: -webkit-box" ng-show="form.isDetail">
+    <simple-select ng-model="form.costWhiteFrom" items="costs" style="width: 75px;"></simple-select>
+    <div style="padding: 1em 0.5em;">
+      ≦ 白 ≦
+    </div>
+    <simple-select ng-model="form.costWhiteTo" items="costs" style="width: 75px;"></simple-select>
+  </div>
+  <div style="display: -webkit-box" ng-show="form.isDetail">
+    <simple-select ng-model="form.costRedFrom" items="costs" style="width: 75px;"></simple-select>
+    <div style="padding: 1em 0.5em;">
+      ≦ 赤 ≦
+    </div>
+    <simple-select ng-model="form.costRedTo" items="costs" style="width: 75px;"></simple-select>
+  </div>
+
+  <div style="display: -webkit-box" ng-show="form.isDetail">
+    <simple-select ng-model="form.costBlueFrom" items="costs" style="width: 75px;"></simple-select>
+    <div style="padding: 1em 0.5em;">
+      ≦ 青 ≦
+    </div>
+    <simple-select ng-model="form.costBlueTo" items="costs" style="width: 75px;"></simple-select>
+  </div>
+  <div style="display: -webkit-box" ng-show="form.isDetail">
+    <simple-select ng-model="form.costGreenFrom" items="costs" style="width: 75px;"></simple-select>
+    <div style="padding: 1em 0.5em;">
+      ≦ 緑 ≦
+    </div>
+    <simple-select ng-model="form.costGreenTo" items="costs" style="width: 75px;"></simple-select>
+  </div>
+  <div style="display: -webkit-box" ng-show="form.isDetail">
+    <simple-select ng-model="form.costBlackFrom" items="costs" style="width: 75px;"></simple-select>
+    <div style="padding: 1em 0.5em;">
+      ≦ 黒 ≦
+    </div>
+    <simple-select ng-model="form.costBlackTo" items="costs" style="width: 75px;"></simple-select>
+  </div>
+  <div style="display: -webkit-box" ng-show="form.isDetail">
+    <simple-select ng-model="form.costColorlessFrom" items="costs" style="width: 75px;"></simple-select>
+    <div style="padding: 1em 0.5em;">
+      ≦ 無 ≦
+    </div>
+    <simple-select ng-model="form.costColorlessTo" items="costs" style="width: 75px;"></simple-select>
+  </div>
+
+  <div ng-show="form.isDetail">
+    <ui-select ng-model="form.constraint">
+      <ui-select-match placeholder="限定">{{$select.selected.Type}}</ui-select-match>
+      <ui-select-choices repeat="constraint.Type as constraint in constraints | filter: $select.search">{{constraint.Type}}</ui-select-choices>
+    </ui-select>
+  </div>
+  <label ng-show="form.isDetail">
+    <checkbox ng-model="form.bursted" style="margin-bottom: 3px;"></checkbox>　バーストアイコン
+  </label>
+  <br>
+  <div ng-show="form.isDetail">
+    <ui-select ng-model="form.expansion">
+      <ui-select-match placeholder="エキスパンション">{{$select.selected.Id}}</ui-select-match>
+      <ui-select-choices repeat="product.Id as product in products | filter: $select.search">{{product.Id}}</ui-select-choices>
+    </ui-select>
+  </div>
+  <div ng-show="form.isDetail">
+    <ui-select ng-model="form.illus" input-model="illustrators">
+      <ui-select-match placeholder="イラストレーター">{{$select.selected.Name}}</ui-select-match>
+      <ui-select-choices repeat="illustrator.Name as illustrator in illustrators | filter: $select.search">{{illustrator.Name}}</ui-select-choices>
+    </ui-select>
+  </div>
+  <button type="button" class="btn btn-default btn-block" ng-show="form.isDetail" ng-click="reset();">リセット</button>
+  <button type="button" class="btn btn-info btn-block" ng-click="search();">検索</button>
+
+  <div style="text-align: right; padding: 0.7em 1.5em 0.5em 1.5em;">
+    <a href="javascript:void(0)" ng-click="toggleDetail()">
+      <span ng-hide="form.isDetail">
+        詳細検索
+      </span>
+      <span ng-show="form.isDetail">
+        簡易検索
+      </span>
+    </a>
+  </div>
+
+</div>
